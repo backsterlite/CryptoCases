@@ -1,0 +1,9 @@
+**/.venv/
+**/.env
+**/.env.test
+**/__pycache__/
+**/*.pyc
+backup_project.sh
+project_structure.txt
+Project_info/
+**/*.tar.gz

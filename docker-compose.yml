@@ -1,0 +1,43 @@
+
+services:
+  bot:
+    build: ./bot
+    container_name: cryptocases_bot
+    environment:
+      - BOT_TOKEN=your_telegram_token
+    depends_on:
+      - api
+    restart: always
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: cryptocases_api
+    volumes:
+      - ./backend/src:/app/src
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: cryptocases_frontend
+    ports:
+      - "3000:3000"
+    restart: always
+
+  mongo:
+    image: mongo:6
+    container_name: cryptocases_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: always
+
+volumes:
+  mongodb_data:

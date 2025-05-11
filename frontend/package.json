@@ -1,0 +1,13 @@
+{
+  "name": "cryptocases-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "serve -s build",
+    "build": "echo 'Pretend we build React here'"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "serve": "^14.0.1"
+  }
+}

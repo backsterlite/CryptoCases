@@ -1,0 +1,7 @@
+[tool.setuptools]
+packages = ["app"]
+package-dir = {"" = "src"}
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

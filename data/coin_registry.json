@@ -1,0 +1,1120 @@
+{
+  "CARDANO": {
+    "coin_symbol": "ada",
+    "coin_name": "Cardano",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/975/thumb/cardano.png?1696502090",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "cardano",
+    "is_native": true,
+    "native_network": "CARDANO"
+  },
+  "TRON": {
+    "coin_symbol": "trx",
+    "coin_name": "TRON",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/1094/thumb/tron-logo.png?1696502193",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "tron",
+    "is_native": true,
+    "native_network": "TRON"
+  },
+  "STELLAR": {
+    "coin_symbol": "xlm",
+    "coin_name": "Stellar",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/100/thumb/fmpFRHHQ_400x400.jpg?1735231350",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "stellar",
+    "is_native": true,
+    "native_network": "STELLAR"
+  },
+  "XRP": {
+    "coin_symbol": "xrp",
+    "coin_name": "XRP",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/44/thumb/xrp-symbol-white-128.png?1696501442",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "ripple",
+    "is_native": true,
+    "native_network": "XRP"
+  },
+  "SUI": {
+    "coin_symbol": "sui",
+    "coin_name": "Sui",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/26375/thumb/sui-ocean-square.png?1727791290",
+    "coin_contract_addresses": {
+      "SUI": {
+        "raw": "SUI",
+        "contract": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        "type": "SUI"
+      }
+    },
+    "coin_decimals": {
+      "SUI": {
+        "raw": "SUI",
+        "decimal_place": 9
+      }
+    },
+    "coingecko_id": "sui",
+    "is_native": false,
+    "native_network": null
+  },
+  "APT": {
+    "coin_symbol": "apt",
+    "coin_name": "Aptos",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/26455/thumb/aptos_round.png?1696525528",
+    "coin_contract_addresses": {
+      "APTOS": {
+        "raw": "APTOS",
+        "contract": "0x1::aptos_coin::AptosCoin",
+        "type": "APTOS"
+      }
+    },
+    "coin_decimals": {
+      "APTOS": {
+        "raw": "APTOS",
+        "decimal_place": 8
+      }
+    },
+    "coingecko_id": "aptos",
+    "is_native": false,
+    "native_network": null
+  },
+  "CHAINLINK": {
+    "coin_symbol": "link",
+    "coin_name": "Chainlink",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/877/thumb/chainlink-new-logo.png?1696502009",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x514910771af9ca656af840dff83e8264ecf986ca",
+        "type": "EVM"
+      },
+      "OP": {
+        "raw": "OPTIMISTIC-ETHEREUM",
+        "contract": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+        "type": "EVM"
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "contract": "514910771af9ca656af840dff83e8264ecf986ca.factory.bridge.near",
+        "type": "NEAR"
+      },
+      "BASE": {
+        "raw": "BASE",
+        "contract": "0x88fb150bdc53a65fe94dea0c9ba0a6daf8c6e196",
+        "type": "EVM"
+      },
+      "HT": {
+        "raw": "HUOBI-TOKEN",
+        "contract": "0x9e004545c59d359f6b7bfb06a26390b087717b42",
+        "type": "EVM"
+      },
+      "XDAI": {
+        "raw": "XDAI",
+        "contract": "0xe2e73a1c69ecf83f464efce6a5be353a37ca09b2",
+        "type": "EVM"
+      },
+      "ONE": {
+        "raw": "HARMONY-SHARD-0",
+        "contract": "0x218532a12a389a4a92fc0c5fb22901d1c19198aa",
+        "type": "EVM"
+      },
+      "OSMO": {
+        "raw": "OSMOSIS",
+        "contract": "ibc/D3327A763C23F01EC43D1F0DB3CEFEC390C362569B6FD191F40A5192F8960049",
+        "type": "IBC"
+      },
+      "MILK": {
+        "raw": "MILKOMEDA-CARDANO",
+        "contract": "0xf390830df829cf22c53c8840554b98eafc5dcbc2",
+        "type": "EVM"
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "contract": "0x68ca48ca2626c415a89756471d4ade2cc9034008",
+        "type": "EVM"
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd",
+        "type": "EVM"
+      },
+      "FTM": {
+        "raw": "FANTOM",
+        "contract": "0xb3654dc3d10ea7645f8319668e8f54d2574fbdc8",
+        "type": "EVM"
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "contract": "0x5947bb275c521040051d82396192181b413227a3",
+        "type": "EVM"
+      },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "contract": "0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
+        "type": "EVM"
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "contract": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "OP": {
+        "raw": "OPTIMISTIC-ETHEREUM",
+        "decimal_place": 18
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "decimal_place": 18
+      },
+      "BASE": {
+        "raw": "BASE",
+        "decimal_place": 18
+      },
+      "HT": {
+        "raw": "HUOBI-TOKEN",
+        "decimal_place": 18
+      },
+      "XDAI": {
+        "raw": "XDAI",
+        "decimal_place": 18
+      },
+      "ONE": {
+        "raw": "HARMONY-SHARD-0",
+        "decimal_place": 18
+      },
+      "OSMO": {
+        "raw": "OSMOSIS",
+        "decimal_place": 18
+      },
+      "MILK": {
+        "raw": "MILKOMEDA-CARDANO",
+        "decimal_place": 18
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "decimal_place": 18
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 18
+      },
+      "FTM": {
+        "raw": "FANTOM",
+        "decimal_place": 18
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "decimal_place": 18
+      },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "decimal_place": 18
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "chainlink",
+    "is_native": false,
+    "native_network": null
+  },
+  "AVALANCHE": {
+    "coin_symbol": "avax",
+    "coin_name": "Avalanche",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/12559/thumb/Avalanche_Circle_RedWhite_Trans.png?1696512369",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "avalanche-2",
+    "is_native": true,
+    "native_network": "AVALANCHE"
+  },
+  "HYPERLIQUID": {
+    "coin_symbol": "hype",
+    "coin_name": "Hyperliquid",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/50882/thumb/hyperliquid.jpg?1729431300",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "hyperliquid",
+    "is_native": true,
+    "native_network": "HYPERLIQUID"
+  },
+  "OKB": {
+    "coin_symbol": "okb",
+    "coin_name": "OKB",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/4463/thumb/WeChat_Image_20220118095654.png?1696505053",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x75231f58b43240c9718dd58b4967c5114342a86c",
+        "type": "EVM"
+      },
+      "OKT": {
+        "raw": "OKEX-CHAIN",
+        "contract": "0xdf54b6c6195ea4d948d03bfd818d365cf175cfc2",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "OKT": {
+        "raw": "OKEX-CHAIN",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "okb",
+    "is_native": false,
+    "native_network": null
+  },
+  "TETHER": {
+    "coin_symbol": "usdt",
+    "coin_name": "Tether",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/325/thumb/Tether.png?1696501661",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "type": "EVM"
+      },
+      "APTOS": {
+        "raw": "APTOS",
+        "contract": "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b",
+        "type": "APTOS"
+      },
+      "TRC20": {
+        "raw": "TRON",
+        "contract": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+        "type": "TRON"
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "contract": "usdt.tether-token.near",
+        "type": "NEAR"
+      },
+      "TON": {
+        "raw": "THE-OPEN-NETWORK",
+        "contract": "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",
+        "type": "TON"
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "contract": "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7",
+        "type": "EVM"
+      },
+      "SPL": {
+        "raw": "SOLANA",
+        "contract": "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+        "type": "SOLANA"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 6
+      },
+      "APTOS": {
+        "raw": "APTOS",
+        "decimal_place": 6
+      },
+      "TRC20": {
+        "raw": "TRON",
+        "decimal_place": 6
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "decimal_place": 6
+      },
+      "TON": {
+        "raw": "THE-OPEN-NETWORK",
+        "decimal_place": 6
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "decimal_place": 6
+      },
+      "SPL": {
+        "raw": "SOLANA",
+        "decimal_place": 6
+      }
+    },
+    "coingecko_id": "tether",
+    "is_native": false,
+    "native_network": null
+  },
+  "THE GRAPH": {
+    "coin_symbol": "grt",
+    "coin_name": "The Graph",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/13397/thumb/Graph_Token.png?1696513159",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0xc944e90c64b2c07662a292be6244bdf05cda44a7",
+        "type": "EVM"
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "contract": "c944e90c64b2c07662a292be6244bdf05cda44a7.factory.bridge.near",
+        "type": "NEAR"
+      },
+      "ONE": {
+        "raw": "HARMONY-SHARD-0",
+        "contract": "0x002fa662f2e09de7c306d2bab0085ee9509488ff",
+        "type": "EVM"
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "contract": "0x771513ba693d457df3678c951c448701f2eaaad5",
+        "type": "EVM"
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "contract": "0x8a0cac13c7da965a312f08ea4229c37869e85cb9",
+        "type": "EVM"
+      },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "contract": "0x9623063377ad1b27544c965ccd7342f7ea7e88c7",
+        "type": "EVM"
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "contract": "0x5fe2b58c013d7601147dcdd68c143a77499f5531",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "decimal_place": 18
+      },
+      "ONE": {
+        "raw": "HARMONY-SHARD-0",
+        "decimal_place": 18
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "decimal_place": 18
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "decimal_place": 18
+      },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "decimal_place": 18
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "the-graph",
+    "is_native": false,
+    "native_network": null
+  },
+  "SHIBA INU": {
+    "coin_symbol": "shib",
+    "coin_name": "Shiba Inu",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/11939/thumb/shiba.png?1696511800",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "shiba-inu",
+    "is_native": false,
+    "native_network": null
+  },
+  "PEPE": {
+    "coin_symbol": "pepe",
+    "coin_name": "Pepe",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/29850/thumb/pepe-token.jpeg?1696528776",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+        "type": "EVM"
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0x25d887ce7a35172c62febfd67a1856f20faebb00",
+        "type": "EVM"
+      },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "contract": "0x25d887ce7a35172c62febfd67a1856f20faebb00",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 18
+      },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "pepe",
+    "is_native": false,
+    "native_network": null
+  },
+  "DOGECOIN": {
+    "coin_symbol": "doge",
+    "coin_name": "Dogecoin",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/5/thumb/dogecoin.png?1696501409",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "dogecoin",
+    "is_native": true,
+    "native_network": "DOGECOIN"
+  },
+  "USDC": {
+    "coin_symbol": "usdc",
+    "coin_name": "USDC",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/6319/thumb/usdc.png?1696506694",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "type": "EVM"
+      },
+      "UNICHAIN": {
+        "raw": "UNICHAIN",
+        "contract": "0x078d782b760474a361dda0af3839290b0ef57ad6",
+        "type": "UNKNOWN"
+      },
+      "OP": {
+        "raw": "OPTIMISTIC-ETHEREUM",
+        "contract": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+        "type": "EVM"
+      },
+      "TRC20": {
+        "raw": "TRON",
+        "contract": "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8",
+        "type": "TRON"
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "contract": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+        "type": "NEAR"
+      },
+      "HBAR": {
+        "raw": "HEDERA-HASHGRAPH",
+        "contract": "0.0.456858",
+        "type": "HEDERA"
+      },
+      "APTOS": {
+        "raw": "APTOS",
+        "contract": "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b",
+        "type": "APTOS"
+      },
+      "ALGO": {
+        "raw": "ALGORAND",
+        "contract": "31566704",
+        "type": "ALGORAND"
+      },
+      "XLM": {
+        "raw": "STELLAR",
+        "contract": "USDC-GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN",
+        "type": "STELLAR"
+      },
+      "SUI": {
+        "raw": "SUI",
+        "contract": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+        "type": "SUI"
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "contract": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+        "type": "EVM"
+      },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "contract": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+        "type": "EVM"
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "contract": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+        "type": "EVM"
+      },
+      "BASE": {
+        "raw": "BASE",
+        "contract": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "type": "EVM"
+      },
+      "SPL": {
+        "raw": "SOLANA",
+        "contract": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        "type": "SOLANA"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 6
+      },
+      "UNICHAIN": {
+        "raw": "UNICHAIN",
+        "decimal_place": 6
+      },
+      "OP": {
+        "raw": "OPTIMISTIC-ETHEREUM",
+        "decimal_place": 6
+      },
+      "TRC20": {
+        "raw": "TRON",
+        "decimal_place": 6
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "decimal_place": 6
+      },
+      "HBAR": {
+        "raw": "HEDERA-HASHGRAPH",
+        "decimal_place": 6
+      },
+      "APTOS": {
+        "raw": "APTOS",
+        "decimal_place": 6
+      },
+      "ALGO": {
+        "raw": "ALGORAND",
+        "decimal_place": 5
+      },
+      "SUI": {
+        "raw": "SUI",
+        "decimal_place": 6
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "decimal_place": 6
+      },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "decimal_place": 6
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "decimal_place": 6
+      },
+      "BASE": {
+        "raw": "BASE",
+        "decimal_place": 6
+      },
+      "SPL": {
+        "raw": "SOLANA",
+        "decimal_place": 6
+      }
+    },
+    "coingecko_id": "usd-coin",
+    "is_native": false,
+    "native_network": null
+  },
+  "TONCOIN": {
+    "coin_symbol": "ton",
+    "coin_name": "Toncoin",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/17980/thumb/photo_2024-09-10_17.09.00.jpeg?1725963446",
+    "coin_contract_addresses": {
+      "TON": {
+        "raw": "THE-OPEN-NETWORK",
+        "contract": "EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM9c",
+        "type": "TON"
+      },
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x582d872a1b094fc48f5de31d3b73f2d9be47def1",
+        "type": "EVM"
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0x76a797a59ba2c17726896976b7b3747bfd1d220f",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 9
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 9
+      }
+    },
+    "coingecko_id": "the-open-network",
+    "is_native": false,
+    "native_network": null
+  },
+  "ZILLIQA": {
+    "coin_symbol": "zil",
+    "coin_name": "Zilliqa",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/2687/thumb/Zilliqa-logo.png?1696503475",
+    "coin_contract_addresses": {
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0xb86abcb37c3a4b64f74f59301aff131a1becc787",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 12
+      }
+    },
+    "coingecko_id": "zilliqa",
+    "is_native": false,
+    "native_network": null
+  },
+  "POLYGON": {
+    "coin_symbol": "matic",
+    "coin_name": "Polygon",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/4713/thumb/polygon.png?1698233745",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+        "type": "EVM"
+      },
+      "MOVR": {
+        "raw": "MOONRIVER",
+        "contract": "0x682f81e57eaa716504090c3ecba8595fb54561d8",
+        "type": "EVM"
+      },
+      "ONE": {
+        "raw": "HARMONY-SHARD-0",
+        "contract": "0x301259f392b551ca8c592c9f676fcd2f9a0a84c5",
+        "type": "EVM"
+      },
+      "GLMR": {
+        "raw": "MOONBEAM",
+        "contract": "0x3405a1bd46b85c5c029483fbecf2f3e611026e45",
+        "type": "EVM"
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "contract": "0x98997e1651919faeacee7b96afbb3dfd96cb6036",
+        "type": "EVM"
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "MOVR": {
+        "raw": "MOONRIVER",
+        "decimal_place": 18
+      },
+      "ONE": {
+        "raw": "HARMONY-SHARD-0",
+        "decimal_place": 18
+      },
+      "GLMR": {
+        "raw": "MOONBEAM",
+        "decimal_place": 18
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "decimal_place": 18
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "matic-network",
+    "is_native": false,
+    "native_network": null
+  },
+  "ALGORAND": {
+    "coin_symbol": "algo",
+    "coin_name": "Algorand",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/4380/thumb/download.png?1696504978",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "algorand",
+    "is_native": true,
+    "native_network": "ALGORAND"
+  },
+  "1INCH": {
+    "coin_symbol": "1inch",
+    "coin_name": "1inch",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/13469/thumb/1inch-token.png?1696513230",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x111111111117dc0aa78b770fa6a738034120c302",
+        "type": "EVM"
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "contract": "111111111117dc0aa78b770fa6a738034120c302.factory.bridge.near",
+        "type": "NEAR"
+      },
+      "ONE": {
+        "raw": "HARMONY-SHARD-0",
+        "contract": "0x58f1b044d8308812881a1433d9bbeff99975e70c",
+        "type": "EVM"
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "contract": "0xdda6205dc3f47e5280eb726613b27374eee9d130",
+        "type": "EVM"
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0x111111111117dc0aa78b770fa6a738034120c302",
+        "type": "EVM"
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "contract": "0xd501281565bf7789224523144fe5d98e8b28f267",
+        "type": "EVM"
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "contract": "0x9c2c5fd7b07e95ee044ddeba0e97a665f142394f",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "NEAR": {
+        "raw": "NEAR-PROTOCOL",
+        "decimal_place": 18
+      },
+      "ONE": {
+        "raw": "HARMONY-SHARD-0",
+        "decimal_place": 18
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "decimal_place": 18
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 18
+      },
+      "AVAXC": {
+        "raw": "AVALANCHE",
+        "decimal_place": 18
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "1inch",
+    "is_native": false,
+    "native_network": null
+  },
+  "HARMONY": {
+    "coin_symbol": "one",
+    "coin_name": "Harmony",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/4344/thumb/Y88JAze.png?1696504947",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "harmony",
+    "is_native": true,
+    "native_network": "HARMONY"
+  },
+  "ARBITRUM": {
+    "coin_symbol": "arb",
+    "coin_name": "Arbitrum",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/16547/thumb/arb.jpg?1721358242",
+    "coin_contract_addresses": {
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "contract": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+        "type": "EVM"
+      },
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0xb50721bcf8d664c30412cfbc6cf7a15145234ad1",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "decimal_place": 18
+      },
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "arbitrum",
+    "is_native": false,
+    "native_network": null
+  },
+  "NEAR PROTOCOL": {
+    "coin_symbol": "near",
+    "coin_name": "NEAR Protocol",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/10365/thumb/near.jpg?1696510367",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x85f17cf997934a597031b2e18a9ab6ebd4b9f6a4",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 24
+      }
+    },
+    "coingecko_id": "near",
+    "is_native": false,
+    "native_network": null
+  },
+  "INTERNET COMPUTER": {
+    "coin_symbol": "icp",
+    "coin_name": "Internet Computer",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/14495/thumb/Internet_Computer_logo.png?1696514180",
+    "coin_contract_addresses": {
+      "ICP": {
+        "raw": "INTERNET-COMPUTER",
+        "contract": "ryjl3-tyaaa-aaaaa-aaaba-cai",
+        "type": "ICP"
+      }
+    },
+    "coin_decimals": {
+      "ICP": {
+        "raw": "INTERNET-COMPUTER",
+        "decimal_place": 8
+      }
+    },
+    "coingecko_id": "internet-computer",
+    "is_native": false,
+    "native_network": null
+  },
+  "INJECTIVE": {
+    "coin_symbol": "inj",
+    "coin_name": "Injective",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/12882/thumb/Other_200x200.png?1738782212",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0xe28b3b32b6c345a34ff64674606124dd5aceca30",
+        "type": "EVM"
+      },
+      "COSMOS": {
+        "raw": "COSMOS",
+        "contract": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
+        "type": "IBC"
+      },
+      "OSMO": {
+        "raw": "OSMOSIS",
+        "contract": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
+        "type": "IBC"
+      },
+      "SCRT": {
+        "raw": "SECRET",
+        "contract": "secret14706vxakdzkz9a36872cs62vpl5qd84kpwvpew",
+        "type": "IBC"
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0xa2b726b1145a4773f68593cf171187d8ebe4d495",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "COSMOS": {
+        "raw": "COSMOS",
+        "decimal_place": 18
+      },
+      "OSMO": {
+        "raw": "OSMOSIS",
+        "decimal_place": 18
+      },
+      "SCRT": {
+        "raw": "SECRET",
+        "decimal_place": 16
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "injective-protocol",
+    "is_native": false,
+    "native_network": null
+  },
+  "MASK NETWORK": {
+    "coin_symbol": "mask",
+    "coin_name": "Mask Network",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/14051/thumb/Mask_Network.jpg?1696513776",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x69af81e73a73b40adf4f3d4223cd9b1ece623074",
+        "type": "EVM"
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "contract": "0x746514e2c7d91e1e84c20c54d1f6f537b28a7d8e",
+        "type": "EVM"
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0x2ed9a5c8c13b93955103b9a7c167b67ef4d568a3",
+        "type": "EVM"
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "contract": "0x2b9e7ccdf0f4e5b24757c1e1a80e311e34cb10c7",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "decimal_place": 18
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 18
+      },
+      "POLYGON": {
+        "raw": "POLYGON-POS",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "mask-network",
+    "is_native": false,
+    "native_network": null
+  },
+  "VECHAIN": {
+    "coin_symbol": "vet",
+    "coin_name": "VeChain",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/1167/thumb/VET.png?1742383283",
+    "coin_contract_addresses": {
+      "VET": {
+        "raw": "VECHAIN",
+        "contract": "",
+        "type": "NATIVE"
+      }
+    },
+    "coin_decimals": {},
+    "coingecko_id": "vechain",
+    "is_native": false,
+    "native_network": null
+  },
+  "COSMOS HUB": {
+    "coin_symbol": "atom",
+    "coin_name": "Cosmos Hub",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/1481/thumb/cosmos_hub.png?1696502525",
+    "coin_contract_addresses": {
+      "COSMOS": {
+        "raw": "COSMOS",
+        "contract": "uatom",
+        "type": "IBC"
+      },
+      "EVMOS": {
+        "raw": "EVMOS",
+        "contract": "0xc5e00d3b04563950941f7137b5afa3a534f0d6d6",
+        "type": "IBC"
+      },
+      "OSMO": {
+        "raw": "OSMOSIS",
+        "contract": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+        "type": "IBC"
+      },
+      "CANTO": {
+        "raw": "CANTO",
+        "contract": "0xeceeefcee421d8062ef8d6b4d814efe4dc898265",
+        "type": "IBC"
+      },
+      "ARCH": {
+        "raw": "ARCHWAY",
+        "contract": "ibc/27394fb092d2eccd56123c74f36e4c1f926001ceada9ca97ea622b25f41e5eb2",
+        "type": "IBC"
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "contract": "0x0eb3a705fc54725037cc9e008bdede697f62f335",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "COSMOS": {
+        "raw": "COSMOS",
+        "decimal_place": 6
+      },
+      "EVMOS": {
+        "raw": "EVMOS",
+        "decimal_place": 6
+      },
+      "OSMO": {
+        "raw": "OSMOSIS",
+        "decimal_place": 6
+      },
+      "CANTO": {
+        "raw": "CANTO",
+        "decimal_place": 6
+      },
+      "ARCH": {
+        "raw": "ARCHWAY",
+        "decimal_place": 6
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "cosmos",
+    "is_native": false,
+    "native_network": null
+  }
+}
