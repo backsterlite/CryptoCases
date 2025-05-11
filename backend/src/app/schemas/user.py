@@ -12,7 +12,6 @@ class UserCreate(BaseModel):
 
 class UserResponsePublic(BaseModel):
     telegram_id: int
-    balance_usd: float
     wallets: UserWalletsGrouped
     history: List[str]
 

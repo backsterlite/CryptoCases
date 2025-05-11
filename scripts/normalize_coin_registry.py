@@ -23,7 +23,7 @@ def get_first_network(platforms: Dict[str,str]) -> Optional[str]:
 def normalize(raw_data, network_map) -> Dict[str,Any]:
     registry = {}
 
-    for internal_name, data in raw_data.items():
+    for coin_id, data in raw_data.items():
         coingecko_id = data.get("id")
         symbol = data.get("symbol")
         name = data.get("name")
@@ -66,7 +66,7 @@ def normalize(raw_data, network_map) -> Dict[str,Any]:
         else:
             native_network = name.upper()
 
-        registry[internal_name.upper()] = {
+        registry[coin_id.upper()] = {
             "coin_symbol": symbol,
             "coin_name": name,
             "coin_thumb": thumb,

@@ -1,7 +1,7 @@
 from decimal import Decimal
 from app.db.models.user import User
 from app.db.models.withdrawal import WithdrawalLog
-from app.services.wallet_service import has_sufficient_balance, decrease
+from app.services.wallet_service import has_sufficient_balance, WalletService
 from app.services.coin_registry import CoinRegistry
 from app.services.blockchain.evm_client import send_evm_token
 from app.services.blockchain.tron_client import send_tron_token
@@ -43,7 +43,12 @@ class WithdrawalService:
             raise NotImplementedError(f"Withdrawals not yet supported for {net_type}")
 
         # Deduct from balance
-        decrease(user, token, network, amount)
+        await WalletService.update_coin_balance(
+                telegram_id=user.telegram_id,
+                coin_id=token,
+                network=network,
+                delta_str=f"-{amount}"
+        )
 
         # (Optional) Log withdrawal
         # save_withdrawal(user.id, token, network, amount, to_address, tx_hash)

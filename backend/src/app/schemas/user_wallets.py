@@ -11,4 +11,7 @@ class UserTokenWallet(BaseModel):
     
 
 class UserWalletsGrouped(RootModel[Dict[str, UserTokenWallet]]):
+    """
+    root model: { SYMBOL: { coin, balances } }
+    """
     pass

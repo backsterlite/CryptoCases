@@ -57,11 +57,11 @@ def main():
         print(f"Fetching {internal_name} ({coingecko_id})...")
         data = fetch_coin_data(coingecko_id)
         if data:
-            results[internal_name] = data
+            results[coingecko_id] = data
         time.sleep(RATE_LIMIT_DELAY)
 
-    # with open(RAW_OUTPUT_PATH, "w") as f:
-    #     json.dump(results, f, indent=2)
+    with open(RAW_OUTPUT_PATH, "w") as f:
+        json.dump(results, f, indent=2)
 
     print(f"Saved {len(results)} entries to {RAW_OUTPUT_PATH}")
 

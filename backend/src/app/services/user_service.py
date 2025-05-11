@@ -3,6 +3,8 @@ from typing import Optional, Dict
 
 from app.db.models.user import User
 from app.services.coin_registry import CoinRegistry
+from app.models.coin import CoinAmount
+from app.config.settings import settings
 
 class UserService:
     @staticmethod
@@ -13,7 +15,6 @@ class UserService:
     async def create_user(telegram_id: int) -> User:
         user = User(
             telegram_id=telegram_id,
-            balance_usd=0.0,
             wallets= UserService.get_initial_wallet(),
             history=[]
         )
@@ -33,16 +34,19 @@ class UserService:
         Returns initial wallet structure with zero balances
         for base tokens (e.g., USDT, USDC) across all supported networks.
         """
-        base_tokens = ["TETHER", "USDC"]  # Extend if needed later
-        wallets = {}
+       
+        wallets: Dict[str, Dict[str, str]] = {}
 
-        for symbol in base_tokens:
+        for symbol in settings.BASE_TOKENS:
             coin = CoinRegistry.get_runtime(symbol)
-            print(f"COIN: {coin}")
             if not coin:
-                raise ValueError(f"COIN: {coin}, registry: {CoinRegistry._registry}")  #TODO change to custom error
+                continue
+
             wallets[symbol] = {}
-            for network_code in coin.networks:
-                wallets[symbol][network_code] = f"0.{"0"*coin.get_precision(network_code)}"
-        
+            for network in coin.networks:
+                # створюємо CoinAmount із atomic = 0
+                ca = CoinAmount.from_atomic(coin, network, 0)
+                _, _, amt_str = ca.to_storage()
+                wallets[symbol][network] = amt_str
+
         return wallets

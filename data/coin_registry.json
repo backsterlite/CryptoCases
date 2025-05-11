@@ -29,7 +29,7 @@
     "is_native": true,
     "native_network": "STELLAR"
   },
-  "XRP": {
+  "RIPPLE": {
     "coin_symbol": "xrp",
     "coin_name": "XRP",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/44/thumb/xrp-symbol-white-128.png?1696501442",
@@ -60,7 +60,7 @@
     "is_native": false,
     "native_network": null
   },
-  "APT": {
+  "APTOS": {
     "coin_symbol": "apt",
     "coin_name": "Aptos",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/26455/thumb/aptos_round.png?1696525528",
@@ -105,6 +105,11 @@
         "raw": "BASE",
         "contract": "0x88fb150bdc53a65fe94dea0c9ba0a6daf8c6e196",
         "type": "EVM"
+      },
+      "SPL": {
+        "raw": "SOLANA",
+        "contract": "y9MdSjD9Beg9EFaeQGdMpESFWLNdSfZKQKeYLBfmnjJ",
+        "type": "SOLANA"
       },
       "HT": {
         "raw": "HUOBI-TOKEN",
@@ -179,6 +184,10 @@
         "raw": "BASE",
         "decimal_place": 18
       },
+      "SPL": {
+        "raw": "SOLANA",
+        "decimal_place": 9
+      },
       "HT": {
         "raw": "HUOBI-TOKEN",
         "decimal_place": 18
@@ -228,7 +237,7 @@
     "is_native": false,
     "native_network": null
   },
-  "AVALANCHE": {
+  "AVALANCHE-2": {
     "coin_symbol": "avax",
     "coin_name": "Avalanche",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/12559/thumb/Avalanche_Circle_RedWhite_Trans.png?1696512369",
@@ -353,7 +362,7 @@
     "is_native": false,
     "native_network": null
   },
-  "THE GRAPH": {
+  "THE-GRAPH": {
     "coin_symbol": "grt",
     "coin_name": "The Graph",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/13397/thumb/Graph_Token.png?1696513159",
@@ -428,7 +437,7 @@
     "is_native": false,
     "native_network": null
   },
-  "SHIBA INU": {
+  "SHIBA-INU": {
     "coin_symbol": "shib",
     "coin_name": "Shiba Inu",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/11939/thumb/shiba.png?1696511800",
@@ -498,7 +507,7 @@
     "is_native": true,
     "native_network": "DOGECOIN"
   },
-  "USDC": {
+  "USD-COIN": {
     "coin_symbol": "usdc",
     "coin_name": "USDC",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/6319/thumb/usdc.png?1696506694",
@@ -641,7 +650,7 @@
     "is_native": false,
     "native_network": null
   },
-  "TONCOIN": {
+  "THE-OPEN-NETWORK": {
     "coin_symbol": "ton",
     "coin_name": "Toncoin",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/17980/thumb/photo_2024-09-10_17.09.00.jpeg?1725963446",
@@ -697,7 +706,7 @@
     "is_native": false,
     "native_network": null
   },
-  "POLYGON": {
+  "MATIC-NETWORK": {
     "coin_symbol": "matic",
     "coin_name": "Polygon",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/4713/thumb/polygon.png?1698233745",
@@ -888,7 +897,7 @@
     "is_native": false,
     "native_network": null
   },
-  "NEAR PROTOCOL": {
+  "NEAR": {
     "coin_symbol": "near",
     "coin_name": "NEAR Protocol",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/10365/thumb/near.jpg?1696510367",
@@ -909,7 +918,7 @@
     "is_native": false,
     "native_network": null
   },
-  "INTERNET COMPUTER": {
+  "INTERNET-COMPUTER": {
     "coin_symbol": "icp",
     "coin_name": "Internet Computer",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/14495/thumb/Internet_Computer_logo.png?1696514180",
@@ -930,7 +939,7 @@
     "is_native": false,
     "native_network": null
   },
-  "INJECTIVE": {
+  "INJECTIVE-PROTOCOL": {
     "coin_symbol": "inj",
     "coin_name": "Injective",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/12882/thumb/Other_200x200.png?1738782212",
@@ -987,7 +996,7 @@
     "is_native": false,
     "native_network": null
   },
-  "MASK NETWORK": {
+  "MASK-NETWORK": {
     "coin_symbol": "mask",
     "coin_name": "Mask Network",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/14051/thumb/Mask_Network.jpg?1696513776",
@@ -1051,7 +1060,7 @@
     "is_native": false,
     "native_network": null
   },
-  "COSMOS HUB": {
+  "COSMOS": {
     "coin_symbol": "atom",
     "coin_name": "Cosmos Hub",
     "coin_thumb": "https://coin-images.coingecko.com/coins/images/1481/thumb/cosmos_hub.png?1696502525",

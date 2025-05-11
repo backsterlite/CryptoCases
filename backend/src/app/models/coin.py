@@ -68,14 +68,14 @@ class CoinAmount:
     
     def to_storage(self) -> Tuple[str, str, str]:
         """Convert to (symbol, network, amount_str)"""
-        return self.coin.symbol, self.network, str(self.amount)
+        return self.coin.id, self.network, str(self.amount)
     
     @classmethod
-    def from_str(cls, symbol: str, network: str, amount_str: str, coin: Optional[Coin] = None) -> "CoinAmount":
+    def from_str(cls, coin_id: str, network: str, amount_str: str, coin: Optional[Coin] = None) -> "CoinAmount":
         if coin is None:
-            coin = CoinRegistry.get_runtime(symbol)
+            coin = CoinRegistry.get_runtime(coin_id)
             if coin is None:
-                raise ValueError(f"Unknown coin symbol: {symbol}")
+                raise ValueError(f"Unknown coin symbol: {coin_id}")
         
         precision = coin.get_precision(network)
         amount = Decimal(amount_str).quantize(Decimal("1." + "0" * precision))

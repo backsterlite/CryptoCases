@@ -1,7 +1,7 @@
 from __future__ import annotations
 import json
 from pathlib import Path
-from typing import Dict, Optional, NoReturn
+from typing import Dict, Optional, NoReturn, List
 from app.models.coin_registry import NormalizedCoin, NetworkEntry, DecimalEntry
 
 
@@ -18,8 +18,8 @@ class CoinRegistry:
     @classmethod
     def _parse(cls, raw_data) -> Dict[str,NormalizedCoin]:
         parsed = {}
-        for symbol, entry in raw_data.items():
-            parsed[symbol.upper()] = NormalizedCoin(
+        for coin_id, entry in raw_data.items():
+            parsed[coin_id.upper()] = NormalizedCoin(
                 coin_symbol=entry["coin_symbol"],
                 coin_name=entry["coin_name"],
                 coin_thumb=entry.get("coin_thumb"),
@@ -38,37 +38,44 @@ class CoinRegistry:
         return parsed
     
     @classmethod
-    def get(cls, symbol: str) -> Optional[NormalizedCoin]:
-        return cls._registry.get(symbol.upper())
+    def get(cls, coin_id: str) -> Optional[NormalizedCoin]:
+        return cls._registry.get(coin_id.upper())
 
     @classmethod
-    def get_contract(cls, symbol: str, network: str) -> Optional[str]:
-        coin = cls.get(symbol)
+    def get_contract(cls, coin_id: str, network: str) -> Optional[str]:
+        coin = cls.get(coin_id)
         if not coin:
             return None
         entry = coin.coin_contract_addresses.get(network.upper())
         return entry.contract if entry else None
 
     @classmethod
-    def get_decimals(cls, symbol: str, network: str) -> Optional[int]:
-        coin = cls.get(symbol)
+    def get_decimals(cls, coin_id: str, network: str) -> Optional[int]:
+        coin = cls.get(coin_id)
         if not coin:
             return None
         entry = coin.coin_decimals.get(network.upper())
         return entry.decimal_place if entry else None
 
     @classmethod
-    def is_supported(cls, symbol: str, network: str) -> bool:
-        coin = cls.get(symbol)
+    def is_supported(cls, coin_id: str, network: str) -> bool:
+        coin = cls.get(coin_id)
         return network.upper() in coin.coin_contract_addresses if coin else False
 
     @classmethod
-    def get_runtime(cls, symbol: str) -> Optional["Coin"]: # type: ignore  # noqa: F821
+    def get_runtime(cls, coin_id: str) -> Optional["Coin"]: # type: ignore  # noqa: F821
         from app.models.coin import Coin
         
-        normalize_coin = cls.get(symbol)
+        normalize_coin = cls.get(coin_id)
         if not normalize_coin:
             return None
         
         coin = Coin.from_registry(normalize_coin)
         return coin
+    
+    @classmethod
+    def get_ids(cls) -> Optional[List[str]]:
+        if CoinRegistry._registry:
+            return [key.lower() for key in CoinRegistry._registry.keys()]
+        return []
+        

@@ -1,7 +1,7 @@
 import pytest
 from httpx import AsyncClient
-from app.services.user_service import UserService
-from app.db.models.user import User
+from src.app.services.user_service import UserService
+from src.app.db.models.user import User
 
 @pytest.mark.asyncio
 class TestUserBalanceEndpoints:

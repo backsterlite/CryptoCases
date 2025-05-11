@@ -1,0 +1,100 @@
+import asyncio
+import logging
+
+from typing import List, Dict
+from aiocache import caches, Cache
+from aiohttp import ClientSession, ClientError, ClientTimeout
+from decimal import Decimal
+
+from app.services.coin_registry import CoinRegistry
+from app.config.settings import settings
+
+
+
+logger = logging.getLogger(__name__)
+caches.set_config({"default": {"cache": "aiocache.SimpleMemoryCache"}})
+
+def chunk_list(lst: List[str], size: int) -> List[List[str]]:
+    """Розбиває список на чанки заданого розміру."""
+    return [lst[i : i + size] for i in range(0, len(lst), size)]
+
+class RateCache:
+    def __init__(
+        self,
+        batch_size: int = 50,
+        timeout_seconds: int = 5,
+    ):
+        self.batch_size = batch_size
+        # пункт 1 & 3: створюємо одну сесію з таймаутом
+        timeout = ClientTimeout(total=timeout_seconds)
+        self._session = ClientSession(timeout=timeout)
+
+    async def close(self) -> None:
+        """Закриваємо сесію при завершенні роботи."""
+        await self._session.close()
+
+    async def _fetch_rates(self) -> Dict[str, Decimal]:
+        # пункт 1: беремо актуальні id кожного разу
+        ids = CoinRegistry.get_ids() or []
+        if not ids:
+            return {}
+
+        results: Dict[str, Decimal] = {}
+
+        # пункт 5: батчимо запити по batch_size
+        for batch in chunk_list(ids, self.batch_size):
+            params = {
+                "ids": ",".join(batch),      # пункт 2: params замість ручного f-string у URL
+                "vs_currencies": "usd"
+            }
+            try:
+                resp = await self._session.get(
+                    f"{settings.COINGECKO_BASE_URL}/simple/price",
+                    params=params
+                )
+                resp.raise_for_status()      # пункт 3: перевірка статусу
+                data = await resp.json()
+            except (ClientError, asyncio.TimeoutError) as e:
+                logger.error("Error fetching rates for batch %s: %s", batch, e)
+                continue
+
+            # пункт 4: ітеруємося по тому, що реально прийшло
+            for key, obj in data.items():
+                usd_val = obj.get("usd")
+                if usd_val is None:
+                    logger.warning("No USD price for %s in response", key)
+                    continue
+                try:
+                    results[key.upper()] = Decimal(str(usd_val))
+                except (ValueError, TypeError) as e:
+                    logger.error("Can't parse USD value for %s: %s", key, e)
+
+        return results
+
+    async def rate_updater(self, interval_seconds: int = 3600) -> None:
+        """
+        Фоновий таск, що кожні interval_seconds оновлює cache["coin_rates"].
+        Запускай як: asyncio.create_task(rate_cache.rate_updater())
+        """
+        cache = caches.get("default")
+        while True:
+            rates = await self._fetch_rates()
+            await cache.set("coin_rates", rates)
+            logger.info("Coin rates updated, next in %s sec", interval_seconds)
+            await asyncio.sleep(interval_seconds)
+
+    async def get_rate(self, coin_id: str) -> Decimal:
+        """
+        Повертає курс конкретної монети з кешу (або 0, якщо немає).
+        """
+        cache = caches.get("default")
+        rates: Dict[str, Decimal] = await cache.get("coin_rates", {})  # {} за замовчуванням
+        return rates.get(coin_id.upper(), Decimal("0"))
+    
+    async def get_all_rates(self) -> Dict[str, str]:
+        cache = caches.get("default")
+        rates = await cache.get("coin_rates", {}) or {}
+        return {sym: str(rt) for sym, rt in rates.items()}
+
+
+rate_cache = RateCache()

@@ -1,7 +1,74 @@
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
+from fastapi import HTTPException
 from typing import Dict, Optional
 from app.db.models.user import User
 from app.services.coin_registry import CoinRegistry
+from app.models.coin import CoinAmount
+
+class WalletService:
+    
+    @staticmethod
+    async def update_coin_balance(
+        telegram_id: int,
+        coin_id: str,
+        network: str,
+        delta_str: str
+    ) -> dict:
+        """
+        Atomically add delta to user.wallets[symbol][network].
+        If resulting amount <= 0, remove that network (and symbol if пусто).
+        Returns updated dict for this symbol (or {} if removed).
+        """
+        # 1.  delta parsing
+        try:
+            delta_ca = CoinAmount.from_str(coin_id, network, delta_str)
+        except Exception:
+            raise HTTPException(status_code=400, detail="Invalid delta format")
+
+        # 2. Find User
+        user = await User.find_one(User.telegram_id == telegram_id)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        # 3. current balance
+        current_str = user.wallets.get(coin_id, {}).get(network, "0")
+        current_ca = CoinAmount.from_str(coin_id, network, current_str)
+
+        # 4. calculate new atomic
+        new_atomic = current_ca.to_atomic() + delta_ca.to_atomic()
+
+        # 5. Atomic update in DB
+        coll = User.get_motor_collection()
+        if new_atomic > 0:
+            new_ca = CoinAmount.from_atomic(current_ca.coin, network, new_atomic)
+            _, _, new_str = new_ca.to_storage()
+            updated = await coll.find_one_and_update(
+                {"telegram_id": telegram_id},
+                {"$set": {f"wallets.{coin_id}.{network}": new_str}},
+                return_document=True
+            )
+        else:
+            # прибрати мережу
+            updated = await coll.find_one_and_update(
+                {"telegram_id": telegram_id},
+                {"$unset": {f"wallets.{coin_id}.{network}": ""}},
+                return_document=True
+            )
+            # якщо під symbol більше немає мереж – прибрати coin_id
+            if updated and (
+                coin_id in updated.get("wallets", {}) and
+                not updated["wallets"][coin_id]
+            ):
+                await coll.update_one(
+                    {"telegram_id": telegram_id},
+                    {"$unset": {f"wallets.{coin_id}": ""}}
+                )
+
+        # 6. Повернути свіжий словник мереж→amount
+        fresh = (await User.find_one(User.telegram_id == telegram_id)
+                 ).wallets.get(coin_id, {})
+        return fresh
+
 
 
 def get_balance(user: User, token: str, network: str) -> Decimal:
@@ -14,27 +81,6 @@ def get_balance(user: User, token: str, network: str) -> Decimal:
 
 def has_sufficient_balance(user: User, token: str, network: str, amount: Decimal) -> bool:
     return get_balance(user, token, network) >= amount
-
-
-def increase(user: User, token: str, network: str, amount: Decimal):
-    current = get_balance(user, token, network)
-    new_amount = current + amount
-    _set(user, token, network, new_amount)
-
-
-def decrease(user: User, token: str, network: str, amount: Decimal):
-    if not has_sufficient_balance(user, token, network, amount):
-        raise ValueError("Insufficient balance")
-    current = get_balance(user, token, network)
-    new_amount = current - amount
-    _set(user, token, network, new_amount)
-
-
-def _set(user: User, token: str, network: str, amount: Decimal):
-    # Normalize as string with proper decimal precision
-    decimals = CoinRegistry.get_decimals(token, network) or 6
-    str_value = f"{amount:.{decimals}f}"
-    user.wallets.setdefault(token, {})[network] = str_value
 
 
 def to_display(token: str, network: str, amount: str) -> str:

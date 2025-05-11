@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pathlib import Path
+from typing import List
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
@@ -10,7 +11,9 @@ class Settings(BaseSettings):
     jwt_secret: str = "supersecret"
     debug: bool = False
     COINGECKO_API: str
+    COINGECKO_BASE_URL: str
     coin_registry_path: Path = BASE_DIR / "data" / "coin_registry.json"
+    BASE_TOKENS: List[str]
 
     model_config = SettingsConfigDict(
         env_file="/app/.env",

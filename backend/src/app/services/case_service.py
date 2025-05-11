@@ -4,7 +4,7 @@ from decimal import Decimal
 from typing import Dict
 
 from app.db.models.user import User
-from app.services.wallet_service import has_sufficient_balance, decrease, increase
+from app.services.wallet_service import has_sufficient_balance, WalletService
 from app.db.models.case_log import CaseLog
 
 # Фіксовані кейси MVP
@@ -48,7 +48,12 @@ async def open_case(user: User, case_id: str) -> Dict[str,str]:
         raise ValueError("Insufficient balance to open case")
 
     # Списуємо вартість кейсу
-    decrease(user, token, network, price)
+    await WalletService.update_coin_balance(
+        telegram_id=user.telegram_id,
+        coin_id=token,
+        network=network,
+        delta_str=f"-{price}"
+    )
 
     # Випадковий виграш
     coins, weights, mins, maxs = zip(*REWARDS)

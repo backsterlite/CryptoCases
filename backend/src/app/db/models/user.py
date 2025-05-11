@@ -10,7 +10,6 @@ class User(Document):
     telegram_id: int = Indexed(unique=True)
     first_name: Optional[str] = None
     last_name: Optional[str] = None
-    balance_usd: float = 0.0
     wallets: Dict[str, Dict[str, str]] = Field(default_factory=Dict)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     history: List[str] = Field(default_factory=list)
