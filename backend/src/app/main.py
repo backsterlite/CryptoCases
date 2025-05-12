@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 
 from contextlib import asynccontextmanager
@@ -25,6 +26,14 @@ async def lifespan(app: FastAPI):
     rate_cache.close()
 
 app = FastAPI(title="CryptoCases API", lifespan=lifespan, debug=True)
+
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],      # або точний URL фронтенду, наприклад "http://localhost:5173"
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
+)
 
 register_exception_handlers(app)
 

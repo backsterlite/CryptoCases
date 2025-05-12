@@ -89,7 +89,7 @@ class RateCache:
         """
         cache = caches.get("default")
         rates: Dict[str, Decimal] = await cache.get("coin_rates", {})  # {} за замовчуванням
-        return rates.get(coin_id.upper(), Decimal("0"))
+        return rates.get(coin_id.lower(), Decimal("0"))
     
     async def get_all_rates(self) -> Dict[str, str]:
         cache = caches.get("default")

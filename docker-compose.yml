@@ -1,15 +1,15 @@
 
 services:
-  bot:
-    build: ./bot
-    container_name: cryptocases_bot
-    environment:
-      - BOT_TOKEN=your_telegram_token
-    depends_on:
-      - api
-    restart: always
+  # bot:
+  #   build: ./bot
+  #   container_name: cryptocases_bot
+  #   environment:
+  #     - BOT_TOKEN=your_telegram_token
+  #   depends_on:
+  #     - backend
+  #   restart: always
 
-  api:
+  backend:
     build:
       context: .
       dockerfile: backend/Dockerfile
@@ -24,10 +24,21 @@ services:
     restart: always
 
   frontend:
-    build: ./frontend
+    build: 
+      context: .
+      dockerfile: frontend/Dockerfile
+      target: dev
     container_name: cryptocases_frontend
     ports:
-      - "3000:3000"
+      - "5173:5173"
+    environment:
+      - REACT_APP_API_URL=http://backend:8000
+    depends_on:
+      - backend
+    env_file:
+      - .env
+    volumes:
+      - ./frontend:/app
     restart: always
 
   mongo:

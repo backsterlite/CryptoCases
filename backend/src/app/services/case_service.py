@@ -62,7 +62,12 @@ async def open_case(user: User, case_id: str) -> Dict[str,str]:
     amount = Decimal(str(round(random.uniform(float(reward_config[2]), float(reward_config[3])), 4)))
 
     # На цей етап — просто видаємо в тій самій мережі TRC20 (можна ускладнити пізніше)
-    increase(user, reward_token, network, amount)
+    await WalletService.update_coin_balance(
+        telegram_id=user.telegram_id,
+        coin_id=reward_token,
+        network=network,
+        delta_str=f"{amount}"
+    )
     
     log = CaseLog(
         user_id=user.id,
