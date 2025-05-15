@@ -4,6 +4,7 @@ from typing import Dict, Optional
 from app.db.models.user import User
 from app.services.coin_registry import CoinRegistry
 from app.models.coin import CoinAmount
+from pymongo import ReturnDocument
 
 class WalletService:
     
@@ -43,9 +44,9 @@ class WalletService:
             new_ca = CoinAmount.from_atomic(current_ca.coin, network, new_atomic)
             _, _, new_str = new_ca.to_storage()
             updated = await coll.find_one_and_update(
-                {"telegram_id": telegram_id},
+                {"user_id": telegram_id},
                 {"$set": {f"wallets.{coin_id}.{network}": new_str}},
-                return_document=True
+                return_document=ReturnDocument.AFTER
             )
         else:
             # прибрати мережу

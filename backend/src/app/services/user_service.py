@@ -9,12 +9,12 @@ from app.config.settings import settings
 class UserService:
     @staticmethod
     async def get_user_by_telegram_id(telegram_id: int) -> Optional[User]:
-        return await User.find_one(User.telegram_id == telegram_id)
+        return await User.find_one(User.user_id == telegram_id)
 
     @staticmethod
     async def create_user(telegram_id: int) -> User:
         user = User(
-            telegram_id=telegram_id,
+            user_id=telegram_id,
             wallets= UserService.get_initial_wallet(),
             history=[]
         )

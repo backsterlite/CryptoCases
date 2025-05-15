@@ -1,7 +1,7 @@
 import asyncio
 import logging
 
-from typing import List, Dict
+from typing import List, Dict, Optional
 from aiocache import caches, Cache
 from aiohttp import ClientSession, ClientError, ClientTimeout
 from decimal import Decimal
@@ -26,14 +26,19 @@ class RateCache:
     ):
         self.batch_size = batch_size
         # пункт 1 & 3: створюємо одну сесію з таймаутом
-        timeout = ClientTimeout(total=timeout_seconds)
-        self._session = ClientSession(timeout=timeout)
+        self._timeout = ClientTimeout(total=timeout_seconds)
+        self._session: Optional[ClientSession] = None
 
     async def close(self) -> None:
         """Закриваємо сесію при завершенні роботи."""
         await self._session.close()
+        
+    async def _ensure_session(self):
+        if self._session is None:
+            self._session = ClientSession(timeout=self._timeout)
 
     async def _fetch_rates(self) -> Dict[str, Decimal]:
+        await self._ensure_session()
         # пункт 1: беремо актуальні id кожного разу
         ids = CoinRegistry.get_ids() or []
         if not ids:
@@ -65,7 +70,7 @@ class RateCache:
                     logger.warning("No USD price for %s in response", key)
                     continue
                 try:
-                    results[key.upper()] = Decimal(str(usd_val))
+                    results[key.lower()] = Decimal(str(usd_val))
                 except (ValueError, TypeError) as e:
                     logger.error("Can't parse USD value for %s: %s", key, e)
 
@@ -88,7 +93,7 @@ class RateCache:
         Повертає курс конкретної монети з кешу (або 0, якщо немає).
         """
         cache = caches.get("default")
-        rates: Dict[str, Decimal] = await cache.get("coin_rates", {})  # {} за замовчуванням
+        rates: Dict[str, Decimal] = await cache.get("coin_rates", {})  # {} for default
         return rates.get(coin_id.lower(), Decimal("0"))
     
     async def get_all_rates(self) -> Dict[str, str]:

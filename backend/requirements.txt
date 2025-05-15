@@ -4,6 +4,7 @@ uvicorn[standard]==0.27.1    # ASGI сервер
 aiocache==0.12.3
 aiohttp==3.11.18
 aioredis==2.0.1
+aioboto3==14.3.0
 
 # JWT / auth
 python-jose[cryptography]>=3.3.0  # Для кодування/декодування токенів

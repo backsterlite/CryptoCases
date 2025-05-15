@@ -4,14 +4,15 @@ import hashlib
 import pytest
 
 from datetime import timedelta
-from jose import JWTError
-from httpx import AsyncClient
+from fastapi import HTTPException
+from httpx import AsyncClient, ASGITransport
 
 from app.main import app
 from app.db.models.user import User
-from app.core.auth_jwt import create_access_token, verify_access_token,  get_current_user
+from app.core.auth_jwt import create_access_token, verify_access_token
+from app.api.deps import get_current_user
 from app.services.user_service import UserService
-from app.config.settings import settings
+from app.config.settings_test import settings
 
 
 
@@ -26,9 +27,9 @@ class TestJWTAuth:
         assert decoded_id == telegram_id
 
     async def test_invalid_token(self):
-        with pytest.raises(JWTError):
+        with pytest.raises(HTTPException) as ei:
             verify_access_token("invalid.token.value")
-  
+        assert ei.value.status_code == 401
             
 @pytest.mark.asyncio
 class TestTelegramAuthRoute:
@@ -40,7 +41,7 @@ class TestTelegramAuthRoute:
             "user[username]": "testuser"
         }
         data_check_string = "\n".join(f"{k}={v}" for k, v in sorted(data.items()))
-        secret = hashlib.sha256(settings.bot_token.encode()).digest()
+        secret = hashlib.sha256(settings.dev_bot_token.encode()).digest()
         hash = hmac.new(secret, data_check_string.encode(), hashlib.sha256).hexdigest()
         data["hash"] = hash
         return urllib.parse.urlencode(data)
@@ -49,7 +50,7 @@ class TestTelegramAuthRoute:
         telegram_id = 789123
         init_data = self.generate_valid_init_data(telegram_id)
 
-        async with AsyncClient(app=app, base_url="http://test") as client:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.post("/auth/telegram", json={"init_data": init_data})
 
         assert response.status_code == 200
@@ -65,7 +66,7 @@ class TestGetCurrentUser:
     async def token_and_user(self):
         telegram_id = 999111
         user = await UserService.get_or_create_user(telegram_id)
-        token = create_access_token({"sub": str(user.telegram_id)})
+        token = create_access_token({"sub": str(user.user_id)})
         return token, user
 
     async def test_get_current_user_from_token(self, token_and_user):
@@ -74,5 +75,5 @@ class TestGetCurrentUser:
         # Симулюємо Depends у роуті
         retrieved_user = await get_current_user(token=token)
 
-        assert retrieved_user.telegram_id == user.telegram_id
+        assert retrieved_user.user_id == user.user_id
         assert isinstance(retrieved_user, User)

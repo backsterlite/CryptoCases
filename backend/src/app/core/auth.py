@@ -22,6 +22,6 @@ def verify_telegram_auth(init_data: str, bot_token: str) -> int:
         if calculated_hash != hash_from_telegram:
             raise ValueError("Invalid hash")
 
-        return int(parsed["user\[id\]"])
+        return int(parsed["user[id]"])
     except Exception as e:
         raise HTTPException(status_code=401, detail=f"Auth failed: {str(e)}")

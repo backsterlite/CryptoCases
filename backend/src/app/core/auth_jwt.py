@@ -22,14 +22,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
 def verify_access_token(token: str) -> int:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        telegram_id: int = int(payload.get("sub"))
-        return telegram_id
+        user_id: int = int(payload.get("sub"))
+        return user_id
     except (JWTError, ValueError):
         raise HTTPException(status_code=401, detail="Invalid or expired token")
-
-async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
-    telegram_id = verify_access_token(token)
-    user = await UserService.get_user_by_telegram_id(telegram_id)
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    return user

@@ -13,7 +13,7 @@ class Coin:
     id: str
     symbol: str
     name: str
-    decimal_places: Dict[str, int] # network → decimal places
+    decimal_places: List[Optional[Dict[str, int]]] # network → decimal places
     networks: List[str] # supported networks
     _allow_direct_init: bool = False
     

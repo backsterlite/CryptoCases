@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends
 
 from app.schemas.user import  UserResponsePublic
-from app.core.auth_jwt import get_current_user
+from app.api.deps import get_current_user
 from app.db.models.user import User
 from app.utils.user import group_wallets_by_coin
 from app.schemas.user_wallets import UserWalletsGrouped
@@ -23,7 +23,7 @@ router = APIRouter(prefix="/users", tags=["Users"])
 async def get_user(user: User = Depends(get_current_user)):
     wallets = UserWalletsGrouped(group_wallets_by_coin(user.wallets))
     return UserResponsePublic(
-        telegram_id=user.telegram_id,
+        telegram_id=user.user_id,
         wallets=wallets,
         history=user.history
     )

@@ -8,8 +8,8 @@ from app.services.rate_cache import rate_cache
 class BalanceService:
     
     @staticmethod
-    async def get_overall_balance_by_usd(telegram_id: int) -> str:
-        user = await User.find_one(User.telegram_id==telegram_id)
+    async def get_overall_balance_by_usd(user_id: int) -> str:
+        user = await User.find_one(User.user_id==user_id)
         total = Decimal("0")
         for coin_id, nets in user.wallets.items():
             print(f"coin_id: {coin_id}")

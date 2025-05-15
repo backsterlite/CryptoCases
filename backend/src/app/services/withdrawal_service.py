@@ -44,7 +44,7 @@ class WithdrawalService:
 
         # Deduct from balance
         await WalletService.update_coin_balance(
-                telegram_id=user.telegram_id,
+                telegram_id=user.user_id,
                 coin_id=token,
                 network=network,
                 delta_str=f"-{amount}"

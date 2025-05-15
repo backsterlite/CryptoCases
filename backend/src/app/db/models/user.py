@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 class User(Document):
     SCHEMA_VERSION: ClassVar[float] = 1.0
     
-    telegram_id: int = Indexed(unique=True)
+    user_id: int = Indexed(unique=True)
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     wallets: Dict[str, Dict[str, str]] = Field(default_factory=Dict)

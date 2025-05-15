@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from decimal import Decimal
-from app.schemas.wallet import WithdrawRequest
+from app.schemas.wallet import WithdrawalRequest
 from app.services.withdrawal_service import WithdrawalService
 from app.api.deps import get_current_user
 from app.db.models.user import User
 
-router = APIRouter()
+router = APIRouter(prefix="/withdraw", tags=["Withdrawals"])
 
 
-@router.post("/withdraw", response_model=str)
+@router.post("/", response_model=str)
 def withdraw(
-    data: WithdrawRequest,
+    data: WithdrawalRequest,
     user: User = Depends(get_current_user)
 ):
     try:

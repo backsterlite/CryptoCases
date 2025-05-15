@@ -1,15 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import asyncio
 
 from contextlib import asynccontextmanager
 
-from app.db.init_db import init_db
-from app.api.routers import user, balance, rates
+from app.api.routers import register_routers
 from app.exceptions import register_exception_handlers
-from app.services.coin_registry import CoinRegistry
-from app.services.rate_cache import rate_cache
-from app.config.settings import settings
+from app.core.bootstrap import bootstrap
 
 #DEV section
 from app.dev import dev_tools
@@ -19,11 +15,9 @@ from app.dev import dev_tools
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    CoinRegistry.load_from_file(path=settings.coin_registry_path)
-    asyncio.create_task(rate_cache.rate_updater())
-    await init_db()
+    await bootstrap.run()
     yield 
-    rate_cache.close()
+    bootstrap.stop()
 
 app = FastAPI(title="CryptoCases API", lifespan=lifespan, debug=True)
 
@@ -36,10 +30,7 @@ app.add_middleware(
 )
 
 register_exception_handlers(app)
-
-app.include_router(user.router)
-app.include_router(balance.router)
-app.include_router(rates.router)
+register_routers(app=app)
 
 
 

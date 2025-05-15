@@ -21,5 +21,5 @@ async def generate_token_for_testing(
 @router.post("/user/create", response_model=TokenResponse)
 async def get_user(payload: UserCreate):
     user = await UserService.get_or_create_user(payload.telegram_id)
-    access_token = create_access_token(data={"sub": str(user.telegram_id)})
+    access_token = create_access_token(data={"sub": str(user.user_id)})
     return TokenResponse(access_token=access_token)
