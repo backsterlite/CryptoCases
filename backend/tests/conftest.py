@@ -43,9 +43,8 @@ async def client(db) -> AsyncClient:
 
 @pytest.fixture
 async def auth_token(client):
-    # створимо тестового юзера через /dev/gen_token
-    resp = await client.get("/dev/gen_token", params={
+    # створимо тестового юзера через /dev/user/create
+    resp = await client.post("/dev/user/create", json={
         "telegram_id": 42,
-        "bot_token": test_settings.dev_bot_token
     })
     return resp.json()["access_token"]

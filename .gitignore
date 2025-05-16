@@ -7,3 +7,4 @@ backup_project.sh
 project_structure.txt
 Project_info/
 **/*.tar.gz
+**/*.code-workspace

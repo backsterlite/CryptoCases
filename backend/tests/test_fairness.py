@@ -10,7 +10,7 @@ class TestFairnessEndpoints:
 
     async def test_commit_and_reveal(self, client: AsyncClient, auth_token):
         headers = {"Authorization": f"Bearer {auth_token}"}
-
+        resp = await client.get("/openapi.json")
         # 1) Commit
         resp = await client.post("/fairness/commit", headers=headers)
         assert resp.status_code == 200
@@ -30,6 +30,7 @@ class TestFairnessEndpoints:
             "server_seed_id": sid
         }
         resp2 = await client.post("/cases/open", json=body, headers=headers)
+        print("RESPONSE TRACE", resp2.status_code, resp.json())
         assert resp2.status_code == 200
         spin = resp2.json()
         log_id = spin["spin_log_id"]
