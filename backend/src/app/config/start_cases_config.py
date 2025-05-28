@@ -23,7 +23,7 @@ START_CASES = [
                             "network": "ERC20",
                             "amount": 1
                         },
-                        "sub_chance": 1/6
+                        "sub_chance": 0.167
                     },
                     {
                         "coin_amount": {
@@ -41,7 +41,7 @@ START_CASES = [
                             "network": "ERC20",
                             "amount": 1
                         },
-                        "sub_chance": 1/6
+                        "sub_chance": 0.166
                     },
                     {
                         "coin_amount": {
@@ -55,7 +55,7 @@ START_CASES = [
                             "network": "DOGECOIN",
                             "amount": 1
                         },
-                        "sub_chance": 1/6
+                        "sub_chance": 0.167
                     },
                     {
                         "coin_amount": {
@@ -77,7 +77,7 @@ START_CASES = [
                             "network": "ERC20",
                             "amount": 1
                         },
-                        "sub_chance": 1/6
+                        "sub_chance": 0.166
                     },
                     {
                         "coin_amount": {
@@ -93,7 +93,7 @@ START_CASES = [
                             "network": "TON",
                             "amount": 1
                         },
-                        "sub_chance": 1/6
+                        "sub_chance": 0.167
                     },
                     {
                         "coin_amount": {
@@ -107,13 +107,13 @@ START_CASES = [
                             "network": "ZILLIQA",
                             "amount": 1
                         },
-                        "sub_chance": 1/6
+                        "sub_chance": 0.167
                     },
                 ]
             },
             {
                 "name": "rare",
-                "chance": 0.35,
+                "chance": 0.20,
                 "rewards": [
                     {
                         "coin_amount": {
@@ -129,7 +129,7 @@ START_CASES = [
                             "network": "MATIC",
                             "amount": 1
                         },
-                        "sub_chance": 1/4
+                        "sub_chance": 0.25
                     },
                     {
                         "coin_amount": {
@@ -145,7 +145,7 @@ START_CASES = [
                             "network": "ALGO",
                             "amount": 1
                         },
-                        "sub_chance": 1/4
+                        "sub_chance": 0.25
                     },
                     {
                         "coin_amount": {
@@ -159,7 +159,7 @@ START_CASES = [
                             "network": "ERC20",
                             "amount": 1
                         },
-                        "sub_chance": 1/4
+                        "sub_chance": 0.25
                     },
                     {
                         "coin_amount": {
@@ -175,13 +175,13 @@ START_CASES = [
                             "network": "ONE",
                             "amount": 1
                         },
-                        "sub_chance": 1/4
+                        "sub_chance": 0.25
                     },
                 ]
             },
             {
                 "name": "epic",
-                "chance": 0.15,
+                "chance": 0.07,
                 "rewards": [
                     {
                         "coin_amount": {
@@ -197,7 +197,7 @@ START_CASES = [
                             "network": "ARB",
                             "amount": 1
                         },
-                        "sub_chance": 1/3
+                        "sub_chance": 0.33
                     },
                     {
                         "coin_amount": {
@@ -213,7 +213,7 @@ START_CASES = [
                             "network": "NEAR",
                             "amount": 1
                         },
-                        "sub_chance": 1/3
+                        "sub_chance": 0.33
                     },
                     {
                         "coin_amount": {
@@ -229,13 +229,13 @@ START_CASES = [
                             "network": "ICP",
                             "amount": 1
                         },
-                        "sub_chance": 1/3
+                        "sub_chance": 0.34
                     },
                 ]
             },
             {
                 "name": "legendary",
-                "chance": 0.15,
+                "chance": 0.03,
                 "rewards": [
                     {
                         "coin_amount": {
@@ -249,9 +249,9 @@ START_CASES = [
                                 "networks": ["ERC20"]
                             },
                             "network": "ERC20",
-                            "amount": 1
+                            "amount": 350
                         },
-                        "sub_chance": 1/3
+                        "sub_chance": 0.42
                     },
                     {
                         "coin_amount": {
@@ -265,9 +265,9 @@ START_CASES = [
                                 "networks": ["INJ"]
                             },
                             "network": "INJ",
-                            "amount": 1
+                            "amount": 3.53
                         },
-                        "sub_chance": 1/3
+                        "sub_chance": 0.16
                     },
                     {
                         "coin_amount": {
@@ -281,16 +281,16 @@ START_CASES = [
                                 "networks": ["MASK"]
                             },
                             "network": "MASK",
-                            "amount": 1
+                            "amount": 23
                         },
-                        "sub_chance": 1/3
+                        "sub_chance": 0.42
                     },
                 ]
             },
         ],
-        "pity_after": None,
-        "pity_bonus_tier": None,
-        "global_pool_usd": 100,
+        "pity_after": 20,
+        "pity_bonus_tier": "epic",
+        "global_pool_usd": 3000,
         "pool_reset_interval": "34",
         "ev_target": 0.5
     },
@@ -302,7 +302,7 @@ START_CASES = [
     "tiers": [
         {
             "name": "common",
-            "chance": 0.74,
+            "chance": 0.70,
             "rewards": [
                 {
                     "coin_amount": {
@@ -324,7 +324,7 @@ START_CASES = [
                         "network": "ERC20",
                         "amount": 1
                     },
-                    "sub_chance": round(20.00/ (20+18+15+13+8),4)  # example calc
+                    "sub_chance": 0.20  # example calc
                 },
                 {
                     "coin_amount": {
@@ -340,7 +340,7 @@ START_CASES = [
                         "network": "CARDANO",
                         "amount": 1
                     },
-                    "sub_chance": round(18.00/ (20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 },
                 {
                     "coin_amount": {
@@ -356,7 +356,7 @@ START_CASES = [
                         "network": "TRON",
                         "amount": 1
                     },
-                    "sub_chance": round(15.00/ (20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 },
                 {
                     "coin_amount": {
@@ -372,7 +372,7 @@ START_CASES = [
                         "network": "STELLAR",
                         "amount": 1
                     },
-                    "sub_chance": round(13.00/ (20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 },
                 {
                     "coin_amount": {
@@ -388,13 +388,13 @@ START_CASES = [
                         "network": "VECHAIN",
                         "amount": 1
                     },
-                    "sub_chance": round(8.00/ (20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 }
             ]
         },
         {
             "name": "rare",
-            "chance": 0.14,
+            "chance": 0.20,
             "rewards": [
                 {
                     "coin_amount": {
@@ -410,7 +410,7 @@ START_CASES = [
                         "network": "XRP",
                         "amount": 1
                     },
-                    "sub_chance": round(5.00/ (5+4+2.5+2.5),4)
+                    "sub_chance": 0.25
                 },
                 {
                     "coin_amount": {
@@ -426,7 +426,7 @@ START_CASES = [
                         "network": "SUI",
                         "amount": 1
                     },
-                    "sub_chance": round(4.00/ (5+4+2.5+2.5),4)
+                    "sub_chance": 0.25
                 },
                 {
                     "coin_amount": {
@@ -442,7 +442,7 @@ START_CASES = [
                         "network": "APTOS",
                         "amount": 1
                     },
-                    "sub_chance": round(2.5/ (5+4+2.5+2.5),4)
+                    "sub_chance": 0.25
                 },
                 {
                     "coin_amount": {
@@ -459,13 +459,13 @@ START_CASES = [
                         "network": "COSMOS",
                         "amount": 1
                     },
-                    "sub_chance": round(2.5/ (5+4+2.5+2.5),4)
+                    "sub_chance": 0.25
                 }
             ]
         },
         {
             "name": "epic",
-            "chance": 0.11,
+            "chance": 0.07,
             "rewards": [
                 {
                     "coin_amount": {
@@ -489,7 +489,7 @@ START_CASES = [
                         "network": "ERC20",
                         "amount": 1
                     },
-                    "sub_chance": round(4.00/ (4+3.5+3.5),4)
+                    "sub_chance": 0.33
                 },
                 {
                     "coin_amount": {
@@ -505,7 +505,7 @@ START_CASES = [
                         "network": "AVALANCHE",
                         "amount": 1
                     },
-                    "sub_chance": round(3.5/ (4+3.5+3.5),4)
+                    "sub_chance": 0.33
                 },
                 {
                     "coin_amount": {
@@ -521,13 +521,13 @@ START_CASES = [
                         "network": "HYPERLIQUID",
                         "amount": 1
                     },
-                    "sub_chance": round(3.5/ (4+3.5+3.5),4)
+                    "sub_chance": 0.33
                 }
             ]
         },
         {
             "name": "legendary",
-            "chance": 0.01,
+            "chance": 0.03,
             "rewards": [
                 {
                     "coin_amount": {
@@ -541,9 +541,9 @@ START_CASES = [
                             ]
                         },
                         "network": "LTC",
-                        "amount": 1
+                        "amount":  0.738163
                     },
-                    "sub_chance": 0.5
+                    "sub_chance": 0.65
                 },
                 {
                     "coin_amount": {
@@ -558,16 +558,16 @@ START_CASES = [
                             ]
                         },
                         "network": "ERC20",
-                        "amount": 1
+                        "amount": 1.9
                     },
-                    "sub_chance": 0.5
+                    "sub_chance": 0.35
                 }
             ]
         }
     ],
-    "pity_after": None,
-    "pity_bonus_tier": None,
-    "global_pool_usd": 100,
+    "pity_after": 20,
+    "pity_bonus_tier": "epic",
+    "global_pool_usd": 6000,
     "pool_reset_interval": "24h",
     "ev_target": 0.5
 },
@@ -579,7 +579,7 @@ START_CASES = [
     "tiers": [
         {
             "name": "common",
-            "chance": 0.75,
+            "chance": 0.70,
             "rewards": [
                 {
                     "coin_amount": {
@@ -601,7 +601,7 @@ START_CASES = [
                         "network": "ERC20",
                         "amount": 1
                     },
-                    "sub_chance": round(20.00/(20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 },
                 {
                     "coin_amount": {
@@ -617,7 +617,7 @@ START_CASES = [
                         "network": "XRP",
                         "amount": 1
                     },
-                    "sub_chance": round(18.00/(20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 },
                 {
                     "coin_amount": {
@@ -633,7 +633,7 @@ START_CASES = [
                         "network": "SUI",
                         "amount": 1
                     },
-                    "sub_chance": round(15.00/(20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 },
                 {
                     "coin_amount": {
@@ -649,7 +649,7 @@ START_CASES = [
                         "network": "APTOS",
                         "amount": 1
                     },
-                    "sub_chance": round(13.00/(20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 },
                 {
                     "coin_amount": {
@@ -665,13 +665,13 @@ START_CASES = [
                         "network": "DOT",
                         "amount": 1
                     },
-                    "sub_chance": round(8.00/(20+18+15+13+8),4)
+                    "sub_chance": 0.20
                 }
             ]
         },
         {
             "name": "rare",
-            "chance": 0.15,
+            "chance": 0.20,
             "rewards": [
                 {
                     "coin_amount": {
@@ -687,7 +687,7 @@ START_CASES = [
                         "network": "INJ",
                         "amount": 1
                     },
-                    "sub_chance": round(5.00/(5+4+3),4)
+                    "sub_chance": 0.3333
                 },
                 {
                     "coin_amount": {
@@ -711,7 +711,7 @@ START_CASES = [
                         "network": "ERC20",
                         "amount": 1
                     },
-                    "sub_chance": round(4.00/(5+4+3),4)
+                    "sub_chance": 0.3333
                 },
                 {
                     "coin_amount": {
@@ -727,13 +727,13 @@ START_CASES = [
                         "network": "ERC20",
                         "amount": 1
                     },
-                    "sub_chance": round(3.00/(5+4+3),4)
+                    "sub_chance": 0.3333
                 }
             ]
         },
         {
             "name": "epic",
-            "chance": 0.09,
+            "chance": 0.08,
             "rewards": [
                 {
                     "coin_amount": {
@@ -772,7 +772,7 @@ START_CASES = [
         },
         {
             "name": "legendary",
-            "chance": 0.01,
+            "chance": 0.02,
             "rewards": [
                 {
                     "coin_amount": {
@@ -786,9 +786,9 @@ START_CASES = [
                             ]
                         },
                         "network": "QNT",
-                        "amount": 1
+                        "amount": 1.508
                     },
-                    "sub_chance": 0.5
+                    "sub_chance": 0.65
                 },
                 {
                     "coin_amount": {
@@ -802,16 +802,16 @@ START_CASES = [
                             ]
                         },
                         "network": "ERC20",
-                        "amount": 0.01
+                        "amount": 0.07752
                     },
-                    "sub_chance": 0.5
+                    "sub_chance": 0.35
                 }
             ]
         }
     ],
-    "pity_after": None,
-    "pity_bonus_tier": None,
-    "global_pool_usd": 200,
+    "pity_after": 20,
+    "pity_bonus_tier": "epic",
+    "global_pool_usd": 12000,
     "pool_reset_interval": "24h",
     "ev_target": 0.5
 }

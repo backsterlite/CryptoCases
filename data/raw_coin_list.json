@@ -27,5 +27,12 @@
   "INJECTIVE": "injective-protocol",
   "MASK NETWORK": "mask-network",
   "VECHAIN": "vechain",
-  "COSMOS HUB": "cosmos"
+  "COSMOS HUB": "cosmos",
+  "POLIGON": "matic-network",
+  "LITECOIN": "litecoin",
+  "POLKADOT": "polkadot",
+  "GATETOKEN": "gatechain-token",
+  "QUANT NETWORK": "quant-network",
+  "ETHEREUM": "ethereum"
+
 }

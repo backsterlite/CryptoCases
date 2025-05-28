@@ -1,8 +1,7 @@
 from fastapi import FastAPI
-from typing import NoReturn
 
 
-def register_routers(app: FastAPI) -> NoReturn:
+def register_routers(app: FastAPI) -> None:
     """
     Register all router for the app
     """

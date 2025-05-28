@@ -91,10 +91,10 @@
         "contract": "0x514910771af9ca656af840dff83e8264ecf986ca",
         "type": "EVM"
       },
-      "OP": {
-        "raw": "OPTIMISTIC-ETHEREUM",
-        "contract": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
-        "type": "EVM"
+      "SPL": {
+        "raw": "SOLANA",
+        "contract": "LinkhB3afbBKb2EQQu7s7umdZceV3wcvAUJhQAfQ23L",
+        "type": "SOLANA"
       },
       "NEAR": {
         "raw": "NEAR-PROTOCOL",
@@ -106,14 +106,19 @@
         "contract": "0x88fb150bdc53a65fe94dea0c9ba0a6daf8c6e196",
         "type": "EVM"
       },
-      "SPL": {
-        "raw": "SOLANA",
-        "contract": "y9MdSjD9Beg9EFaeQGdMpESFWLNdSfZKQKeYLBfmnjJ",
-        "type": "SOLANA"
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "contract": "0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
+        "type": "EVM"
       },
       "HT": {
         "raw": "HUOBI-TOKEN",
         "contract": "0x9e004545c59d359f6b7bfb06a26390b087717b42",
+        "type": "EVM"
+      },
+      "OP": {
+        "raw": "OPTIMISTIC-ETHEREUM",
+        "contract": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
         "type": "EVM"
       },
       "XDAI": {
@@ -156,11 +161,6 @@
         "contract": "0x5947bb275c521040051d82396192181b413227a3",
         "type": "EVM"
       },
-      "ARB": {
-        "raw": "ARBITRUM-ONE",
-        "contract": "0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
-        "type": "EVM"
-      },
       "POLYGON": {
         "raw": "POLYGON-POS",
         "contract": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
@@ -172,9 +172,9 @@
         "raw": "ETHEREUM",
         "decimal_place": 18
       },
-      "OP": {
-        "raw": "OPTIMISTIC-ETHEREUM",
-        "decimal_place": 18
+      "SPL": {
+        "raw": "SOLANA",
+        "decimal_place": 9
       },
       "NEAR": {
         "raw": "NEAR-PROTOCOL",
@@ -184,12 +184,16 @@
         "raw": "BASE",
         "decimal_place": 18
       },
-      "SPL": {
-        "raw": "SOLANA",
-        "decimal_place": 9
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "decimal_place": 18
       },
       "HT": {
         "raw": "HUOBI-TOKEN",
+        "decimal_place": 18
+      },
+      "OP": {
+        "raw": "OPTIMISTIC-ETHEREUM",
         "decimal_place": 18
       },
       "XDAI": {
@@ -222,10 +226,6 @@
       },
       "AVAXC": {
         "raw": "AVALANCHE",
-        "decimal_place": 18
-      },
-      "ARB": {
-        "raw": "ARBITRUM-ONE",
         "decimal_place": 18
       },
       "POLYGON": {
@@ -377,6 +377,11 @@
         "contract": "c944e90c64b2c07662a292be6244bdf05cda44a7.factory.bridge.near",
         "type": "NEAR"
       },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "contract": "0x9623063377ad1b27544c965ccd7342f7ea7e88c7",
+        "type": "EVM"
+      },
       "ONE": {
         "raw": "HARMONY-SHARD-0",
         "contract": "0x002fa662f2e09de7c306d2bab0085ee9509488ff",
@@ -390,11 +395,6 @@
       "AVAXC": {
         "raw": "AVALANCHE",
         "contract": "0x8a0cac13c7da965a312f08ea4229c37869e85cb9",
-        "type": "EVM"
-      },
-      "ARB": {
-        "raw": "ARBITRUM-ONE",
-        "contract": "0x9623063377ad1b27544c965ccd7342f7ea7e88c7",
         "type": "EVM"
       },
       "POLYGON": {
@@ -412,6 +412,10 @@
         "raw": "NEAR-PROTOCOL",
         "decimal_place": 18
       },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "decimal_place": 18
+      },
       "ONE": {
         "raw": "HARMONY-SHARD-0",
         "decimal_place": 18
@@ -422,10 +426,6 @@
       },
       "AVAXC": {
         "raw": "AVALANCHE",
-        "decimal_place": 18
-      },
-      "ARB": {
-        "raw": "ARBITRUM-ONE",
         "decimal_place": 18
       },
       "POLYGON": {
@@ -468,13 +468,13 @@
         "contract": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
         "type": "EVM"
       },
-      "BEP20": {
-        "raw": "BINANCE-SMART-CHAIN",
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
         "contract": "0x25d887ce7a35172c62febfd67a1856f20faebb00",
         "type": "EVM"
       },
-      "ARB": {
-        "raw": "ARBITRUM-ONE",
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
         "contract": "0x25d887ce7a35172c62febfd67a1856f20faebb00",
         "type": "EVM"
       }
@@ -484,12 +484,12 @@
         "raw": "ETHEREUM",
         "decimal_place": 18
       },
-      "BEP20": {
-        "raw": "BINANCE-SMART-CHAIN",
-        "decimal_place": 18
-      },
       "ARB": {
         "raw": "ARBITRUM-ONE",
+        "decimal_place": 18
+      },
+      "BEP20": {
+        "raw": "BINANCE-SMART-CHAIN",
         "decimal_place": 18
       }
     },
@@ -522,11 +522,6 @@
         "contract": "0x078d782b760474a361dda0af3839290b0ef57ad6",
         "type": "UNKNOWN"
       },
-      "OP": {
-        "raw": "OPTIMISTIC-ETHEREUM",
-        "contract": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
-        "type": "EVM"
-      },
       "TRC20": {
         "raw": "TRON",
         "contract": "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8",
@@ -542,10 +537,25 @@
         "contract": "0.0.456858",
         "type": "HEDERA"
       },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "contract": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+        "type": "EVM"
+      },
+      "OP": {
+        "raw": "OPTIMISTIC-ETHEREUM",
+        "contract": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+        "type": "EVM"
+      },
       "APTOS": {
         "raw": "APTOS",
         "contract": "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b",
         "type": "APTOS"
+      },
+      "BASE": {
+        "raw": "BASE",
+        "contract": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "type": "EVM"
       },
       "ALGO": {
         "raw": "ALGORAND",
@@ -567,19 +577,9 @@
         "contract": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
         "type": "EVM"
       },
-      "ARB": {
-        "raw": "ARBITRUM-ONE",
-        "contract": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
-        "type": "EVM"
-      },
       "POLYGON": {
         "raw": "POLYGON-POS",
         "contract": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
-        "type": "EVM"
-      },
-      "BASE": {
-        "raw": "BASE",
-        "contract": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
         "type": "EVM"
       },
       "SPL": {
@@ -597,10 +597,6 @@
         "raw": "UNICHAIN",
         "decimal_place": 6
       },
-      "OP": {
-        "raw": "OPTIMISTIC-ETHEREUM",
-        "decimal_place": 6
-      },
       "TRC20": {
         "raw": "TRON",
         "decimal_place": 6
@@ -613,8 +609,20 @@
         "raw": "HEDERA-HASHGRAPH",
         "decimal_place": 6
       },
+      "ARB": {
+        "raw": "ARBITRUM-ONE",
+        "decimal_place": 6
+      },
+      "OP": {
+        "raw": "OPTIMISTIC-ETHEREUM",
+        "decimal_place": 6
+      },
       "APTOS": {
         "raw": "APTOS",
+        "decimal_place": 6
+      },
+      "BASE": {
+        "raw": "BASE",
         "decimal_place": 6
       },
       "ALGO": {
@@ -629,16 +637,8 @@
         "raw": "AVALANCHE",
         "decimal_place": 6
       },
-      "ARB": {
-        "raw": "ARBITRUM-ONE",
-        "decimal_place": 6
-      },
       "POLYGON": {
         "raw": "POLYGON-POS",
-        "decimal_place": 6
-      },
-      "BASE": {
-        "raw": "BASE",
         "decimal_place": 6
       },
       "SPL": {
@@ -1125,5 +1125,55 @@
     "coingecko_id": "cosmos",
     "is_native": false,
     "native_network": null
+  },
+  "LITECOIN": {
+    "coin_symbol": "ltc",
+    "coin_name": "Litecoin",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/2/thumb/litecoin.png?1696501400",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "litecoin",
+    "is_native": true,
+    "native_network": "LITECOIN"
+  },
+  "QUANT-NETWORK": {
+    "coin_symbol": "qnt",
+    "coin_name": "Quant",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/3370/thumb/5ZOu7brX_400x400.jpg?1696504070",
+    "coin_contract_addresses": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "contract": "0x4a220e6096b25eadb88358cb44068a3248254675",
+        "type": "EVM"
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "contract": "0x462b35452e552a66b519ecf70aedb1835d434965",
+        "type": "EVM"
+      }
+    },
+    "coin_decimals": {
+      "ERC20": {
+        "raw": "ETHEREUM",
+        "decimal_place": 18
+      },
+      "NRG": {
+        "raw": "ENERGI",
+        "decimal_place": 18
+      }
+    },
+    "coingecko_id": "quant-network",
+    "is_native": false,
+    "native_network": null
+  },
+  "ETHEREUM": {
+    "coin_symbol": "eth",
+    "coin_name": "Ethereum",
+    "coin_thumb": "https://coin-images.coingecko.com/coins/images/279/thumb/ethereum.png?1696501628",
+    "coin_contract_addresses": {},
+    "coin_decimals": {},
+    "coingecko_id": "ethereum",
+    "is_native": true,
+    "native_network": "ETHEREUM"
   }
 }

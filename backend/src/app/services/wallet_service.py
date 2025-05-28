@@ -2,7 +2,7 @@ from decimal import Decimal, InvalidOperation
 from fastapi import HTTPException
 from typing import Dict, Optional
 from app.db.models.user import User
-from app.services.coin_registry import CoinRegistry
+from app.config.coin_registry import CoinRegistry
 from app.models.coin import CoinAmount
 from pymongo import ReturnDocument
 
@@ -10,7 +10,7 @@ class WalletService:
     
     @staticmethod
     async def update_coin_balance(
-        telegram_id: int,
+        user_id: int,
         coin_id: str,
         network: str,
         delta_str: str
@@ -27,7 +27,7 @@ class WalletService:
             raise HTTPException(status_code=400, detail="Invalid delta format")
 
         # 2. Find User
-        user = await User.find_one(User.telegram_id == telegram_id)
+        user = await User.find_one(User.user_id == user_id)
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
 
@@ -44,14 +44,14 @@ class WalletService:
             new_ca = CoinAmount.from_atomic(current_ca.coin, network, new_atomic)
             _, _, new_str = new_ca.to_storage()
             updated = await coll.find_one_and_update(
-                {"user_id": telegram_id},
+                {"user_id": user_id},
                 {"$set": {f"wallets.{coin_id}.{network}": new_str}},
                 return_document=ReturnDocument.AFTER
             )
         else:
             # прибрати мережу
             updated = await coll.find_one_and_update(
-                {"telegram_id": telegram_id},
+                {"user_id": user_id},
                 {"$unset": {f"wallets.{coin_id}.{network}": ""}},
                 return_document=True
             )
@@ -61,12 +61,12 @@ class WalletService:
                 not updated["wallets"][coin_id]
             ):
                 await coll.update_one(
-                    {"telegram_id": telegram_id},
+                    {"user_id": user_id},
                     {"$unset": {f"wallets.{coin_id}": ""}}
                 )
 
         # 6. Повернути свіжий словник мереж→amount
-        fresh = (await User.find_one(User.telegram_id == telegram_id)
+        fresh = (await User.find_one(User.user_id == user_id)
                  ).wallets.get(coin_id, {})
         return fresh
 

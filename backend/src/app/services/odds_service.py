@@ -8,7 +8,7 @@ from app.db.models.case_config import CaseConfig
 from app.config.settings import settings
 import aioboto3
 
-async def export_odds(case_id: str, to_bucket: bool = True) -> str:
+async def export_odds(case_id: str, to_bucket: bool = True) -> Path:
     """
     Generate JSON with odds.
     If to_bucket=True, upload to S3; otherwise, save locally.
@@ -22,47 +22,50 @@ async def export_odds(case_id: str, to_bucket: bool = True) -> str:
     # Build payload structure
     payload = {
         "case_id": cfg.case_id,
-        "version": cfg.odds_version,
+        "version": cfg.odds_versions[-1].version,
         "tiers": [
             {
                 "name": tier.name,
                 "chance": tier.chance,
                 "rewards": [
                     {
-                        "coin_symbol": symbol,
-                        "network": network,
-                        "amount": amount,
+                        "coin_id": r.coin_id,
+                        "network": r.network,
+                        "amount": r.amount,
                         "sub_chance": r.sub_chance,
                     }
                     for r in tier.rewards
-                    for symbol, network, amount in [r.coin_amount.to_storage()]
                 ],
             }
             for tier in cfg.tiers
         ],
     }
-    body = json.dumps(payload, indent=2).encode()
-    key = f"odds/{case_id}/{cfg.odds_version}.json"
+    body = json.dumps(payload, indent=2, default=str, ensure_ascii=False).encode()
+    # key = f"odds/{case_id}/{cfg.odds_versions[-1]}.json"
 
     if to_bucket:
         # Upload JSON to S3 bucket
-        session = aioboto3.Session()
-        async with session.client(
-            "s3",
-            aws_access_key_id=settings.aws_key,
-            aws_secret_access_key=settings.aws_secret
-        ) as s3:
-            await s3.put_object(Bucket=settings.s3_bucket, Key=key, Body=body)
-        # Return the public URL
-        return f"{settings.s3_base_url}/{key}"
+        # session = aioboto3.Session()
+        # async with session.client(
+        #     "s3",
+        #     aws_access_key_id=settings.aws_key,
+        #     aws_secret_access_key=settings.aws_secret
+        # ) as s3:
+        #     await s3.put_object(Bucket=settings.s3_bucket, Key=key, Body=body)
+        # # Return the public URL
+        # return f"{settings.s3_base_url}/{key}"
+        pass
     else:
         # Save JSON locally under configured directory
         local_dir = settings.local_odds_dir  # e.g. "./data/odds"
         os.makedirs(Path(local_dir, case_id), exist_ok=True)
-        path = Path(local_dir, case_id, f"{cfg.odds_version}.json")
+        path = Path(local_dir, case_id, f"{cfg.odds_versions[-1].version}.json")
         with open(path, "wb") as f:
             f.write(body)
         # Return the local file system path
+        file_sha256_sum = get_file_hash_sum(path)
+        cfg.odds_versions[-1].sha256 = file_sha256_sum
+        await cfg.save()
         return path
 
 def get_file_hash_sum(file_path: Path) -> str:

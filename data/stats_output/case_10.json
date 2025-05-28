@@ -1,0 +1,28 @@
+{
+  "case_id": "case_10",
+  "spent": "10000.00",
+  "received": "5603.92426668",
+  "by_tier": {
+    "rare": 219,
+    "common": 684,
+    "epic": 60,
+    "legendary": 37
+  },
+  "by_item": {
+    "ripple": 52,
+    "stellar": 136,
+    "hyperliquid": 15,
+    "vechain": 139,
+    "cardano": 132,
+    "tron": 137,
+    "cosmos": 63,
+    "chainlink": 26,
+    "tether": 140,
+    "sui": 55,
+    "litecoin": 24,
+    "okb": 13,
+    "aptos": 49,
+    "avalanche-2": 19
+  },
+  "N": 1000
+}

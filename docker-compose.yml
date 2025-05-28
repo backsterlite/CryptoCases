@@ -1,26 +1,36 @@
 
 services:
-  # bot:
-  #   build: ./bot
-  #   container_name: cryptocases_bot
-  #   environment:
-  #     - BOT_TOKEN=your_telegram_token
-  #   depends_on:
-  #     - backend
-  #   restart: always
+  bot:
+      build:
+        context: ./bot
+        dockerfile: Dockerfile
+      container_name: cryptocases_bot
+      env_file:
+        - bot/.env
+      volumes:
+        - ./bot:/app
+      depends_on:
+        - frontend
+      restart: always
 
   backend:
     build:
       context: .
       dockerfile: backend/Dockerfile
     container_name: cryptocases_api
+    env_file:
+      - ./backend/.env
+      - ./backend/.env.test
     volumes:
       - ./backend/src:/app/src
       - ./data:/app/data
+      - ./scripts/collect_stats.py:/app/scripts/collect_stats.py
     ports:
       - "8000:8000"
+      - "5678:5678"
     depends_on:
       - mongo
+      - redis
     restart: always
 
   frontend:
@@ -36,9 +46,24 @@ services:
     depends_on:
       - backend
     env_file:
-      - .env
+      - ./frontend/.env
     volumes:
       - ./frontend:/app
+    restart: always
+
+  redis:
+    image: redis:7-alpine
+    container_name: cryptocases_redis
+    # вмикаємо автентифікацію паролем
+    command: >
+      redis-server
+      --requirepass "${BACKEND_REDIS_PASS}"
+    env_file:
+      - ./backend/.env      # підхоплюємо змінну BACKEND_REDIS_PASS
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
     restart: always
 
   mongo:
@@ -52,3 +77,4 @@ services:
 
 volumes:
   mongodb_data:
+  redis_data:

@@ -1,0 +1,102 @@
+{
+  "case_id": "case_20",
+  "version": "2025-05-26T20:25:05.874808+00:00",
+  "tiers": [
+    {
+      "name": "common",
+      "chance": "0.75",
+      "rewards": [
+        {
+          "coin_id": "tether",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.2703"
+        },
+        {
+          "coin_id": "ripple",
+          "network": "XRP",
+          "amount": "1",
+          "sub_chance": "0.2432"
+        },
+        {
+          "coin_id": "sui",
+          "network": "SUI",
+          "amount": "1",
+          "sub_chance": "0.2027"
+        },
+        {
+          "coin_id": "aptos",
+          "network": "APTOS",
+          "amount": "1",
+          "sub_chance": "0.1757"
+        },
+        {
+          "coin_id": "polkadot",
+          "network": "DOT",
+          "amount": "1",
+          "sub_chance": "0.1081"
+        }
+      ]
+    },
+    {
+      "name": "rare",
+      "chance": "0.15",
+      "rewards": [
+        {
+          "coin_id": "injective-protocol",
+          "network": "INJ",
+          "amount": "1",
+          "sub_chance": "0.4167"
+        },
+        {
+          "coin_id": "chainlink",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.3333"
+        },
+        {
+          "coin_id": "gate-token",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.25"
+        }
+      ]
+    },
+    {
+      "name": "epic",
+      "chance": "0.09",
+      "rewards": [
+        {
+          "coin_id": "okb",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.5"
+        },
+        {
+          "coin_id": "litecoin",
+          "network": "LTC",
+          "amount": "1",
+          "sub_chance": "0.5"
+        }
+      ]
+    },
+    {
+      "name": "legendary",
+      "chance": "0.01",
+      "rewards": [
+        {
+          "coin_id": "quant-network",
+          "network": "QNT",
+          "amount": "1",
+          "sub_chance": "0.5"
+        },
+        {
+          "coin_id": "ethereum",
+          "network": "ERC20",
+          "amount": "0.01",
+          "sub_chance": "0.5"
+        }
+      ]
+    }
+  ]
+}

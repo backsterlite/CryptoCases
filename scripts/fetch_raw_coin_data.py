@@ -13,7 +13,7 @@ RAW_OUTPUT_PATH = BASE_DIR / "data" / "raw_coin_data.json"
 
 
 COINGECKO_URL_TEMPLATE = "https://api.coingecko.com/api/v3/coins/"
-COINGECKO_API_KEY = os.getenv("COINGECKO_API")
+COINGECKO_API_KEY = "CG-emDJCDWmXRDeo5B5pAbxYFZT"
 
 RATE_LIMIT_DELAY = 1.5  # seconds
 COINGECKO_HEADERS = {

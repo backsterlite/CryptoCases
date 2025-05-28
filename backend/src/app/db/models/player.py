@@ -1,17 +1,16 @@
 from beanie import Document, Indexed
-from pydantic import Field, ConfigDict, field_validator
+from pydantic import Field, ConfigDict
 from datetime import datetime, timezone
-from typing import Annotated, Literal
 from decimal import Decimal
 
 class PlayerStat(Document):
     """
     Player statistics for soft-pity and loose streak control.
     """
-    user_id: str = Annotated[str,Indexed(unique=True)]
+    user_id: int = Indexed(unique=True)
     fail_streak: int = Field(default=0, description="Number of consecutive spins without a rare drop")
-    rtp_session: float = Field(default=0.0, description="Accumulated RTP in this session")
-    net_loss: float = Field(default=0.0, description="Accumulated difference (stakes–winnings) in USDT")
+    rtp_session: Decimal = Field(default=Decimal("0"), description="Accumulated RTP in this session")
+    net_loss: Decimal = Field(default=Decimal("0"), description="Accumulated difference (stakes–winnings) in USDT")
 
     class Settings:
         name = "player_stats"
@@ -25,20 +24,15 @@ class CapPool(Document):
         default="main",
         alias="_id",
         description="Fixed ID of the single reserve")       # always "main"
-    balance: float = Field(0.0, description="Current Reserve Balance (USDT)")
-    sigma_buffer: float = Field(0.0, description="Recommended statistical buffer (4σ)")
-    max_payout: float = Field(0.0, description="Maximum one-time payout (USDT)")
+    balance: Decimal = Field(Decimal("0"),  description="Current Reserve Balance (USDT)")
+    sigma_buffer: Decimal = Field(Decimal("0"), description="Recommended statistical buffer (4σ)")
+    max_payout: Decimal = Field(Decimal("0"), description="Maximum one-time payout (USDT)")
     
     model_config = ConfigDict(populate_by_name=True)
 
     class Settings:
         name = "cap_pool"
     
-    @field_validator("id")
-    def _check_id_must_be_main(cls, v):
-        if v != "main":
-            raise ValueError("CapPool._id must be 'main'")
-        return v
 
 class ServerSeed(Document):
     """
@@ -57,26 +51,26 @@ class SpinLog(Document):
     """
     Log of each spin for analytics and A/B tests.
     """
-    user_id: str
+    user_id: int
     case_id: str
     server_seed_id: str
     server_seed_hash: str
-    # server_seed_seed: str
+    server_seed_seed: str
     client_seed: str
     nonce: int
-    hmac_value: str
+    hmac_value: bytes
     raw_roll: Decimal
     table_id: str
     odds_version: str
     case_tier: str
     prize_id: str
-    stake: float
+    stake: Decimal
     payout: Decimal
-    payout_usd: float
-    pity_before: int
-    pity_after: int
-    rtp_session: float
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    payout_usd: Decimal
+    pity_before: Decimal
+    pity_after: Decimal
+    rtp_session: Decimal
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     class Settings:
         name = "spin_logs"

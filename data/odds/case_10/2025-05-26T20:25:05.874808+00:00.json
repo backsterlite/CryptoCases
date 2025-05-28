@@ -1,0 +1,114 @@
+{
+  "case_id": "case_10",
+  "version": "2025-05-26T20:25:05.874808+00:00",
+  "tiers": [
+    {
+      "name": "common",
+      "chance": "0.74",
+      "rewards": [
+        {
+          "coin_id": "tether",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.2703"
+        },
+        {
+          "coin_id": "cardano",
+          "network": "CARDANO",
+          "amount": "1",
+          "sub_chance": "0.2432"
+        },
+        {
+          "coin_id": "tron",
+          "network": "TRON",
+          "amount": "1",
+          "sub_chance": "0.2027"
+        },
+        {
+          "coin_id": "stellar",
+          "network": "STELLAR",
+          "amount": "1",
+          "sub_chance": "0.1757"
+        },
+        {
+          "coin_id": "vechain",
+          "network": "VECHAIN",
+          "amount": "1",
+          "sub_chance": "0.1081"
+        }
+      ]
+    },
+    {
+      "name": "rare",
+      "chance": "0.14",
+      "rewards": [
+        {
+          "coin_id": "ripple",
+          "network": "XRP",
+          "amount": "1",
+          "sub_chance": "0.3571"
+        },
+        {
+          "coin_id": "sui",
+          "network": "SUI",
+          "amount": "1",
+          "sub_chance": "0.2857"
+        },
+        {
+          "coin_id": "aptos",
+          "network": "APTOS",
+          "amount": "1",
+          "sub_chance": "0.1786"
+        },
+        {
+          "coin_id": "cosmos",
+          "network": "COSMOS",
+          "amount": "1",
+          "sub_chance": "0.1786"
+        }
+      ]
+    },
+    {
+      "name": "epic",
+      "chance": "0.11",
+      "rewards": [
+        {
+          "coin_id": "chainlink",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.3636"
+        },
+        {
+          "coin_id": "avalanche-2",
+          "network": "AVALANCHE",
+          "amount": "1",
+          "sub_chance": "0.3182"
+        },
+        {
+          "coin_id": "hyperliquid",
+          "network": "HYPERLIQUID",
+          "amount": "1",
+          "sub_chance": "0.3182"
+        }
+      ]
+    },
+    {
+      "name": "legendary",
+      "chance": "0.01",
+      "rewards": [
+        {
+          "coin_id": "litecoin",
+          "network": "LTC",
+          "amount": "1",
+          "sub_chance": "0.5"
+        },
+        {
+          "coin_id": "okb",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.5"
+        }
+      ]
+    }
+  ]
+}

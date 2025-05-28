@@ -1,12 +1,12 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, List, Tuple, Optional
-from decimal import Decimal, ROUND_DOWN
+from decimal import Decimal, ROUND_DOWN, localcontext
 
 from app.models.coin_registry import NormalizedCoin
-from app.services.coin_registry import CoinRegistry
+from src.app.config.coin_registry import CoinRegistry
 
-
+TARGET_SCALE = Decimal("0.000001")
 
 @dataclass
 class Coin:
@@ -19,6 +19,13 @@ class Coin:
     
     def get_precision(self, network: str) -> int:
         return self.decimal_places.get(network, 18)  # fallback = 18
+    
+    @classmethod
+    def from_id(cls, coin_id: str) -> Coin:
+        coin = CoinRegistry.get_runtime(coin_id)
+        if coin is None:
+            raise ValueError(f"Unknown coin symbol: {coin_id}")
+        return coin
     
     @classmethod
     def from_registry(cls, normalized: NormalizedCoin) -> Coin:
@@ -40,6 +47,13 @@ class CoinAmount:
     coin: Coin
     network: str
     amount: Decimal
+    @staticmethod
+    def _needed_prec(a: Decimal, b: Decimal, reserve: int = 4) -> int:
+        """How many significant figures are needed so that nothing is cut off when multiplying"""
+        digits_a = len(a.normalize().as_tuple().digits)
+        digits_b = len(b.normalize().as_tuple().digits)
+        return digits_a + digits_b + reserve    # a little bit of spare money so you don't have to worry about moving
+    
     
     def get_precision(self) -> int:
         return self.coin.get_precision(self.network)
@@ -70,12 +84,11 @@ class CoinAmount:
         """Convert to (symbol, network, amount_str)"""
         return self.coin.id, self.network, str(self.amount)
     
+    
     @classmethod
     def from_str(cls, coin_id: str, network: str, amount_str: str, coin: Optional[Coin] = None) -> "CoinAmount":
         if coin is None:
-            coin = CoinRegistry.get_runtime(coin_id)
-            if coin is None:
-                raise ValueError(f"Unknown coin symbol: {coin_id}")
+            coin = Coin.from_id(coin_id=coin_id)
         
         precision = coin.get_precision(network)
         amount = Decimal(amount_str).quantize(Decimal("1." + "0" * precision))
@@ -85,3 +98,19 @@ class CoinAmount:
             network=network,
             amount=amount
         )
+    
+    @classmethod
+    def amount_from_usd(cls, coin_id: str, network: str, value_in_usd: Decimal, rate: Decimal) -> Decimal:
+        coin: Coin = CoinRegistry.get_runtime(coin_id=coin_id)
+        amount = value_in_usd / rate
+        prec = coin.get_precision(network=network)
+        return amount.quantize(prec)
+    
+    def to_usd(self, rate: Decimal, out_scale: Decimal = TARGET_SCALE) -> Decimal:
+        prec = CoinAmount._needed_prec(self.amount, rate)
+
+        with localcontext() as ctx:
+            ctx.prec = prec
+            usd = self.amount * rate
+
+        return usd.quantize(out_scale)

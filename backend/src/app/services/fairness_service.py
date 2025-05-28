@@ -20,7 +20,7 @@ class FairnessService:
         raw = await ServerSeed.get_motor_collection().find_one_and_update(
             {
                 "_id": commit_id,
-                "owner_id": user_id,
+                "owner_id": str(user_id),
                 "used": False,
             },
             {"$set": {"used": True}},

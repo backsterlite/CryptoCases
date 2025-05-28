@@ -11,34 +11,14 @@ export default defineConfig({
   server: {
     host: true,     // щоб слухати на 0.0.0.0
     port: 5173,     // твій порт фронта
-    proxy: {
-      // проксувати всі запити з префіксом /api/ на бек
-      '/dev': {
-        target: 'http://cryptocases_api:8000',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/users': {
-        target: 'http://cryptocases_api:8000',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/cases': {
-        target: 'http://cryptocases_api:8000',
-        changeOrigin: true,
-      },
-      '/wallets': {
-        target: 'http://cryptocases_api:8000',
-        changeOrigin: true,
-      },
-      '/balance': {
-        target: 'http://cryptocases_api:8000',
-        changeOrigin: true,
-      },
-      '/rates': {
-        target: 'http://cryptocases_api:8000',
-        changeOrigin: true,
-      },
-    }
-  }
+    allowedHosts: [
+      "d405-93-175-80-8.ngrok-free.app",
+      "85c5-93-175-80-8.ngrok-free.app",
+      "localhost:8000",
+      "d422-93-175-80-8.ngrok-free.app"
+    ]
+  },
+  define: {
+    'import.meta.env.PROD': JSON.stringify(process.env.NODE_ENV === 'production')
+  },
 })

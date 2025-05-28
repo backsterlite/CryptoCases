@@ -21,11 +21,10 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 @router.get("/me", response_model=UserResponsePublic)
 async def get_user(user: User = Depends(get_current_user)):
-    wallets = UserWalletsGrouped(group_wallets_by_coin(user.wallets))
     return UserResponsePublic(
-        telegram_id=user.user_id,
-        wallets=wallets,
-        history=user.history
+        user_id=user.user_id,
+        username=user.user_name
+        
     )
 
 @router.get("/me/wallets", response_model=UserWalletsGrouped)

@@ -1,0 +1,30 @@
+{
+  "case_id": "case_5",
+  "spent": "5000.00",
+  "received": "2106.07334580",
+  "by_tier": {
+    "common": 704,
+    "rare": 196,
+    "legendary": 29,
+    "epic": 71
+  },
+  "by_item": {
+    "pepe": 100,
+    "dogecoin": 122,
+    "matic-network": 56,
+    "the-open-network": 130,
+    "zilliqa": 134,
+    "shiba-inu": 118,
+    "usd-coin": 100,
+    "algorand": 38,
+    "the-graph": 16,
+    "near": 25,
+    "1inch": 55,
+    "harmony": 47,
+    "arbitrum": 22,
+    "internet-computer": 24,
+    "injective-protocol": 4,
+    "mask-network": 9
+  },
+  "N": 1000
+}

@@ -1,0 +1,26 @@
+{
+  "case_id": "case_20",
+  "spent": "20000.00",
+  "received": "15926.2584560",
+  "by_tier": {
+    "common": 690,
+    "rare": 217,
+    "legendary": 24,
+    "epic": 69
+  },
+  "by_item": {
+    "polkadot": 135,
+    "chainlink": 72,
+    "tether": 137,
+    "aptos": 146,
+    "sui": 140,
+    "ripple": 132,
+    "ethereum": 10,
+    "okb": 33,
+    "litecoin": 36,
+    "injective-protocol": 67,
+    "quant-network": 14,
+    "gate-token": 78
+  },
+  "N": 1000
+}

@@ -1,13 +1,20 @@
 import hmac
 import hashlib
 import urllib.parse
+import json
+from typing import Dict, Any
+
 from fastapi import Request, HTTPException
 from starlette.middleware.base import BaseHTTPMiddleware
 
+from app.schemas.user import UserCreateTelegram
 
 
 
-def verify_telegram_auth(init_data: str, bot_token: str) -> int:
+
+
+
+def verify_telegram_auth(init_data: str, bot_token: str) -> Dict[str,Any]:
     try:
         parsed = urllib.parse.parse_qs(init_data, keep_blank_values=True)
         parsed = {k: v[0] for k, v in parsed.items()}
@@ -21,7 +28,6 @@ def verify_telegram_auth(init_data: str, bot_token: str) -> int:
 
         if calculated_hash != hash_from_telegram:
             raise ValueError("Invalid hash")
-
-        return int(parsed["user[id]"])
+        return parsed
     except Exception as e:
         raise HTTPException(status_code=401, detail=f"Auth failed: {str(e)}")

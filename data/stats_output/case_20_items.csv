@@ -1,0 +1,13 @@
+item_id,count,empirical_chance
+polkadot,135,0.135
+chainlink,72,0.072
+tether,137,0.137
+aptos,146,0.146
+sui,140,0.14
+ripple,132,0.132
+ethereum,10,0.01
+okb,33,0.033
+litecoin,36,0.036
+injective-protocol,67,0.067
+quant-network,14,0.014
+gate-token,78,0.078

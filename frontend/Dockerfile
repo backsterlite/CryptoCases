@@ -1,5 +1,5 @@
 # stage 1: build
-FROM node:current-alpine3.20 AS bilder
+FROM node:20-bullseye-slim AS bilder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # stage 2: dev
-FROM node:current-alpine3.20 AS dev
+FROM node:20-bullseye-slim AS dev
 WORKDIR /app
 COPY ./frontend/package*.json ./
 

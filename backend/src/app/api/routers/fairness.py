@@ -24,21 +24,27 @@ async def get_odds(case_id: str, version: str):
 
 @router.post("/commit", response_model=CommitOut)
 async def commit_seed(user=Depends(get_current_user))-> CommitOut:
+    not_used_seed = await ServerSeed.find_one({"user_id": str(user.user_id), "used": False})
+    if not not_used_seed:
     # generate new seed
-    raw = os.urandom(32)
-    hex_seed = raw.hex()
-    hash_digest = hashlib.sha256(raw).hexdigest()
-    
-    # save seed to DB
-    server_seed =  ServerSeed(
-        seed=hex_seed,
-        hash=hash_digest,
-        owner_id=str(user.user_id)
-        )
-    await server_seed.insert()
+        raw = os.urandom(32)
+        hex_seed = raw.hex()
+        hash_digest = hashlib.sha256(raw).hexdigest()
+        
+        # save seed to DB
+        server_seed =  ServerSeed(
+            seed=hex_seed,
+            hash=hash_digest,
+            owner_id=str(user.user_id)
+            )
+        await server_seed.insert()
+        server_seed = str(server_seed.id)
+    else:
+        server_seed = str(not_used_seed.id)
+        hash_digest = not_used_seed.hash
     #return the hash, document id
     return CommitOut(
-        server_seed_id=str(server_seed.id),
+        server_seed_id=server_seed,
         hash=hash_digest,
 
         )

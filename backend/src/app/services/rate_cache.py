@@ -1,13 +1,15 @@
 import asyncio
 import logging
+import json
 
 from typing import List, Dict, Optional
 from aiocache import caches, Cache
 from aiohttp import ClientSession, ClientError, ClientTimeout
 from decimal import Decimal
+from pathlib import Path
 
-from app.services.coin_registry import CoinRegistry
-from app.config.settings import settings
+from app.config.coin_registry import CoinRegistry
+from app.config.settings import settings, BASE_DIR
 
 
 
@@ -29,7 +31,7 @@ class RateCache:
         self._timeout = ClientTimeout(total=timeout_seconds)
         self._session: Optional[ClientSession] = None
 
-    async def close(self) -> None:
+    async def close(self):
         """Закриваємо сесію при завершенні роботи."""
         await self._session.close()
         
@@ -73,7 +75,9 @@ class RateCache:
                     results[key.lower()] = Decimal(str(usd_val))
                 except (ValueError, TypeError) as e:
                     logger.error("Can't parse USD value for %s: %s", key, e)
-
+            await asyncio.sleep(1)
+        with open(Path( "/app/data/rate_cache.json"), "w") as f:
+            json.dump(results, f, indent=2, default=str, ensure_ascii=False)
         return results
 
     async def rate_updater(self, interval_seconds: int = 3600) -> None:

@@ -1,7 +1,7 @@
 from typing import Dict
 from app.models.coin import CoinAmount
 from app.schemas.user_wallets import UserTokenWallet
-from app.services.coin_registry import CoinRegistry
+from app.config.coin_registry import CoinRegistry
 
 
 def group_wallets_by_coin(wallets: Dict[str, Dict[str, str]]) -> Dict[str,UserTokenWallet]:
