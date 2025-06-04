@@ -1,0 +1,355 @@
+{
+  "ALGO": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "ALGORAND"
+  },
+  "APTOS": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "APTOS"
+  },
+  "ARB": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "ARB-NOVA": {
+    "chain_id": 42170,
+    "native_coin": "ETH",
+    "rpc": [
+      "https://nova.arbitrum.io/rpc",
+      "https://arbitrum-nova-rpc.publicnode.com",
+      "wss://arbitrum-nova-rpc.publicnode.com"
+    ],
+    "type": "EVM"
+  },
+  "ARCH": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "IBC"
+  },
+  "AVAXC": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "BASE": {
+    "chain_id": 8453,
+    "native_coin": "ETH",
+    "rpc": [
+      "https://mainnet.base.org/",
+      "https://developer-access-mainnet.base.org/",
+      "https://base.gateway.tenderly.co",
+      "wss://base.gateway.tenderly.co",
+      "https://base-rpc.publicnode.com",
+      "wss://base-rpc.publicnode.com"
+    ],
+    "type": "EVM"
+  },
+  "BEP20": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "CANTO": {
+    "chain_id": 7700,
+    "native_coin": "CANTO",
+    "rpc": [
+      "https://canto.slingshot.finance",
+      "https://canto-rpc.ansybl.io",
+      "https://mainnode.plexnode.org:8545",
+      "https://canto.gravitychain.io/"
+    ],
+    "type": "IBC"
+  },
+  "COSMOS": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "IBC"
+  },
+  "ERC20": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "EVMOS": {
+    "chain_id": 9000,
+    "native_coin": "tEVMOS",
+    "rpc": [
+      "https://evmos-testnet.lava.build",
+      "https://eth.bd.evmos.dev:8545",
+      "https://evmos-testnet-evm-rpc.publicnode.com",
+      "wss://evmos-testnet-evm-rpc.publicnode.com"
+    ],
+    "type": "IBC"
+  },
+  "FTM": {
+    "chain_id": 250,
+    "native_coin": "FTM",
+    "rpc": [
+      "https://rpc.ftm.tools",
+      "https://fantom-rpc.publicnode.com",
+      "wss://fantom-rpc.publicnode.com",
+      "https://fantom.drpc.org",
+      "wss://fantom.drpc.org"
+    ],
+    "type": "EVM"
+  },
+  "GLMR": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "HBAR": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "HEDERA"
+  },
+  "HDX": {
+    "chain_id": 222222,
+    "native_coin": "WETH",
+    "rpc": [
+      "https://rpc.hydradx.cloud",
+      "wss://rpc.hydradx.cloud",
+      "https://hydration-rpc.n.dwellir.com",
+      "wss://hydration-rpc.n.dwellir.com",
+      "https://rpc.helikon.io/hydradx",
+      "wss://rpc.helikon.io/hydradx",
+      "https://hydration.dotters.network",
+      "wss://hydration.dotters.network",
+      "https://hydration.ibp.network",
+      "wss://hydration.ibp.network",
+      "https://rpc.cay.hydration.cloud",
+      "wss://rpc.cay.hydration.cloud",
+      "https://rpc.parm.hydration.cloud",
+      "wss://rpc.parm.hydration.cloud",
+      "https://rpc.roach.hydration.cloud",
+      "wss://rpc.roach.hydration.cloud",
+      "https://rpc.zipp.hydration.cloud",
+      "wss://rpc.zipp.hydration.cloud",
+      "https://rpc.sin.hydration.cloud",
+      "wss://rpc.sin.hydration.cloud",
+      "https://rpc.coke.hydration.cloud",
+      "wss://rpc.coke.hydration.cloud"
+    ],
+    "type": "EVM"
+  },
+  "HT": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "ICP": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "ICP"
+  },
+  "KAVA": {
+    "chain_id": 2221,
+    "native_coin": "TKAVA",
+    "rpc": [
+      "https://evm.testnet.kava.io",
+      "https://kava-evm-testnet.rpc.thirdweb.com",
+      "wss://wevm.testnet.kava.io",
+      "https://kava-testnet.drpc.org",
+      "wss://kava-testnet.drpc.org"
+    ],
+    "type": "EVM"
+  },
+  "MILK": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "MOVR": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "NEAR": {
+    "chain_id": 397,
+    "native_coin": "NEAR",
+    "rpc": [
+      "https://eth-rpc.mainnet.near.org"
+    ],
+    "type": "NEAR"
+  },
+  "NRG": {
+    "chain_id": 39797,
+    "native_coin": "NRG",
+    "rpc": [
+      "https://nodeapi.energi.network"
+    ],
+    "type": "EVM"
+  },
+  "OKT": {
+    "chain_id": 66,
+    "native_coin": "OKT",
+    "rpc": [
+      "https://exchainrpc.okex.org",
+      "https://okc-mainnet.gateway.pokt.network/v1/lb/6275309bea1b320039c893ff"
+    ],
+    "type": "EVM"
+  },
+  "ONE": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "OP": {
+    "chain_id": 54,
+    "native_coin": "BELLY",
+    "rpc": [
+      "https://mainnet.openpiece.io"
+    ],
+    "type": "EVM"
+  },
+  "OSMO": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "IBC"
+  },
+  "POLYGON": {
+    "chain_id": 137,
+    "deposit_tokens": [
+      "MATIC",
+      "TETHER",
+      "USD-COIN",
+      "LINK"
+    ],
+    "enabled": true,
+    "min_confirmations": 12,
+    "native_coin": "MATIC",
+    "rpc": [
+      "https://polygon-rpc.com"
+    ],
+    "type": "EVM",
+    "withdrawal_tokens": [
+      "TETHER",
+      "USD-COIN"
+    ]
+  },
+  "SCRT": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "IBC"
+  },
+  "SPL": {
+    "chain_id": null,
+    "deposit_tokens": [
+      "SOL",
+      "TETHER",
+      "USD-COIN",
+      "LINK"
+    ],
+    "enabled": true,
+    "min_confirmations": 1,
+    "native_coin": "SOL",
+    "rpc": [
+      "https://api.mainnet-beta.solana.com"
+    ],
+    "type": "SOLANA",
+    "withdrawal_tokens": [
+      "TETHER",
+      "USD-COIN"
+    ]
+  },
+  "SUI": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "SUI"
+  },
+  "TON": {
+    "chain_id": null,
+    "deposit_tokens": [
+      "TON",
+      "TETHER",
+      "USD-COIN",
+      "NOT"
+    ],
+    "enabled": true,
+    "min_confirmations": 1,
+    "native_coin": "ton",
+    "rpc": [
+      "https://toncenter.com/api/v2/jsonRPC"
+    ],
+    "type": "TON",
+    "withdrawal_tokens": [
+      "TETHER",
+      "USD-COIN"
+    ]
+  },
+  "TRC20": {
+    "chain_id": null,
+    "deposit_tokens": [
+      "TRX",
+      "TETHER",
+      "USD-COIN",
+      "WETH"
+    ],
+    "enabled": true,
+    "min_confirmations": 1,
+    "native_coin": "trx",
+    "rpc": [
+      "https://api.trongrid.io"
+    ],
+    "type": "TRON",
+    "withdrawal_tokens": [
+      "TETHER",
+      "USD-COIN"
+    ]
+  },
+  "UNICHAIN": {
+    "chain_id": 130,
+    "native_coin": "ETH",
+    "rpc": [
+      "https://mainnet.unichain.org",
+      "https://unichain-rpc.publicnode.com",
+      "wss://unichain-rpc.publicnode.com"
+    ],
+    "type": "UNKNOWN"
+  },
+  "UNKNOWN": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "UNKNOWN"
+  },
+  "VET": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "NATIVE"
+  },
+  "XDAI": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "EVM"
+  },
+  "XLM": {
+    "chain_id": null,
+    "native_coin": null,
+    "rpc": [],
+    "type": "STELLAR"
+  }
+}

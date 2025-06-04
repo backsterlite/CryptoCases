@@ -11,27 +11,31 @@ import AppRoutes from '../routes/AppRoutes';
 function App() {
 
   const dispatch = useDispatch();
-  const { token, user, status, error } = useSelector(state => state.auth);
+  const { accessToken, refreshToken, user, status, error } = useSelector(state => state.auth);
   const {sessionExpiredModalVisible} = useSelector(state => state.ui)
 
 // On mount or token change: login or fetch user
   useEffect(() => {
-    if (!token) {
+    console.log("auth", accessToken, refreshToken)
+    if (!accessToken && refreshToken) {
+      // спробувати оновити accessToken
+      dispatch(refreshAccessToken());
+    } else if (!accessToken && !refreshToken) {
       dispatch(loginWithTelegram());
-    } else if (!user) {
+    } else if (accessToken && !user) {
       dispatch(fetchCurrentUser());
+      dispatch(fetchBalance());
     }
-  }, [dispatch, token, user]);
+  }, [dispatch, accessToken, refreshToken, user]);
 
   // After successful auth, fetch balance
   useEffect(() => {
-    if (token && user) {
+    if (accessToken && user) {
+      // console.log("fetchBalance", accessToken, status)
       dispatch(fetchBalance());
     }
-  }, [dispatch, token, status]);
+  }, [dispatch, accessToken, status]);
 
-  // Handle session expiration modal
-  console.log(sessionExpiredModalVisible)
 
   return (
     <>

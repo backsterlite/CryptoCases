@@ -11,7 +11,7 @@ class CaseOpenRequest(BaseModel):
     server_seed_id:str
 
 class PrizeItem(BaseModel):
-    coin_amount: Tuple[str,str,Decimal]
+    coin_amount: Tuple[str,str | None,Decimal]
     usd_value: str
     reward_tier: str
 

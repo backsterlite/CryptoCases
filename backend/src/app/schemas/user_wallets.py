@@ -1,13 +1,15 @@
 from typing import Dict
+from decimal import Decimal
+
 from pydantic import RootModel, BaseModel
 
 
-from app.models.coin import Coin
+from app.models.coin import CoinMeta
 
 
 class UserTokenWallet(BaseModel):
-    coin: Coin
-    balances: Dict[str,str] # network -> amount string
+    coin: CoinMeta
+    balance: Dict[str | None,Decimal] # network -> amount string
     
 
 class UserWalletsGrouped(RootModel[Dict[str, UserTokenWallet]]):

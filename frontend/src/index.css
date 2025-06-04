@@ -4,6 +4,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  @apply w-full max-w-screen-lg mx-auto px-4 text-center text-black;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);

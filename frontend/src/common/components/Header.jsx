@@ -12,7 +12,7 @@ export default function Header() {
   if (loading) return <div>Loading…</div>;
   if (error)   return <div>Error: {error}</div>;
   return (
-    <div className="flex items-center justify-between p-4 bg-white shadow">
+    <div className="w-full flex items-center justify-between px-4 py-2 bg-white shadow">
       <img src="/logo.svg" alt="Logo" className="h-8" />
       <div style={{color: 'black'}}>${amount}</div>
       <UserAvatar />

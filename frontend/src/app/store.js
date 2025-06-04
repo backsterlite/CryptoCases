@@ -6,9 +6,10 @@ import authReducer from '../features/auth/authSlice';
 import casesReducer from '../features/cases/casesSlice';
 import caseDetailReducer from '../features/caseDetail/caseDetailSlice';
 import balanceReducer from '../features/balance/balanceSlice';
-// import historyReducer from '../features/history/historySlice';
-// import walletReducer from '../features/wallet/walletSlice';
+import historyReducer from '../features/history/historySlice';
+import walletReducer from '../features/wallet/walletSlice';
 import uiReducer from '../common/slices/uiSlice'
+import rateReducer from '../common/slices/rateSlice';
 
 const persistConfig = {
   key: 'root',
@@ -19,11 +20,12 @@ const persistConfig = {
 const rootReducer = {
     auth: authReducer,
     ui: uiReducer,
-       cases: casesReducer,
+    cases: casesReducer,
     caseDetail: caseDetailReducer,
     balance: balanceReducer,
-//     history: historyReducer,
-//     wallet: walletReducer,
+    history: historyReducer,
+    wallet: walletReducer,
+    rates: rateReducer,
 }
 
 const persistedReducer = persistReducer(persistConfig, combineReducers(rootReducer));

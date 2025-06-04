@@ -1,0 +1,467 @@
+{
+  "1INCH": {
+    "AVAXC": {
+      "contract": "0xd501281565bf7789224523144fe5d98e8b28f267",
+      "decimals": 18
+    },
+    "BEP20": {
+      "contract": "0x111111111117dc0aa78b770fa6a738034120c302",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0x111111111117dc0aa78b770fa6a738034120c302",
+      "decimals": 18
+    },
+    "NEAR": {
+      "contract": "111111111117dc0aa78b770fa6a738034120c302.factory.bridge.near",
+      "decimals": 18
+    },
+    "NRG": {
+      "contract": "0xdda6205dc3f47e5280eb726613b27374eee9d130",
+      "decimals": 18
+    },
+    "ONE": {
+      "contract": "0x58f1b044d8308812881a1433d9bbeff99975e70c",
+      "decimals": 18
+    },
+    "POLYGON": {
+      "contract": "0x9c2c5fd7b07e95ee044ddeba0e97a665f142394f",
+      "decimals": 18
+    }
+  },
+  "ALGORAND": {},
+  "APT": {
+    "APTOS": {
+      "contract": "0x1::aptos_coin::aptoscoin",
+      "decimals": 8
+    }
+  },
+  "ARBITRUM": {
+    "ARB": {
+      "contract": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+      "decimals": 18
+    },
+    "ARB-NOVA": {
+      "contract": "0xf823c3cd3cebe0a1fa952ba88dc9eef8e0bf46ad",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0xb50721bcf8d664c30412cfbc6cf7a15145234ad1",
+      "decimals": 18
+    }
+  },
+  "AVALANCHE": {},
+  "CARDANO": {},
+  "CHAINLINK": {
+    "ARB": {
+      "contract": "0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
+      "decimals": 18
+    },
+    "AVAXC": {
+      "contract": "0x5947bb275c521040051d82396192181b413227a3",
+      "decimals": 18
+    },
+    "BASE": {
+      "contract": "0x88fb150bdc53a65fe94dea0c9ba0a6daf8c6e196",
+      "decimals": 18
+    },
+    "BEP20": {
+      "contract": "0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0x514910771af9ca656af840dff83e8264ecf986ca",
+      "decimals": 18
+    },
+    "FTM": {
+      "contract": "0xb3654dc3d10ea7645f8319668e8f54d2574fbdc8",
+      "decimals": 18
+    },
+    "HDX": {
+      "contract": "asset_registry%2f1000794",
+      "decimals": 18
+    },
+    "HT": {
+      "contract": "0x9e004545c59d359f6b7bfb06a26390b087717b42",
+      "decimals": 18
+    },
+    "MILK": {
+      "contract": "0xf390830df829cf22c53c8840554b98eafc5dcbc2",
+      "decimals": 18
+    },
+    "NEAR": {
+      "contract": "514910771af9ca656af840dff83e8264ecf986ca.factory.bridge.near",
+      "decimals": 18
+    },
+    "NRG": {
+      "contract": "0x68ca48ca2626c415a89756471d4ade2cc9034008",
+      "decimals": 18
+    },
+    "ONE": {
+      "contract": "0x218532a12a389a4a92fc0c5fb22901d1c19198aa",
+      "decimals": 18
+    },
+    "OP": {
+      "contract": "0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6",
+      "decimals": 18
+    },
+    "OSMO": {
+      "contract": "ibc/d3327a763c23f01ec43d1f0db3cefec390c362569b6fd191f40a5192f8960049",
+      "decimals": 18
+    },
+    "POLYGON": {
+      "contract": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
+      "decimals": 18
+    },
+    "SPL": {
+      "contract": "linkhb3afbbkb2eqqu7s7umdzcev3wcvaujhqafq23l",
+      "decimals": 9
+    },
+    "XDAI": {
+      "contract": "0xe2e73a1c69ecf83f464efce6a5be353a37ca09b2",
+      "decimals": 18
+    }
+  },
+  "COSMOS HUB": {
+    "ARCH": {
+      "contract": "ibc/27394fb092d2eccd56123c74f36e4c1f926001ceada9ca97ea622b25f41e5eb2",
+      "decimals": 6
+    },
+    "BEP20": {
+      "contract": "0x0eb3a705fc54725037cc9e008bdede697f62f335",
+      "decimals": 18
+    },
+    "CANTO": {
+      "contract": "0xeceeefcee421d8062ef8d6b4d814efe4dc898265",
+      "decimals": 6
+    },
+    "COSMOS": {
+      "contract": "uatom",
+      "decimals": 6
+    },
+    "EVMOS": {
+      "contract": "0xc5e00d3b04563950941f7137b5afa3a534f0d6d6",
+      "decimals": 6
+    },
+    "KAVA": {
+      "contract": "0x15932e26f5bd4923d46a2b205191c4b5d5f43fe3",
+      "decimals": 6
+    },
+    "OSMO": {
+      "contract": "ibc/27394fb092d2eccd56123c74f36e4c1f926001ceada9ca97ea622b25f41e5eb2",
+      "decimals": 6
+    }
+  },
+  "DOGECOIN": {},
+  "ETHEREUM": {},
+  "GATETOKEN": {
+    "ERC20": {
+      "contract": "0xe66747a101bff2dba3697199dcce5b743b454759",
+      "decimals": 18
+    }
+  },
+  "HARMONY": {},
+  "HYPERLIQUID": {},
+  "INJECTIVE": {
+    "BEP20": {
+      "contract": "0xa2b726b1145a4773f68593cf171187d8ebe4d495",
+      "decimals": 18
+    },
+    "COSMOS": {
+      "contract": "ibc/64ba6e31fe887d66c6f8f31c7b1a80c7ca179239677b4088bb55f5ea07dbe273",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0xe28b3b32b6c345a34ff64674606124dd5aceca30",
+      "decimals": 18
+    },
+    "OSMO": {
+      "contract": "ibc/64ba6e31fe887d66c6f8f31c7b1a80c7ca179239677b4088bb55f5ea07dbe273",
+      "decimals": 18
+    },
+    "SCRT": {
+      "contract": "secret14706vxakdzkz9a36872cs62vpl5qd84kpwvpew",
+      "decimals": 16
+    }
+  },
+  "INTERNET COMPUTER": {
+    "ICP": {
+      "contract": "ryjl3-tyaaa-aaaaa-aaaba-cai",
+      "decimals": 8
+    }
+  },
+  "LITECOIN": {},
+  "MASK NETWORK": {
+    "BEP20": {
+      "contract": "0x2ed9a5c8c13b93955103b9a7c167b67ef4d568a3",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0x69af81e73a73b40adf4f3d4223cd9b1ece623074",
+      "decimals": 18
+    },
+    "NRG": {
+      "contract": "0x746514e2c7d91e1e84c20c54d1f6f537b28a7d8e",
+      "decimals": 18
+    },
+    "POLYGON": {
+      "contract": "0x2b9e7ccdf0f4e5b24757c1e1a80e311e34cb10c7",
+      "decimals": 18
+    }
+  },
+  "NEAR PROTOCOL": {
+    "ERC20": {
+      "contract": "0x85f17cf997934a597031b2e18a9ab6ebd4b9f6a4",
+      "decimals": 24
+    }
+  },
+  "OKB": {
+    "ERC20": {
+      "contract": "0x75231f58b43240c9718dd58b4967c5114342a86c",
+      "decimals": 18
+    },
+    "OKT": {
+      "contract": "0xdf54b6c6195ea4d948d03bfd818d365cf175cfc2",
+      "decimals": 18
+    }
+  },
+  "PEPE": {
+    "ARB": {
+      "contract": "0x25d887ce7a35172c62febfd67a1856f20faebb00",
+      "decimals": 18
+    },
+    "BEP20": {
+      "contract": "0x25d887ce7a35172c62febfd67a1856f20faebb00",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+      "decimals": 18
+    }
+  },
+  "POLIGON": {
+    "BEP20": {
+      "contract": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+      "decimals": 18
+    },
+    "GLMR": {
+      "contract": "0x3405a1bd46b85c5c029483fbecf2f3e611026e45",
+      "decimals": 18
+    },
+    "MOVR": {
+      "contract": "0x682f81e57eaa716504090c3ecba8595fb54561d8",
+      "decimals": 18
+    },
+    "NRG": {
+      "contract": "0x98997e1651919faeacee7b96afbb3dfd96cb6036",
+      "decimals": 18
+    },
+    "ONE": {
+      "contract": "0x301259f392b551ca8c592c9f676fcd2f9a0a84c5",
+      "decimals": 18
+    }
+  },
+  "POLKADOT": {},
+  "POLYGON": {
+    "BEP20": {
+      "contract": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+      "decimals": 18
+    },
+    "GLMR": {
+      "contract": "0x3405a1bd46b85c5c029483fbecf2f3e611026e45",
+      "decimals": 18
+    },
+    "MOVR": {
+      "contract": "0x682f81e57eaa716504090c3ecba8595fb54561d8",
+      "decimals": 18
+    },
+    "NRG": {
+      "contract": "0x98997e1651919faeacee7b96afbb3dfd96cb6036",
+      "decimals": 18
+    },
+    "ONE": {
+      "contract": "0x301259f392b551ca8c592c9f676fcd2f9a0a84c5",
+      "decimals": 18
+    }
+  },
+  "QUANT NETWORK": {
+    "ERC20": {
+      "contract": "0x4a220e6096b25eadb88358cb44068a3248254675",
+      "decimals": 18
+    },
+    "NRG": {
+      "contract": "0x462b35452e552a66b519ecf70aedb1835d434965",
+      "decimals": 18
+    }
+  },
+  "SHIBA INU": {
+    "ERC20": {
+      "contract": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+      "decimals": 18
+    }
+  },
+  "STELLAR": {},
+  "SUI": {
+    "SUI": {
+      "contract": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::sui",
+      "decimals": 9
+    }
+  },
+  "TETHER": {
+    "APTOS": {
+      "contract": "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b",
+      "decimals": 6
+    },
+    "AVAXC": {
+      "contract": "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7",
+      "decimals": 6
+    },
+    "ERC20": {
+      "contract": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6
+    },
+    "KAVA": {
+      "contract": "0x919c1c267bc06a7039e03fcc2ef738525769109c",
+      "decimals": 6
+    },
+    "NEAR": {
+      "contract": "usdt.tether-token.near",
+      "decimals": 6
+    },
+    "SPL": {
+      "contract": "es9vmfrzacermjfrf4h2fyd4kconky11mcce8benwnyb",
+      "decimals": 6
+    },
+    "TON": {
+      "contract": "eqcxe6mutqjkfngfarotkot1lzbdiix1kcixrv7nw2id_sds",
+      "decimals": 6
+    },
+    "TRC20": {
+      "contract": "tr7nhqjekqxgtci8q8zy4pl8otszgjlj6t",
+      "decimals": 6
+    }
+  },
+  "THE GRAPH": {
+    "ARB": {
+      "contract": "0x9623063377ad1b27544c965ccd7342f7ea7e88c7",
+      "decimals": 18
+    },
+    "AVAXC": {
+      "contract": "0x8a0cac13c7da965a312f08ea4229c37869e85cb9",
+      "decimals": 18
+    },
+    "ERC20": {
+      "contract": "0xc944e90c64b2c07662a292be6244bdf05cda44a7",
+      "decimals": 18
+    },
+    "NEAR": {
+      "contract": "c944e90c64b2c07662a292be6244bdf05cda44a7.factory.bridge.near",
+      "decimals": 18
+    },
+    "NRG": {
+      "contract": "0x771513ba693d457df3678c951c448701f2eaaad5",
+      "decimals": 18
+    },
+    "ONE": {
+      "contract": "0x002fa662f2e09de7c306d2bab0085ee9509488ff",
+      "decimals": 18
+    },
+    "POLYGON": {
+      "contract": "0x5fe2b58c013d7601147dcdd68c143a77499f5531",
+      "decimals": 18
+    }
+  },
+  "TONCOIN": {
+    "BEP20": {
+      "contract": "0x76a797a59ba2c17726896976b7b3747bfd1d220f",
+      "decimals": 9
+    },
+    "ERC20": {
+      "contract": "0x582d872a1b094fc48f5de31d3b73f2d9be47def1",
+      "decimals": 9
+    },
+    "TON": {
+      "contract": "eqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaam9c",
+      "decimals": 18
+    }
+  },
+  "TRON": {},
+  "USDC": {
+    "ALGO": {
+      "contract": "31566704",
+      "decimals": 5
+    },
+    "APTOS": {
+      "contract": "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b",
+      "decimals": 6
+    },
+    "ARB": {
+      "contract": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+      "decimals": 6
+    },
+    "AVAXC": {
+      "contract": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+      "decimals": 6
+    },
+    "BASE": {
+      "contract": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "decimals": 6
+    },
+    "ERC20": {
+      "contract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6
+    },
+    "HBAR": {
+      "contract": "0.0.456858",
+      "decimals": 6
+    },
+    "NEAR": {
+      "contract": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+      "decimals": 6
+    },
+    "OP": {
+      "contract": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+      "decimals": 6
+    },
+    "POLYGON": {
+      "contract": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+      "decimals": 6
+    },
+    "SPL": {
+      "contract": "epjfwdd5aufqssqem2qn1xzybapc8g4weggkzwytdt1v",
+      "decimals": 6
+    },
+    "SUI": {
+      "contract": "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::usdc",
+      "decimals": 6
+    },
+    "TRC20": {
+      "contract": "tekxitehnzsmse2xqrbj4w32run966rdz8",
+      "decimals": 6
+    },
+    "UNICHAIN": {
+      "contract": "0x078d782b760474a361dda0af3839290b0ef57ad6",
+      "decimals": 6
+    },
+    "XLM": {
+      "contract": "usdc-ga5zsejyb37jrc5avcia5mop4rhtm335x2kgx3ihojapp5re34k4kzvn",
+      "decimals": 18
+    }
+  },
+  "VECHAIN": {},
+  "XRP": {},
+  "ZILLIQA": {
+    "BEP20": {
+      "contract": "0xb86abcb37c3a4b64f74f59301aff131a1becc787",
+      "decimals": 12
+    }
+  }
+}

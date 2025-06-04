@@ -9,6 +9,7 @@ import {
   deleteServerSeed,
   resetCaseDetail
 } from './caseDetailSlice';
+import { fetchBalance } from '../balance/balanceSlice';
 
 export function useCaseDetail(caseId) {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export function useCaseDetail(caseId) {
     prepareSpin()
     }
   }, [dispatch, caseId, commitData])
+
   const handlePlay = async () => {
     const open = await dispatch(
       openCaseDetail({
@@ -52,7 +54,7 @@ export function useCaseDetail(caseId) {
         serverSeedId: commitData?.server_seed_id
       })
     ).unwrap();
-
+    dispatch(fetchBalance())
     // await dispatch(revealCaseDetail(open.spin_log_id)).unwrap();
   };
 

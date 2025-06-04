@@ -1,41 +1,182 @@
 {
-  "ETHEREUM": {"code": "ERC20", "type": "EVM"},
-  "BINANCE-SMART-CHAIN": {"code": "BEP20", "type": "EVM"},
-  "POLYGON-POS": {"code": "POLYGON", "type": "EVM"},
-  "AVALANCHE": {"code": "AVAXC", "type": "EVM"},
-  "ARBITRUM-ONE": {"code": "ARB", "type": "EVM"},
-  "OPTIMISTIC-ETHEREUM": {"code": "OP", "type": "EVM"},
-  "BASE": {"code": "BASE", "type": "EVM"},
-
-  "TRON": {"code": "TRC20", "type": "TRON"},
-  "SOLANA": {"code": "SPL", "type": "SOLANA"},
-  "APTOS": {"code": "APTOS", "type": "APTOS"},
-  "SUI": {"code": "SUI", "type": "SUI"},
-  "NEAR-PROTOCOL": {"code": "NEAR", "type": "NEAR"},
-  "ALGORAND": {"code": "ALGO", "type": "ALGORAND"},
-  "HEDERA-HASHGRAPH": {"code": "HBAR", "type": "HEDERA"},
-  "STELLAR": {"code": "XLM", "type": "STELLAR"},
-  "THE-OPEN-NETWORK": {"code": "TON", "type": "TON"},
-  "INTERNET-COMPUTER": {"code": "ICP", "type": "ICP"},
-
-  "COSMOS": {"code": "COSMOS", "type": "IBC"},
-  "OSMOSIS": {"code": "OSMO", "type": "IBC"},
-  "SECRET": {"code": "SCRT", "type": "IBC"},
-  "EVMOS": {"code": "EVMOS", "type": "IBC"},
-  "ARCHWAY": {"code": "ARCH", "type": "IBC"},
-  "CANTO": {"code": "CANTO", "type": "IBC"},
-
-  "OKEX-CHAIN": {"code": "OKT", "type": "EVM"},
-  "XDAI": {"code": "XDAI", "type": "EVM"},
-  "FANTOM": {"code": "FTM", "type": "EVM"},
-  "MOONBEAM": {"code": "GLMR", "type": "EVM"},
-  "MOONRIVER": {"code": "MOVR", "type": "EVM"},
-  "ENERGI": {"code": "NRG", "type": "EVM"},
-  "MILKOMEDA-CARDANO": {"code": "MILK", "type": "EVM"},
-  "HUOBI-TOKEN": {"code": "HT", "type": "EVM"},
-  "HARMONY-SHARD-0": {"code": "ONE", "type": "EVM"},
-  "UNICHAIN": {"code": "UNICHAIN", "type": "UNKNOWN"},
-
-  "VECHAIN": {"code": "VET", "type": "NATIVE"},
-  "MISSING": {"code": "UNKNOWN", "type": "UNKNOWN"}
+  "ALGORAND": {
+    "code": "ALGO",
+    "type": "ALGORAND"
+  },
+  "APTOS": {
+    "code": "APTOS",
+    "type": "APTOS"
+  },
+  "ARBITRUM-NOVA": {
+    "code": "ARB-NOVA",
+    "type": "EVM"
+  },
+  "ARBITRUM-ONE": {
+    "code": "ARB",
+    "type": "EVM"
+  },
+  "ARCHWAY": {
+    "code": "ARCH",
+    "type": "IBC"
+  },
+  "AVALANCHE": {
+    "code": "AVAXC",
+    "type": "EVM"
+  },
+  "BASE": {
+    "code": "BASE",
+    "type": "EVM"
+  },
+  "BINANCE-SMART-CHAIN": {
+    "code": "BEP20",
+    "type": "EVM"
+  },
+  "CANTO": {
+    "code": "CANTO",
+    "type": "IBC"
+  },
+  "CELO": {
+    "code": "UNKNOWN",
+    "type": "UNKNOWN"
+  },
+  "COSMOS": {
+    "code": "COSMOS",
+    "type": "IBC"
+  },
+  "ENERGI": {
+    "code": "NRG",
+    "type": "EVM"
+  },
+  "ETHEREUM": {
+    "code": "ERC20",
+    "type": "EVM"
+  },
+  "EVMOS": {
+    "code": "EVMOS",
+    "type": "IBC"
+  },
+  "FANTOM": {
+    "code": "FTM",
+    "type": "EVM"
+  },
+  "HARMONY-SHARD-0": {
+    "code": "ONE",
+    "type": "EVM"
+  },
+  "HEDERA-HASHGRAPH": {
+    "code": "HBAR",
+    "type": "HEDERA"
+  },
+  "HUOBI-TOKEN": {
+    "code": "HT",
+    "type": "EVM"
+  },
+  "HYDRATION": {
+    "code": "HDX",
+    "type": "EVM"
+  },
+  "HYPERLIQUID": {
+    "code": "UNKNOWN",
+    "type": "UNKNOWN"
+  },
+  "INTERNET-COMPUTER": {
+    "code": "ICP",
+    "type": "ICP"
+  },
+  "KAVA": {
+    "code": "KAVA",
+    "type": "EVM"
+  },
+  "KLAY-TOKEN": {
+    "code": "UNKNOWN",
+    "type": "UNKNOWN"
+  },
+  "MILKOMEDA-CARDANO": {
+    "code": "MILK",
+    "type": "EVM"
+  },
+  "MISSING": {
+    "code": "UNKNOWN",
+    "type": "UNKNOWN"
+  },
+  "MOONBEAM": {
+    "code": "GLMR",
+    "type": "EVM"
+  },
+  "MOONRIVER": {
+    "code": "MOVR",
+    "type": "EVM"
+  },
+  "NEAR-PROTOCOL": {
+    "code": "NEAR",
+    "type": "NEAR"
+  },
+  "OKEX-CHAIN": {
+    "code": "OKT",
+    "type": "EVM"
+  },
+  "OPTIMISTIC-ETHEREUM": {
+    "code": "OP",
+    "type": "EVM"
+  },
+  "OSMOSIS": {
+    "code": "OSMO",
+    "type": "IBC"
+  },
+  "POLKADOT": {
+    "code": "UNKNOWN",
+    "type": "UNKNOWN"
+  },
+  "POLYGON-POS": {
+    "code": "POLYGON",
+    "type": "EVM"
+  },
+  "SECRET": {
+    "code": "SCRT",
+    "type": "IBC"
+  },
+  "SOLANA": {
+    "code": "SPL",
+    "type": "SOLANA"
+  },
+  "SONIC": {
+    "code": "UNKNOWN",
+    "type": "UNKNOWN"
+  },
+  "SORA": {
+    "code": "UNKNOWN",
+    "type": "UNKNOWN"
+  },
+  "STELLAR": {
+    "code": "XLM",
+    "type": "STELLAR"
+  },
+  "SUI": {
+    "code": "SUI",
+    "type": "SUI"
+  },
+  "THE-OPEN-NETWORK": {
+    "code": "TON",
+    "type": "TON"
+  },
+  "TRON": {
+    "code": "TRC20",
+    "type": "TRON"
+  },
+  "UNICHAIN": {
+    "code": "UNICHAIN",
+    "type": "UNKNOWN"
+  },
+  "VECHAIN": {
+    "code": "VET",
+    "type": "NATIVE"
+  },
+  "XDAI": {
+    "code": "XDAI",
+    "type": "EVM"
+  },
+  "ZKSYNC": {
+    "code": "UNKNOWN",
+    "type": "UNKNOWN"
+  }
 }

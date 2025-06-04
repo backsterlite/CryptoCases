@@ -8,7 +8,7 @@ from beanie import PydanticObjectId
 from app.services.odds_service import export_odds
 from app.db.models.player import ServerSeed, SpinLog
 from app.schemas.case import CommitOut, RevealOut
-from app.api.deps import get_current_user
+from app.api.deps import require_role
 
 router = APIRouter(prefix="/fairness", tags=["Fairness"])
 
@@ -23,7 +23,8 @@ async def get_odds(case_id: str, version: str):
 
 
 @router.post("/commit", response_model=CommitOut)
-async def commit_seed(user=Depends(get_current_user))-> CommitOut:
+async def commit_seed(user=Depends(require_role("user")))-> CommitOut:
+    
     not_used_seed = await ServerSeed.find_one({"user_id": str(user.user_id), "used": False})
     if not not_used_seed:
     # generate new seed
@@ -62,7 +63,7 @@ async def reveal_pf(
     spin_log_id: PydanticObjectId = Path(
         ..., description="Identifier of the spin log entry to reveal"
     ),
-    user=Depends(get_current_user)
+    user=Depends(require_role("user"))
 ) -> RevealOut:
     # 1. Retrieve the spin log and verify ownership
     spin = await SpinLog.get(spin_log_id)

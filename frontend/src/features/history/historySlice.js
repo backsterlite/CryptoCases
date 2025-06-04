@@ -3,10 +3,10 @@ import api from '../../services/api';
 
 export const fetchDepositHistory = createAsyncThunk(
   'history/fetchDepositHistory',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, limit, offset }) => {
     try {
-      const data = await api.history.deposits();
-      return data;
+      const response = await api.history.deposits(limit, offset);
+      return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data || err.message);
     }
@@ -15,10 +15,10 @@ export const fetchDepositHistory = createAsyncThunk(
 
 export const fetchCaseOpensHistory = createAsyncThunk(
   'history/fetchCaseOpensHistory',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, limit, offset }) => {
     try {
-      const data = await api.history.opens();
-      return data;
+      const response = await api.history.spins(limit, offset);
+      return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data || err.message);
     }
@@ -27,10 +27,10 @@ export const fetchCaseOpensHistory = createAsyncThunk(
 
 export const fetchWithdrawHistory = createAsyncThunk(
   'history/fetchWithdrawHistory',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, limit, offset }) => {
     try {
-      const data = await api.history.withdrawals();
-      return data;
+      const response = await api.history.withdrawals(limit, offset);
+      return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data || err.message);
     }

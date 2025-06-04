@@ -1,13 +1,13 @@
-import aioredis
+import redis.asyncio as redis_client
 from typing import Any
 from app.config.settings import settings
 
-_redis: aioredis.Redis | None = None
+_redis: redis_client.Redis | None = None
 
-def get_redis() -> aioredis.Redis:
+def get_redis() -> redis_client.Redis:
     global _redis
     if _redis is None:
-        _redis = aioredis.from_url(
+        _redis = redis_client.from_url(
             settings.REDIS_URL,
             password=settings.REDIS_PASS or None,
             encoding="utf-8",

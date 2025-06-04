@@ -4,10 +4,10 @@ import client from "../app/api/client"
 const api = {
   auth: {
     telegram: (initData) => client.post('/auth/telegram', { init_data: initData }),
+    refresh: () => client.post('/auth/refresh'),
   },
   users: {
     me: () => client.get('/users/me'),
-    wallets: () => client.get('/users/me/wallets'),
   },
   balance: {
     usd: () => client.get('/balance/usd'),
@@ -26,11 +26,24 @@ const api = {
   },
   rates: {
     list: () => client.get('/rates'),
-    get: (symbol) => client.get(`/rates/${symbol}`),
+    getOne: (symbol) => client.get(`/rates/${symbol}`),
   },
   withdrawals: {
     open: (symbol, network, amount, toAddress) =>
       client.post('/withdraw/', { token: symbol, network, amount, to_address: toAddress }),
+  },
+  history: {
+    spins: () => client.get('/history/spins'),
+    deposits: () => client.get('/history/deposits'),
+    withdrawals: () => client.get('/history/withdrawals'),
+  },
+  wallet: {
+    all: () =>
+      client.get('/wallet/all'),
+    quote:     (payload) => client.post('/wallet/swap/quote', payload),
+    execute:   (payload) => client.post('/wallet/swap/execute', payload),
+    deposit:   (token, network, amount) => client.post('/wallet/deposit', { token, network, amount }),
+    connect:   () => client.post('/wallet/connect')
   },
   dev: {
     genToken: (telegramId, botToken) =>

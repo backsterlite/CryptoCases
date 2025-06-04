@@ -1,0 +1,21 @@
+{
+  "TON": {
+    "deposit":  ["TON", "TETHER", "USD-COIN", "NOT"],
+    "withdraw": ["TETHER", "USD-COIN"]
+  },
+
+  "TRC20": {
+    "deposit":  ["TRX", "TETHER", "USD-COIN", "WETH"],
+    "withdraw": ["TETHER", "USD-COIN"]
+  },
+
+  "SPL": {
+    "deposit":  ["SOL", "TETHER", "USD-COIN", "LINK"],
+    "withdraw": ["TETHER", "USD-COIN"]
+  },
+
+  "POLYGON": {
+    "deposit":  ["MATIC", "TETHER", "USD-COIN", "LINK"],
+    "withdraw": ["TETHER", "USD-COIN"]
+  }
+}

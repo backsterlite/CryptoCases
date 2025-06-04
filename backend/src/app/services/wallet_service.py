@@ -2,8 +2,9 @@ from decimal import Decimal, InvalidOperation
 from fastapi import HTTPException
 from typing import Dict, Optional
 from app.db.models.user import User
-from app.config.coin_registry import CoinRegistry
-from app.models.coin import CoinAmount
+from app.config.settings import settings
+from app.models.coin import CoinAmount, Coin
+from app.db.models.internal_balance import InternalBalance
 from pymongo import ReturnDocument
 
 class WalletService:
@@ -71,20 +72,47 @@ class WalletService:
         return fresh
 
 
+    @staticmethod
+    async def get_balance(user: User, token: str, network: str) -> Decimal:
+        """
+        Retrieve the balance for a given user, token and network.
+        If no wallet is found, return Decimal('0').
+        """
+        wallet = await InternalBalance.find_one(
+            InternalBalance.user_id==user.id,
+            InternalBalance.coin==token,
+            InternalBalance.network==network
+        )
+        if wallet is None:
+            return Decimal("0")
+        return wallet.balance
+    
 
-def get_balance(user: User, token: str, network: str) -> Decimal:
-    try:
-        raw = user.wallets[token][network]
-        return Decimal(raw)
-    except (KeyError, TypeError, ValueError):
-        return Decimal("0")
+    @staticmethod
+    async def has_sufficient_balance(user: User, token: str, network: str, amount: Decimal) -> bool:
+        current_balance = await WalletService.get_balance(user, token, network)
+        return  current_balance >= amount
 
 
-def has_sufficient_balance(user: User, token: str, network: str, amount: Decimal) -> bool:
-    return get_balance(user, token, network) >= amount
+    @staticmethod
+    async def initial_wallets(user_id: int) -> None:
+        """
+        Returns initial wallet structure with zero balances
+        for base tokens (e.g., USDT, USDC) across all supported networks.
+        """
+                
+        for symbol in settings.BASE_TOKENS:
+            
+            new_balance = InternalBalance(
+                user_id=user_id,
+                coin=symbol,
+                network=None,
+                balance=Decimal("0")
+            )
+            await new_balance.insert()
 
-
-def to_display(token: str, network: str, amount: str) -> str:
-    decimals = CoinRegistry.get_decimals(token, network) or 6
-    value = Decimal(amount)
-    return f"{value:.{decimals}f}"
+# def to_display(token: str, network: str, amount: str) -> str:
+#     coin = Coin.from_id(coin_id=token)
+    
+#     value = Decimal(amount)
+#     return f"{value:.{decimals}f}"

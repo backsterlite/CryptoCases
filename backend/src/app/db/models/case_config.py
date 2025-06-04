@@ -1,29 +1,11 @@
 from decimal import Decimal
 from datetime import datetime, timezone
 from beanie import Document
-from bson.decimal128 import Decimal128
-from pydantic import BaseModel, Field, field_validator, ConfigDict
+from pydantic import Field, ConfigDict
 from typing import List
 from pymongo import ASCENDING
 
-class RewardItem(BaseModel):
-    coin_id: str
-    amount: Decimal
-    network: str
-    sub_chance: Decimal
-
-class TierConfig(BaseModel):
-    name: str
-    chance: Decimal
-    rewards: List[RewardItem]
-    
-    
-    
-class OddsVersion(BaseModel):
-    version: str = Field(default="", description="Unique version odd table e.g. datetime of create")
-    sha256: str = Field(default="", description="Hash sum file with table")
-    url: str = Field(default="", description="Link to file with table [optional]")
-    uploaded_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))    
+from app.models.case_config import TierConfig, OddsVersion, RewardItem
 
 class CaseConfig(Document):
     """

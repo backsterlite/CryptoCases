@@ -22,7 +22,7 @@ services:
       - ./backend/.env
       - ./backend/.env.test
     volumes:
-      - ./backend/src:/app/src
+      - ./backend/:/app/
       - ./data:/app/data
       - ./scripts/collect_stats.py:/app/scripts/collect_stats.py
     ports:
@@ -55,11 +55,10 @@ services:
     image: redis:7-alpine
     container_name: cryptocases_redis
     # вмикаємо автентифікацію паролем
-    command: >
-      redis-server
-      --requirepass "${BACKEND_REDIS_PASS}"
     env_file:
-      - ./backend/.env      # підхоплюємо змінну BACKEND_REDIS_PASS
+      - ./backend/.env 
+    command: ["redis-server", "--requirepass", "123456789"]
+      
     ports:
       - "6379:6379"
     volumes:
@@ -69,6 +68,7 @@ services:
   mongo:
     image: mongo:6
     container_name: cryptocases_mongo
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
     ports:
       - "27017:27017"
     volumes:

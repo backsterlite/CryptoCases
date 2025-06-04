@@ -1,17 +1,20 @@
-from typing import Dict
-from app.models.coin import CoinAmount
-from app.schemas.user_wallets import UserTokenWallet
-from app.config.coin_registry import CoinRegistry
+from typing import Dict, Optional
+from app.schemas.wallet import UserTokenWallet, UserWalletsGrouped
+from app.services.internal_balance_service import InternalBalanceService
+from app.config.coin_registry import CoinRegistry, CoinMeta
 
 
-def group_wallets_by_coin(wallets: Dict[str, Dict[str, str]]) -> Dict[str,UserTokenWallet]:
-    result = dict()
-    for symbol, network_dict in wallets.items():
-        coin = CoinRegistry.get_runtime(symbol)
+async def group_wallets_by_coin(user_id: int) -> UserWalletsGrouped:
+    result: Dict[str,UserTokenWallet] = dict()
+    user_wallets =  await InternalBalanceService.list_wallets(user_id)
+    for wallet in user_wallets:
+        coin: Optional[CoinMeta] = CoinRegistry.get(wallet.coin)
         if not coin:
-            continue  # або log warning
-        result[symbol] = UserTokenWallet(
+            continue
+        result[wallet.coin] = UserTokenWallet(
             coin=coin,
-            balances=network_dict
+            balance={wallet.network: wallet.balance}
+            
         )
-    return result
+        
+    return UserWalletsGrouped(result)

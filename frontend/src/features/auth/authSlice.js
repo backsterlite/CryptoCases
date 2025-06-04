@@ -5,11 +5,32 @@ import { showSessionExpiredModal } from '../../common/slices/uiSlice'; // action
 import TelegramWebAppPromise from '../../mocks/WebAppTG';
 
 const initialState = {
-  token: null,
+  accessToken: null,
+  refreshToken: null,
   user: null,
   status: 'idle', // 'loading' | 'succeeded' | 'failed'
   error: null,
 };
+
+export const refreshAccessToken = createAsyncThunk(
+  'auth/refresh',
+  async (_, { getState, rejectWithValue, dispatch }) => {
+    try {
+      const { refreshToken } = getState().auth;
+      // Якщо refreshToken зберігається в Redux
+      if (!refreshToken) {
+        return rejectWithValue('No refresh token');
+      }
+      // Запит на бекенд:
+      const res = await api.auth.refresh({ refresh_token: refreshToken });
+      // Очікуємо, що бек поверне { access_token: '...', refresh_token: '...' }
+      return res.data;
+    } catch (err) {
+      // якщо бек видав 401 або іншу помилку, кидаємо reject
+      return rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
 
 export const loginWithTelegram = createAsyncThunk(
   'auth/login',
@@ -18,8 +39,7 @@ export const loginWithTelegram = createAsyncThunk(
       const WebApp = await TelegramWebAppPromise;
       const initData = WebApp.initData;
       const res = await api.auth.telegram(initData);
-      console.log(res.data.access_token)
-      return res.data.access_token;
+      return res.data;
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -49,7 +69,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout(state) {
-      state.token = null;
+      state.accessToken = null;
+      state.refreshToken = null;
       state.user = null;
       state.status = 'idle';
     },
@@ -63,13 +84,30 @@ const authSlice = createSlice({
       })
       .addCase(loginWithTelegram.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.token = action.payload;
+        state.accessToken = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token
+
       })
       .addCase(loginWithTelegram.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       })
-
+      .addCase(refreshAccessToken.pending, state => {
+        // можемо ставити окремий статус, але для простоти залишимо існуючий
+      })
+      .addCase(refreshAccessToken.fulfilled, (state, action) => {
+        // Якщо бек повернув нові токени:
+        state.accessToken = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token;
+      })
+      .addCase(refreshAccessToken.rejected, (state, action) => {
+        // якщо не вдалось оновити — логаут
+        state.accessToken = null;
+        state.refreshToken = null;
+        state.user = null;
+        state.status = 'idle';
+        state.error = 'SessionExpired';
+      })
       // FETCH USER
       .addCase(fetchCurrentUser.pending, state => {
         state.error = null;
@@ -78,8 +116,8 @@ const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
-        state.token = null
-        state.user = null
+        // state.token = null
+        // state.user = null
         state.error = action.payload;
 
       });

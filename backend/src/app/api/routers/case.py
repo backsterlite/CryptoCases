@@ -3,10 +3,12 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.db.models.user import User
-from app.api.deps import get_current_user
+from app.api.deps import require_role
+from app.exceptions.balance import BalanceTooLow
 from app.schemas.case import CaseOpenRequest, CaseOpenResponse, CaseOut
 from app.services.spin_controller import spin
 from app.services.case_service import CaseService
+from app.services.internal_balance_service import InternalBalanceService
 from app.db.models.player import ServerSeed, CapPool
 from app.db.models.case_config import CaseConfig
 
@@ -28,17 +30,30 @@ async def precheck(case_id: str):
 @router.post("/open", response_model=CaseOpenResponse)
 async def open_case_endpoint(
     data: CaseOpenRequest,
-    user: User = Depends(get_current_user)
+    user: User = Depends(require_role("user"))
     ): 
-     result = await spin(
-         user_id=user.user_id,
-         data_for_spin=data
-         )
-     return result
+    if await InternalBalanceService.try_charge_user_for_case(
+        user_id=user.user_id,
+        case_id=data.case_id):
+        
+        result = await spin(
+            user_id=user.user_id,
+            data_for_spin=data
+            )
+        ca = result.prize.coin_amount
+        await InternalBalanceService.adjust_balance(
+            user_id=user.user_id,
+            coin=ca[0],
+            network=ca[1],
+            delta=ca[2]
+        )
+        return result
+    else:
+        raise BalanceTooLow(None)
 
 @router.get("/list", response_model=List[CaseOut])
 async def get_cases_list(
-    user: User = Depends(get_current_user)
+    user: User = Depends(require_role("user"))
 ):
     return await CaseService.get_all_cases()
 
@@ -46,6 +61,6 @@ async def get_cases_list(
 @router.get('/get_one', response_model=CaseOut)
 async def get_one_case(
     case_id: str,
-    user: User = Depends(get_current_user)
+    user: User = Depends(require_role("user"))
 ):
     return await CaseService.get_case_by_id(case_id)

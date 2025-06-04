@@ -5,7 +5,7 @@ export default function CaseCard({ caseInfo, onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className="bg-white rounded-lg shadow p-6 flex flex-col items-center justify-center transform hover:scale-105 transition"
+      className="w-full max-w-sm bg-white rounded-lg shadow p-6 flex flex-col items-center justify-center transform hover:scale-105 transition"
     >
       <div className="text-xl font-semibold mb-2">{caseInfo.name || caseInfo.case_id}</div>
       {/* Uncomment when image URL is available */}

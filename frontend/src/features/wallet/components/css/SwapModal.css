@@ -1,0 +1,243 @@
+/* SwapModal.css */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  color: #333;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.balance-selector {
+  margin-bottom: 24px;
+}
+
+.selector-row {
+  margin-bottom: 16px;
+}
+
+.selector-row label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #666;
+}
+
+.token-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.token-select:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.amount-section {
+  margin-bottom: 24px;
+}
+
+.amount-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #666;
+}
+
+.amount-input-wrapper {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.amount-input-wrapper input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.amount-input-wrapper input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.amount-input-wrapper input.error {
+  border-color: #f44336;
+}
+
+.max-btn {
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.max-btn:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.max-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.balance-info {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.receive-section {
+  margin-bottom: 24px;
+}
+
+.receive-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #666;
+}
+
+.quote-result {
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.quote-placeholder {
+  padding: 12px;
+  color: #999;
+  font-style: italic;
+}
+
+.loading {
+  padding: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+.swap-error {
+  margin-top: 16px;
+  padding: 12px;
+  background: #ffebee;
+  border-radius: 8px;
+  border: 1px solid #ffcdd2;
+}
+
+.success-message {
+  margin-top: 16px;
+  padding: 12px;
+  background: #e8f5e9;
+  border-radius: 8px;
+  border: 1px solid #c8e6c9;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.swap-btn,
+.cancel-btn {
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.swap-btn {
+  background: #4CAF50;
+  color: white;
+}
+
+.swap-btn:hover:not(:disabled) {
+  background: #45a049;
+}
+
+.swap-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.cancel-btn:hover {
+  background: #e0e0e0;
+}

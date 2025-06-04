@@ -21,8 +21,6 @@ export default function CaseDetailPage() {
     handleVerify,
     handleReset
   } = useCaseDetail(caseId);
-  
-  
 
   const [showPrizeModal, setShowPrizeModal] = useState(false);
 

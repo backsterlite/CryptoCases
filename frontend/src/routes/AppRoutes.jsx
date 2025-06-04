@@ -8,7 +8,7 @@ import CaseDetailPage from '../features/caseDetail/CaseDetailPage';
 import ProfileLayout from '../layouts/ProfileLayout';
 import WalletLayout from '../layouts/WalletLayout';
 import HistoryLayout from '../layouts/HistoryLayout';
-import WalletConnectPage from '../features/wallet/WalletConnectPage';
+import WalletsPage from '../features/wallet/WalletsPage';
 import DepositPage from '../features/wallet/DepositPage';
 import WithdrawPage from '../features/wallet/WithdrawPage';
 import DepositHistoryPage from '../features/history/DepositHistoryPage';
@@ -17,15 +17,18 @@ import WithdrawHistoryPage from '../features/history/WithdrawHistoryPage';
 import SettingsPage from '../features/settings/SettingsPage';
 
 function Protected({ children }) {
-  const token = useSelector(state => state.auth.token);
-  return token ? children : <Navigate to="/" replace />;
+  const { accessToken } = useSelector(state => state.auth);
+  if(!accessToken) {
+    console.log("NO ACCESS TOKEN")
+  }
+  return accessToken ? children : <Navigate to="/" replace />;
 }
 
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<Protected><MainLayout /></Protected>}>
           <Route index element={<HomePage />} />
           <Route path="play" element={<GamePage />} />
           <Route path="play/:caseId" element={<Protected><CaseDetailPage/></Protected>} />
@@ -34,8 +37,8 @@ export default function AppRoutes() {
             <Route index element={<Navigate to="wallet" replace />} />
 
             <Route path="wallet" element={<Protected><WalletLayout/></Protected>}>
-              <Route index element={<WalletConnectPage/>} />
-              <Route path="connect" element={<WalletConnectPage/>} />
+              <Route index element={<WalletsPage/>} />
+              <Route path="all" element={<WalletsPage/>} />
               <Route path="deposit" element={<DepositPage/>} />
               <Route path="withdraw" element={<WithdrawPage/>} />
             </Route>

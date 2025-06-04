@@ -9,7 +9,7 @@ import NavBar from '../common/components/NavBar';
  */
 export default function MainLayout() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex-1 mt-16 mb-16 overflow-auto px-4 w-full max-w-screen-md mx-auto">
       {/* Fixed header */}
       <header className="fixed top-0 left-0 right-0 h-16 bg-white shadow z-10">
         <Header />

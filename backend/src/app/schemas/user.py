@@ -2,7 +2,6 @@ import json
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional, List, Dict, Any
 from app.models.coin import CoinAmount
-from app.schemas.user_wallets import UserWalletsGrouped
 
 
 

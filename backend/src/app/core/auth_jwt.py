@@ -33,7 +33,7 @@ def create_access_token(data: Dict[str,Any], role: str) -> str:
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-def create_refresh_token(user_id: str) -> str:
+async def create_refresh_token(user_id: str) -> str:
     now = datetime.now(timezone.utc)
     jti = str(uuid.uuid4())
     to_encode = {
@@ -45,7 +45,7 @@ def create_refresh_token(user_id: str) -> str:
     token = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     # Зберігаємо jti в Redis з TTL
     redis = get_redis()
-    redis.set(f"refresh_jti:{user_id}", jti, ex=REFRESH_TOKEN_EXPIRE_DAYS * 24 * 3600)
+    await redis.set(f"refresh_jti:{user_id}", jti, ex=REFRESH_TOKEN_EXPIRE_DAYS * 24 * 3600)
     return token
 
 
@@ -59,8 +59,8 @@ def verify_access_token(token: str) -> dict[str, Any]:
 async def verify_and_rotate_refresh_token(token: str) -> tuple[str, str]:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: str = payload.get("sub")
-        jti: str = payload.get("jti")
+        user_id: str = payload.get("sub", "")
+        jti: str = payload.get("jti", "")
         if not user_id or not jti:
             raise ValueError("Malformed refresh token")
     except JWTError as e:
@@ -73,5 +73,5 @@ async def verify_and_rotate_refresh_token(token: str) -> tuple[str, str]:
 
     # Валідація пройдена — створюємо нову пару
     new_access = create_access_token({"sub": user_id}, role=payload.get("scope", "user"))
-    new_refresh = create_refresh_token(user_id)
+    new_refresh = await create_refresh_token(user_id)
     return new_access, new_refresh

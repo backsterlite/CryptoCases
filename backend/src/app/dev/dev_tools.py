@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Query
-from app.core.auth_jwt import create_access_token
+from app.core.auth_jwt import create_access_token, create_refresh_token
 from app.config.settings_test import settings
 from app.services.user_service import UserService
 from app.schemas.user import UserResponsePrivate, UserCreateTelegram
@@ -15,11 +15,12 @@ async def generate_token_for_testing(
     if bot_token != settings.dev_bot_token:
         return {"error": "unauthorized"}
 
-    token = create_access_token(data={"sub": str(telegram_id)})
+    token = create_access_token(data={"sub": str(telegram_id)}, role="user")
     return {"access_token": token, "token_type": "bearer"}
 
 @router.post("/user/create", response_model=TokenResponse)
 async def get_user(payload: UserCreateTelegram):
     user = await UserService.get_or_create_user(payload)
-    access_token = create_access_token(data={"sub": str(user.user_id)})
-    return TokenResponse(access_token=access_token)
+    access_token = create_access_token(data={"sub": str(user.user_id)}, role="user")
+    refresh = create_refresh_token(user_id=str(user.id))
+    return TokenResponse(access_token=access_token, refresh_token=refresh)

@@ -33,7 +33,7 @@ class RateCache:
 
     async def close(self):
         """Закриваємо сесію при завершенні роботи."""
-        await self._session.close()
+        await self._session.close() # type: ignore
         
     async def _ensure_session(self):
         if self._session is None:
@@ -42,7 +42,7 @@ class RateCache:
     async def _fetch_rates(self) -> Dict[str, Decimal]:
         await self._ensure_session()
         # пункт 1: беремо актуальні id кожного разу
-        ids = CoinRegistry.get_ids() or []
+        ids = CoinRegistry.list_ids() or []
         if not ids:
             return {}
 
@@ -55,7 +55,7 @@ class RateCache:
                 "vs_currencies": "usd"
             }
             try:
-                resp = await self._session.get(
+                resp = await self._session.get( # type: ignore
                     f"{settings.COINGECKO_BASE_URL}/simple/price",
                     params=params
                 )
@@ -72,7 +72,7 @@ class RateCache:
                     logger.warning("No USD price for %s in response", key)
                     continue
                 try:
-                    results[key.lower()] = Decimal(str(usd_val))
+                    results[key] = Decimal(str(usd_val))
                 except (ValueError, TypeError) as e:
                     logger.error("Can't parse USD value for %s: %s", key, e)
             await asyncio.sleep(1)
@@ -80,7 +80,7 @@ class RateCache:
             json.dump(results, f, indent=2, default=str, ensure_ascii=False)
         return results
 
-    async def rate_updater(self, interval_seconds: int = 3600) -> None:
+    async def rate_updater(self, interval_seconds: int = 300) -> None:
         """
         Фоновий таск, що кожні interval_seconds оновлює cache["coin_rates"].
         Запускай як: asyncio.create_task(rate_cache.rate_updater())
@@ -88,7 +88,7 @@ class RateCache:
         cache = caches.get("default")
         while True:
             rates = await self._fetch_rates()
-            await cache.set("coin_rates", rates)
+            await cache.set("coin_rates", rates) # type: ignore
             logger.info("Coin rates updated, next in %s sec", interval_seconds)
             await asyncio.sleep(interval_seconds)
 
@@ -97,13 +97,18 @@ class RateCache:
         Повертає курс конкретної монети з кешу (або 0, якщо немає).
         """
         cache = caches.get("default")
-        rates: Dict[str, Decimal] = await cache.get("coin_rates", {})  # {} for default
-        return rates.get(coin_id.lower(), Decimal("0"))
+        rates: Dict[str, Decimal] = await cache.get("coin_rates", {})  # type: ignore # {} for default
+        return rates.get(coin_id, Decimal("0"))
     
     async def get_all_rates(self) -> Dict[str, str]:
         cache = caches.get("default")
-        rates = await cache.get("coin_rates", {}) or {}
+        rates = await cache.get("coin_rates", {}) or {} # type: ignore
         return {sym: str(rt) for sym, rt in rates.items()}
-
+    
+    
+    async def force_update(self):
+        cache = caches.get("default")
+        rates = await self._fetch_rates()
+        await cache.set("coin_rates", rates) # type: ignore
 
 rate_cache = RateCache()

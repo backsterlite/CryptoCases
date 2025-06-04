@@ -51,12 +51,13 @@ def _to_int(value: Any) -> int:
 class TokenCfg:
     """Lightweight view around token entry (contract/decimals)."""
 
-    __slots__ = ("symbol", "contract", "decimals")
+    __slots__ = ("symbol", "contract", "decimals", "canonical")
 
     def __init__(self, raw: Mapping[str, Any]):
         self.symbol: str = raw["symbol"].upper()
         self.contract: Optional[str] = raw.get("contract") or None
         self.decimals: int = _to_int(raw["decimals"])
+        self.canonical: str | None = raw.get("canonical")
 
     # Helpful for debug / logging ------------------------------------------------
     def __repr__(self) -> str:  # pragma: no cover
@@ -84,13 +85,53 @@ class NetworkCfg:
         self.min_confirmations: int = _to_int(raw.get("min_confirmations", 0))
         self.existence_check: bool = bool(raw.get("existence_check", True))
 
-        # Pre‑index tokens by symbol for O(1) lookup later.
-        self._deposit_tokens: Dict[str, TokenCfg] = {
-            t["symbol"].upper(): TokenCfg(t) for t in raw.get("deposit_tokens", [])
-        }
-        self._withdrawal_tokens: Dict[str, TokenCfg] = {
-            t["symbol"].upper(): TokenCfg(t) for t in raw.get("withdrawal_tokens", [])
-        }
+        # Нова логіка: raw.get("deposit_tokens") повертає список рядків (символів).
+        # Для кожного символу беремо контракт і decimals з AssetRegistry, а також
+        # вираховуємо canonical тільки для TETHER/USDT і USD-COIN/USDC.
+        from app.config.asset_registry import AssetRegistry
+
+        self._deposit_tokens: Dict[str, TokenCfg] = {}
+        for sym in raw.get("deposit_tokens", []):
+            symbol = sym.upper()
+            # Шукаємо контракт/десятковість у AssetRegistry
+            contract = AssetRegistry.get_contract(symbol, self.code)
+            decimals = AssetRegistry.get_decimals(symbol, self.code)
+            # Визначаємо canonical: TETHER → USDT, USD-COIN → USDC, інакше None
+            if symbol == "TETHER":
+                canonical = "USDT"
+            elif symbol == "USD-COIN":
+                canonical = "USDC"
+            else:
+                canonical = None
+
+            cfg_raw = {
+                "symbol": symbol,
+                "contract": contract,
+                "decimals": decimals,
+                "canonical": canonical,
+            }
+            self._deposit_tokens[symbol] = TokenCfg(cfg_raw)
+
+        self._withdrawal_tokens: Dict[str, TokenCfg] = {}
+        for sym in raw.get("withdrawal_tokens", []):
+            symbol = sym.upper()
+            contract = AssetRegistry.get_contract(symbol, self.code)
+            decimals = AssetRegistry.get_decimals(symbol, self.code)
+            if symbol == "TETHER":
+                canonical = "USDT"
+            elif symbol == "USD-COIN":
+                canonical = "USDC"
+            else:
+                canonical = None
+            cfg_raw = {
+                "symbol": symbol,
+                "contract": contract,
+                "decimals": decimals,
+                "canonical": canonical,
+            }
+            self._withdrawal_tokens[symbol] = TokenCfg(cfg_raw)
+            
+    
 
     # ---------------------------------------------------------------------
     # Public helpers

@@ -18,27 +18,13 @@ from app.services.risk_guard import ensure_reserve_and_limits
 from app.services.rate_cache import rate_cache
 from app.services.fairness_service import FairnessService
 from app.schemas.case import CaseOpenResponse, PrizeItem, CaseOpenRequest
+from app.config.settings import settings
 
 ZERO = Decimal("0")
 STEP = Decimal("0.02")
 MAX_BONUS = Decimal("0.20")
 async def spin(user_id:int, data_for_spin: CaseOpenRequest) -> CaseOpenResponse:
-    # 1. Precheck reserve happens inside risk_guard later
-    
-    # 2. Commit→reveal
-    # ss = await ServerSeed.get_motor_collection().find_one_and_update(
-    #     {
-    #         "_id":PydanticObjectId(server_seed_id),
-    #         "used": False,
-    #         "awner_id": user_id
-    #     },
-    #     {"$set":{"used": True}},
-    #     return_document=ReturnDocument.AFTER
-    # )
-    # if not ss:
-    #     raise HTTPException(503, "no_server_seed")
-    # ss.used = True
-    # await ss.save()
+
     seed_doc = await FairnessService.reveal_and_verify(
         commit_id=PydanticObjectId(data_for_spin.server_seed_id),
         user_id=user_id)
@@ -78,6 +64,7 @@ async def spin(user_id:int, data_for_spin: CaseOpenRequest) -> CaseOpenResponse:
     cum_r = list(accumulate(sub_probs))
     idx_r = next(i for i,p in enumerate(cum_r) if sub_roll < p)
     reward: RewardItem = tier.rewards[idx_r]
+    reward.network = None if reward.coin_id in settings.GLOBAL_USD_WALLET_ALIAS else reward.network
 
     prize_amount = Decimal(reward.amount)
     rate = await rate_cache.get_rate(reward.coin_id)

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from app.api.deps import get_network_registry, get_current_user
+from app.api.deps import get_network_registry, require_role
 from app.config.network_registry import NetworkRegistry, UnknownNetworkError, UnsupportedTokenError
 from app.services.deposit_service import DepositService
 from app.schemas.deposit import(
@@ -48,7 +48,7 @@ def list_tokens(
 @router.post("/address", response_model=GenerateAddressResponse)
 async def generate_address(
     req: GenerateAddressRequest,
-    user=Depends(get_current_user),
+    user=Depends(require_role("user")),
     service: DepositService = Depends()
 ):
     """Generate or retrieve a deposit address for the user"""
@@ -73,7 +73,7 @@ async def generate_address(
 
 @router.get("/history", response_model=DepositHistoryResponse)
 async def get_history(
-    user=Depends(get_current_user),
+    user=Depends(require_role("user")),
     service: DepositService = Depends()
 ):
     """Get deposit history for the current user"""

@@ -1,6 +1,5 @@
 import random
 import json
-import random
 
 from decimal import Decimal
 from typing import Dict, Mapping, Any
@@ -10,7 +9,7 @@ from datetime import datetime, timezone
 from fastapi import HTTPException,  status
 
 from app.db.models.user import User
-from app.services.wallet_service import has_sufficient_balance, WalletService
+from app.services.wallet_service import  WalletService
 from app.db.models.case_log import CaseLog
 from app.services.odds_service import export_odds
 from app.config.settings import settings

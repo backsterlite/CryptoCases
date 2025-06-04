@@ -10,7 +10,7 @@ else:
     BASE_DIR = Path(__file__).resolve().parents[4]
 
 class Settings(BaseSettings):
-    mongo_uri: str = "mongodb://mongo:27017"
+    mongo_uri: str = "mongodb://mongo:27017/?replicaSet=rs0"
     mongo_db_name: str = "cryptocases"
     bot_token: str = ""
     jwt_secret: str = "supersecret"
@@ -18,26 +18,28 @@ class Settings(BaseSettings):
     COINGECKO_API: str = ""
     COINGECKO_BASE_URL: str = ""
     coin_registry_path: Path = BASE_DIR / "data" / "coin_registry.json"
-    network_registry_path: Path = BASE_DIR / "data" / "network_registry.json"
+    network_registry_path: Path = BASE_DIR / "data" / "chain_registry.json"
+    asset_registry_path: Path = BASE_DIR / "data" / "asset_registry.json"
     project_root_path: Path = BASE_DIR
-    BASE_TOKENS: List[str] = ["TETHER", "USD-COIN"]
+    BASE_TOKENS: List[str] = ["tether", "usdc"]
+    GLOBAL_USD_WALLET_ALIAS: List[str] = ["tether", "usdt", "usdc", "usd-coin"]
     local_odds_dir: Path = BASE_DIR / "data" / "odds"
     
     #REDIS
     REDIS_URL: str = Field(
-        ...,
+        default="redis://redis:6379/1",
         description="URL for Redis (refresh tokens storage)"
     )
     REDIS_PASS: str = Field(
-        default="",
+        default="123456789",
         description="Password for Redis"
     )
     
      # HD wallet XPUB-ключі для кожної монети+мережі
-    XPUB_USDT_ERC20: str = Field(..., description="XPUB для USDT ERC20")
-    XPUB_USDT_TRC20: str = Field(..., description="XPUB для USDT TRC20")
-    XPUB_USDC_ERC20: str = Field(..., description="XPUB для USDC ERC20")
-    XPUB_TON_TONCENTER: str = Field(..., description="XPUB для TON")
+    XPUB_USDT_ERC20: str = Field(default="", description="XPUB для USDT ERC20")
+    XPUB_USDT_TRC20: str = Field(default="", description="XPUB для USDT TRC20")
+    XPUB_USDC_ERC20: str = Field(default="", description="XPUB для USDC ERC20")
+    XPUB_TON_TONCENTER: str = Field(default="", description="XPUB для TON")
     
     HD_XPRV: str = ""
 
