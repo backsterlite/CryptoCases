@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   fetchCaseDetail,
   precheckCase,
@@ -7,13 +7,13 @@ import {
   openCaseDetail,
   revealCaseDetail,
   deleteServerSeed,
-  resetCaseDetail
+  resetCaseDetail,
 } from './caseDetailSlice';
 import { fetchBalance } from '../balance/balanceSlice';
 
-export function useCaseDetail(caseId) {
-  const dispatch = useDispatch();
-  const state = useSelector(s => s.caseDetail);
+export const useCaseDetail = (caseId: string) => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((s) => s.caseDetail);
   const {
     detail,
     clientSeed,
@@ -22,28 +22,27 @@ export function useCaseDetail(caseId) {
     precheckStatus,
     commitStatus,
     openStatus,
-    revealStatus
+    revealStatus,
   } = state;
 
-  useEffect( () => {
-    dispatch(resetCaseDetail())
+  useEffect(() => {
+    dispatch(resetCaseDetail());
     dispatch(fetchCaseDetail(caseId));
   }, [dispatch, caseId]);
 
-
   useEffect(() => {
-    if(commitData === null) {
+    if (commitData === null) {
       const prepareSpin = async () => {
-      const pre = await dispatch(precheckCase(caseId)).unwrap();
-      if (!pre.spin) return alert(`Blocked: ${pre.reason}`);
+        const pre = await dispatch(precheckCase(caseId)).unwrap();
+        if (!pre.spin) return alert(`Blocked: ${pre.reason}`);
 
-      await dispatch(commitCase()).unwrap();
+        await dispatch(commitCase()).unwrap();
 
-      dispatch(fetchCaseDetail(caseId));
+        dispatch(fetchCaseDetail(caseId));
+      };
+      prepareSpin();
     }
-    prepareSpin()
-    }
-  }, [dispatch, caseId, commitData])
+  }, [dispatch, caseId, commitData]);
 
   const handlePlay = async () => {
     const open = await dispatch(
@@ -51,10 +50,10 @@ export function useCaseDetail(caseId) {
         caseId,
         clientSeed,
         nonce: detail.nonce + 1,
-        serverSeedId: commitData?.server_seed_id
+        serverSeedId: commitData?.server_seed_id,
       })
     ).unwrap();
-    dispatch(fetchBalance())
+    dispatch(fetchBalance());
     // await dispatch(revealCaseDetail(open.spin_log_id)).unwrap();
   };
 
@@ -77,6 +76,8 @@ export function useCaseDetail(caseId) {
     revealStatus,
     handlePlay,
     handleVerify,
-    handleReset
+    handleReset,
   };
-}
+};
+
+export default useCaseDetail;
