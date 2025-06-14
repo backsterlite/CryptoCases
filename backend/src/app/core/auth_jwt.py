@@ -9,12 +9,13 @@ from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordBearer
 
 
-from app.config.settings import settings
+from app.config.settings import Settings
 from app.services.user_service import UserService
 from app.db.models.user import User
 from app.core.redis_client import get_redis
+from app.api.deps import get_settings
 
-SECRET_KEY = settings.jwt_secret
+SECRET_KEY = get_settings().jwt_secret
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 15  # 12 годин
 REFRESH_TOKEN_EXPIRE_DAYS = 30
@@ -51,7 +52,7 @@ async def create_refresh_token(user_id: str) -> str:
 
 def verify_access_token(token: str) -> dict[str, Any]:
     try:
-        payload = jwt.decode(token, settings.jwt_secret, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload
     except JWTError as e:
         raise ValueError("Invalid access token") from e

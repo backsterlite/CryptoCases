@@ -52,7 +52,7 @@ START_CASES = [
                                 "decimal_places": [],
                                 "networks": []
                             },
-                            "network": "DOGECOIN",
+                            "network": "native",
                             "amount": 1
                         },
                         "sub_chance": 0.167
@@ -84,7 +84,7 @@ START_CASES = [
                             "coin": {
                                 "id": "the-open-network",
                                 "symbol": "ton",
-                                "name": "The Open Network",
+                                "name": "Toncoin",
                                 "decimal_places": [
                                     {"network": "TON", "decimals": 9}
                                 ],
@@ -104,7 +104,7 @@ START_CASES = [
                                 "decimal_places": [],
                                 "networks": []
                             },
-                            "network": "ZILLIQA",
+                            "network": "BEP20",
                             "amount": 1
                         },
                         "sub_chance": 0.167
@@ -122,11 +122,11 @@ START_CASES = [
                                 "symbol": "matic",
                                 "name": "Polygon",
                                 "decimal_places": [
-                                    {"network": "MATIC", "decimals": 18}
+                                    {"network": "native", "decimals": 18}
                                 ],
-                                "networks": ["MATIC"]
+                                "networks": ["native"]
                             },
-                            "network": "MATIC",
+                            "network": "native",
                             "amount": 1
                         },
                         "sub_chance": 0.25
@@ -138,11 +138,11 @@ START_CASES = [
                                 "symbol": "algo",
                                 "name": "Algorand",
                                 "decimal_places": [
-                                    {"network": "ALGO", "decimals": 6}
+                                    {"network": "native", "decimals": 6}
                                 ],
-                                "networks": ["ALGO"]
+                                "networks": ["native"]
                             },
-                            "network": "ALGO",
+                            "network": "native",
                             "amount": 1
                         },
                         "sub_chance": 0.25
@@ -168,11 +168,11 @@ START_CASES = [
                                 "symbol": "one",
                                 "name": "Harmony",
                                 "decimal_places": [
-                                    {"network": "ONE", "decimals": 18}
+                                    {"network": "native", "decimals": 18}
                                 ],
-                                "networks": ["ONE"]
+                                "networks": ["native"]
                             },
-                            "network": "ONE",
+                            "network": "native",
                             "amount": 1
                         },
                         "sub_chance": 0.25
@@ -206,11 +206,11 @@ START_CASES = [
                                 "symbol": "near",
                                 "name": "NEAR Protocol",
                                 "decimal_places": [
-                                    {"network": "NEAR", "decimals": 24}
+                                    {"network": "ERC20", "decimals": 24}
                                 ],
-                                "networks": ["NEAR"]
+                                "networks": ["ERC20"]
                             },
-                            "network": "NEAR",
+                            "network": "ERC20",
                             "amount": 1
                         },
                         "sub_chance": 0.33
@@ -260,11 +260,11 @@ START_CASES = [
                                 "symbol": "inj",
                                 "name": "Injective Protocol",
                                 "decimal_places": [
-                                    {"network": "INJ", "decimals": 18}
+                                    {"network": "ERC20", "decimals": 18}
                                 ],
-                                "networks": ["INJ"]
+                                "networks": ["ERC20"]
                             },
-                            "network": "INJ",
+                            "network": "ERC20",
                             "amount": 3.53
                         },
                         "sub_chance": 0.16
@@ -276,11 +276,11 @@ START_CASES = [
                                 "symbol": "mask",
                                 "name": "Mask Network",
                                 "decimal_places": [
-                                    {"network": "MASK", "decimals": 18}
+                                    {"network": "POLYGON", "decimals": 18}
                                 ],
-                                "networks": ["MASK"]
+                                "networks": ["POLYGON"]
                             },
-                            "network": "MASK",
+                            "network": "POLYGON",
                             "amount": 23
                         },
                         "sub_chance": 0.42
@@ -332,12 +332,12 @@ START_CASES = [
                             "id": "cardano",
                             "symbol": "ada",
                             "name": "Cardano",
-                            "networks": ["CARDANO"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"CARDANO","decimals":6}
+                                {"network":"native","decimals":6}
                             ]
                         },
-                        "network": "CARDANO",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.20
@@ -348,12 +348,12 @@ START_CASES = [
                             "id": "tron",
                             "symbol": "trx",
                             "name": "TRON",
-                            "networks": ["TRON"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"TRON","decimals":6}
+                                {"network":"native","decimals":6}
                             ]
                         },
-                        "network": "TRON",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.20
@@ -364,12 +364,12 @@ START_CASES = [
                             "id": "stellar",
                             "symbol": "xlm",
                             "name": "Stellar",
-                            "networks": ["STELLAR"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"STELLAR","decimals":7}
+                                {"network":"native","decimals":7}
                             ]
                         },
-                        "network": "STELLAR",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.20
@@ -380,12 +380,12 @@ START_CASES = [
                             "id": "vechain",
                             "symbol": "vet",
                             "name": "VeChain",
-                            "networks": ["VECHAIN"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"VECHAIN","decimals":0}
+                                {"network":"native","decimals":18}
                             ]
                         },
-                        "network": "VECHAIN",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.20
@@ -402,12 +402,12 @@ START_CASES = [
                             "id": "ripple",
                             "symbol": "xrp",
                             "name": "XRP",
-                            "networks": ["XRP"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"XRP","decimals":6}
+                                {"network":"native","decimals":6}
                             ]
                         },
-                        "network": "XRP",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.25
@@ -497,12 +497,12 @@ START_CASES = [
                             "id": "avalanche-2",
                             "symbol": "avax",
                             "name": "Avalanche",
-                            "networks": ["AVALANCHE"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"AVALANCHE","decimals":18}
+                                {"network":"native","decimals":18}
                             ]
                         },
-                        "network": "AVALANCHE",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.33
@@ -513,12 +513,12 @@ START_CASES = [
                             "id": "hyperliquid",
                             "symbol": "hype",
                             "name": "Hyperliquid",
-                            "networks": ["HYPERLIQUID"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"HYPERLIQUID","decimals":18}
+                                {"network":"native","decimals":18}
                             ]
                         },
-                        "network": "HYPERLIQUID",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.33
@@ -535,12 +535,12 @@ START_CASES = [
                             "id": "litecoin",
                             "symbol": "ltc",
                             "name": "Litecoin",
-                            "networks": ["LTC"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"LTC","decimals":8}
+                                {"network":"native","decimals":8}
                             ]
                         },
-                        "network": "LTC",
+                        "network": "native",
                         "amount":  0.738163
                     },
                     "sub_chance": 0.65
@@ -609,12 +609,12 @@ START_CASES = [
                             "id": "ripple",
                             "symbol": "xrp",
                             "name": "XRP",
-                            "networks": ["XRP"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"XRP","decimals":6}
+                                {"network":"native","decimals":6}
                             ]
                         },
-                        "network": "XRP",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.20
@@ -657,12 +657,12 @@ START_CASES = [
                             "id": "polkadot",
                             "symbol": "dot",
                             "name": "Polkadot",
-                            "networks": ["DOT"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"DOT","decimals":10}
+                                {"network":"native","decimals":10}
                             ]
                         },
-                        "network": "DOT",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.20
@@ -679,12 +679,12 @@ START_CASES = [
                             "id": "injective-protocol",
                             "symbol": "inj",
                             "name": "Injective Protocol",
-                            "networks": ["INJ"],
+                            "networks": ["ERC20"],
                             "decimal_places": [
-                                {"network":"INJ","decimals":18}
+                                {"network":"ERC20","decimals":18}
                             ]
                         },
-                        "network": "INJ",
+                        "network": "ERC20",
                         "amount": 1
                     },
                     "sub_chance": 0.3333
@@ -758,12 +758,12 @@ START_CASES = [
                             "id": "litecoin",
                             "symbol": "ltc",
                             "name": "Litecoin",
-                            "networks": ["LTC"],
+                            "networks": ["native"],
                             "decimal_places": [
-                                {"network":"LTC","decimals":8}
+                                {"network":"native","decimals":8}
                             ]
                         },
-                        "network": "LTC",
+                        "network": "native",
                         "amount": 1
                     },
                     "sub_chance": 0.5
@@ -798,10 +798,10 @@ START_CASES = [
                             "name": "Ethereum",
                             "networks": ["ERC20"],
                             "decimal_places": [
-                                {"network":"ERC20","decimals":18}
+                                {"network":"native","decimals":18}
                             ]
                         },
-                        "network": "ERC20",
+                        "network": "native",
                         "amount": 0.07752
                     },
                     "sub_chance": 0.35

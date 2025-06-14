@@ -10,3 +10,6 @@ def to_symbol(value: str) -> str:
     """Завжди повертає canonical symbol у UPPER-CASE (для реєстрів)."""
     meta = CoinRegistry.get(value)
     return meta.symbol.upper() if meta else value.upper()
+
+def to_asset_key(value: str) -> str:
+    return CoinRegistry.get_asset_key(value)

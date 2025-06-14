@@ -11,8 +11,12 @@ from app.api.deps import get_network_registry, get_external_wallet_service
 from app.config.network_registry import NetworkRegistry, UnknownNetworkError, UnsupportedTokenError
 from app.db.models.external_wallet import ExternalWallet
 from app.db.models.deposit_log import DepositLog
+from app.schemas.deposit import GenerateAddressResponse
 from app.services.internal_balance_service import InternalBalanceService
 from app.services.external_wallet_service import ExternalWalletService
+from app.services.rate_cache import rate_cache
+from app.models.coin import Coin, CoinAmount
+from app.utils import coin_keys
 
 class DepositService:
     """
@@ -53,7 +57,8 @@ class DepositService:
 
         # 2) find external wallet by address and network
         wallet: Optional[ExternalWallet] = await ExternalWallet.find_one(
-            (ExternalWallet.address == address) & (ExternalWallet.network == network)
+            ExternalWallet.address == address,
+            ExternalWallet.network == network
         )
         if not wallet:
             raise HTTPException(
@@ -102,12 +107,12 @@ class DepositService:
         user_id: int,
         network: str,
         token: str,
-        wallet_type: str = "onchain"
-    ) -> Dict:
+        wallet_type: str = "deposit"
+    ) -> GenerateAddressResponse:
         # 1) Валідація мережі й токена
         try:
-            token_cfg = self.registry.token_cfg(network, token, "deposit")
-            net_cfg = self.registry.get_network(network)
+            _ = self.registry.token_cfg(network, token, "deposit")
+            _ = self.registry.get_network(network)
         except UnknownNetworkError:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail=f"Network {network} not supported")
@@ -115,25 +120,44 @@ class DepositService:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                                 detail=f"Token {token} not depositable on {network}")
 
+        external_wallet_info = {
+            "user_id": user_id,
+            "coin": token,
+            "network": network,
+            "wallet_type": "deposit"
+        }
+        
+        
         # 2) Генерація адреси через ExternalWalletService
-        source = "telegram" if wallet_type == "telegram" else "manual"
-        wallet = await self.external_wallet_service.create_external_wallet(
-            user_id=str(user_id),
-            coin=token,
-            network=network,
-            source=source
-        )
-
+        wallet_exists = await self.external_wallet_service.wallet_exists(**external_wallet_info)
+        wallet: ExternalWallet | None
+        if not wallet_exists:
+            wallet = await self.external_wallet_service.create_wallet(
+                **external_wallet_info
+            )
+        else:
+            wallet = await self.external_wallet_service.get_wallet(**external_wallet_info)
+        
+        assert wallet is ExternalWallet
         # 3) Генерація QR-коду
         qr_img = qrcode.make(wallet.address)
         buf = BytesIO()
         qr_img.save(buf, format="PNG")
         qr_b64 = base64.b64encode(buf.getvalue()).decode()
         qr_code_url = f"data:image/png;base64,{qr_b64}"
-
-        return {
-            "external_wallet_id": str(wallet.id),
-            "address": wallet.address,
-            "qr_code_url": qr_code_url
-        }
-
+        
+        # calculate minimum amount
+        token_id = coin_keys.to_id(token)
+        token_rate = await rate_cache.get_rate(coin_id=token_id)
+        minimum_amount = CoinAmount.amount_from_usd(
+            coin_id=token_id,
+            network=network,
+            value_in_usd=Decimal("5.00"),
+            rate=token_rate
+        )
+        return GenerateAddressResponse (
+            external_wallet_id=str(wallet.id),
+            address=wallet.address,
+            qr_code_url=qr_code_url,
+            min_amount=minimum_amount
+        )

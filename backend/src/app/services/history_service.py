@@ -1,9 +1,8 @@
 # src/app/services/history_service.py
 
-from typing import List
+from typing import List, Dict, Optional
 from bson import ObjectId
 from beanie import PydanticObjectId
-from pymongo import DESCENDING
 
 from app.db.models.player import SpinLog
 from app.db.models.deposit_log import DepositLog
@@ -13,7 +12,9 @@ from app.schemas.history import (
     DepositHistoryItem,
     WithdrawalHistoryItem,
 )
-
+from app.schemas.admin.history.deposit import DepositHistoryEntry
+from app.schemas.admin.history.spin import SpinLogEntry
+from app.schemas.admin.history.withdrawal import WithdrawalHistoryEntry
 class HistoryService:
     @staticmethod
     async def get_spins(user_id: str, limit: int = 20, offset: int = 0) -> List[SpinHistoryItem]:
@@ -25,7 +26,7 @@ class HistoryService:
         # сортуємо за спаданням created_at
         query = SpinLog.find(
             {"user_id": user_id}
-        ).sort([("created_at", DESCENDING)]).skip(offset*limit).limit(limit) # type: ignore
+        ).sort("-created_at").skip(offset*limit).limit(limit) # type: ignore
 
         docs = await query.to_list()
         result: List[SpinHistoryItem] = []
@@ -51,7 +52,7 @@ class HistoryService:
         # Передбачається, що DepositLog зберігає user_id при створенні
         query = DepositLog.find(
             {"user_id": user_id}
-        ).sort([("created_at", DESCENDING)]).skip(offset*limit).limit(limit) # type: ignore
+        ).sort("-created_at").skip(offset*limit).limit(limit) # type: ignore
 
         docs = await query.to_list()
         result: List[DepositHistoryItem] = []
@@ -79,7 +80,7 @@ class HistoryService:
         """
         query = WithdrawalLog.find(
             {"user_id": user_id}
-        ).sort([("created_at", DESCENDING)]).skip(offset*limit).limit(limit) # type: ignore
+        ).sort("-created_at").skip(offset*limit).limit(limit) # type: ignore
 
         docs = await query.to_list()
         result: List[WithdrawalHistoryItem] = []
@@ -95,4 +96,143 @@ class HistoryService:
                 created_at=doc.created_at,
             )
             result.append(item)
+        return result
+    
+    @staticmethod
+    async def get_spins_admin(
+        limit: int = 20,
+        offset: int = 0,
+        user_id: Optional[str] = None,
+    ) -> List[SpinLogEntry]:
+        """
+        Return full spin logs for admin, including all fields, optionally filtered by user_id.
+        """
+        filters: Dict[str, str] = {}
+        if user_id:
+            filters["user_id"] = user_id
+
+        query = (
+            SpinLog.find(filters)
+            .sort("-created_at")
+            .skip(offset * limit)
+            .limit(limit)
+        )  # type: ignore
+        docs = await query.to_list()
+
+        result: List[SpinLogEntry] = []
+        for doc in docs:
+            entry = SpinLogEntry(
+                id=str(doc.id),
+                user_id=doc.user_id,
+                case_id=doc.case_id,
+                server_seed_id=doc.server_seed_id,
+                server_seed_hash=doc.server_seed_hash,
+                server_seed_seed=doc.server_seed_seed,
+                client_seed=doc.client_seed,
+                nonce=doc.nonce,
+                hmac_value=doc.hmac_value,
+                raw_roll=doc.raw_roll,
+                table_id=doc.table_id,
+                odds_version=doc.odds_version,
+                case_tier=doc.case_tier,
+                prize_id=doc.prize_id,
+                stake=doc.stake,
+                payout=doc.payout,
+                payout_usd=doc.payout_usd,
+                pity_before=doc.pity_before,
+                pity_after=doc.pity_after,
+                rtp_session=doc.rtp_session,
+                created_at=doc.created_at,
+            )
+            result.append(entry)
+
+        return result
+
+    @staticmethod
+    async def get_deposits_admin(
+        limit: int = 20,
+        offset: int = 0,
+        user_id: Optional[str] = None,
+    ) -> List[DepositHistoryEntry]:
+        """
+        Return full deposit logs for admin, including status_history, optionally filtered by user_id.
+        """
+        filters: Dict[str, str] = {}
+        if user_id:
+            filters["user_id"] = user_id
+
+        query = (
+            DepositLog.find(filters)
+            .sort("-created_at")
+            .skip(offset * limit)
+            .limit(limit)
+        )  # type: ignore
+        docs = await query.to_list()
+
+        result: List[DepositHistoryEntry] = []
+        for doc in docs:
+            entry = DepositHistoryEntry(
+                id=str(doc.id),
+                user_id=doc.user_id,
+                external_wallet_id=doc.external_wallet_id,
+                tx_hash=doc.tx_hash,
+                coin=doc.coin,
+                amount=doc.amount,
+                from_address=doc.from_address,
+                block_number=doc.block_number,
+                timestamp=doc.timestamp,
+                confirmations=doc.confirmations,
+                status=doc.status,
+                created_at=doc.created_at,
+                updated_at=doc.updated_at,
+                status_history=doc.status_history or [],
+            )
+            result.append(entry)
+
+        return result
+
+    @staticmethod
+    async def get_withdrawals_admin(
+        limit: int = 20,
+        offset: int = 0,
+        user_id: Optional[str] = None,
+    ) -> List[WithdrawalHistoryEntry]:
+        """
+        Return full withdrawal logs for admin, including status_history, optionally filtered by user_id.
+        """
+        filters: Dict[str, str] = {}
+        if user_id:
+            filters["user_id"] = user_id
+
+        query = (
+            WithdrawalLog.find(filters)
+            .sort("-created_at")
+            .skip(offset * limit)
+            .limit(limit)
+        )  # type: ignore
+        docs = await query.to_list()
+
+        result: List[WithdrawalHistoryEntry] = []
+        for doc in docs:
+            entry = WithdrawalHistoryEntry(
+                id=str(doc.id),
+                user_id=doc.user_id,
+                external_wallet_id=doc.external_wallet_id,
+                network=doc.network,
+                to_address=doc.to_address,
+                amount_coin=doc.amount_coin,
+                amount_usdt=doc.amount_usdt,
+                conversion_rate=doc.conversion_rate,
+                fee_coin=doc.fee_coin,
+                fee_usdt=doc.fee_usdt,
+                tx_hash=doc.tx_hash,
+                block_number=doc.block_number,
+                confirmations=doc.confirmations,
+                status=doc.status,
+                created_at=doc.created_at,
+                updated_at=doc.updated_at,
+                status_history=doc.status_history or [],
+            )
+            result.append(entry)
+
         return result

@@ -6,6 +6,7 @@ from fastapi import HTTPException, status
 
 from app.config.coin_registry import CoinRegistry
 from app.config.asset_registry import AssetRegistry
+from app.db.transaction import TransactionManager
 from app.services.rate_cache import rate_cache
 from app.services.internal_balance_service import InternalBalanceService
 from app.models.coin import Coin, CoinAmount
@@ -33,6 +34,7 @@ class ExchangeService:
         Verify that `token_symbol` corresponds to a known coin in CoinRegistry.
         Raises HTTPException if coin is not found.
         """
+        print("TOKEN SYMBOL:", token_symbol)
         if CoinRegistry.get(token_symbol) is None:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -48,6 +50,7 @@ class ExchangeService:
         Raises HTTPException on invalid combination.
         """
         from app.config.settings import settings
+        print("TOKEN SYMBOL:", token_symbol, "network", network)
         # If no network, token must be USDT or USDC (internal balances are network-agnostic)
         if network is None:
             if coin_keys.to_id(token_symbol) not in settings.GLOBAL_USD_WALLET_ALIAS:
@@ -61,10 +64,10 @@ class ExchangeService:
             return
 
         # If network is specified, token must exist on that chain
-        contract = AssetRegistry.get_contract(
-            coin_id=coin_keys.to_symbol(token_symbol),
+        allow = AssetRegistry.is_supported(
+            coin_id=coin_keys.to_asset_key(token_symbol),
             chain=network)
-        if contract is None:
+        if not allow:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Token {token_symbol} is not supported on network {network}"
@@ -255,7 +258,8 @@ class ExchangeService:
 
         # 4) Perform balance updates (atomicity depends on DB capabilities)
         # Deduct from “from_token”
-        async with InternalBalanceService.start_transaction() as session:
+        tx = TransactionManager()
+        async with tx() as session:
             
             await InternalBalanceService.adjust_balance(
                 user_id=user_id,

@@ -11,8 +11,9 @@ from app.services.case_service import CaseService
 from app.services.internal_balance_service import InternalBalanceService
 from app.db.models.player import ServerSeed, CapPool
 from app.db.models.case_config import CaseConfig
+from . import API_V1
 
-router = APIRouter(prefix="/cases", tags=["Cases"])
+router = APIRouter(prefix=f"{API_V1}/cases", tags=["Cases"])
 
 
 @router.get("/precheck")

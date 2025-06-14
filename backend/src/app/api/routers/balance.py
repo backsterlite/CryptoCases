@@ -3,8 +3,10 @@ from fastapi import APIRouter, Depends
 from app.api.deps import require_role
 from app.db.models.user import User
 from app.services.internal_balance_service import InternalBalanceService
+from . import API_V1
 
-router = APIRouter(prefix="/balance", tags=["Balance"])
+
+router = APIRouter(prefix=f"{API_V1}/balance", tags=["Balance"])
 
 @router.get("/usd", response_model=str)
 async def get_usd_balance(user: User = Depends(require_role("user"))):

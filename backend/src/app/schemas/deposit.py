@@ -2,39 +2,21 @@ from typing import List, Optional
 from datetime import datetime
 from decimal import Decimal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class NetworkListResponse(BaseModel):
     networks: List[str]
 
-class TokenInfo(BaseModel):
-    symbol: str
-    decimals: int
 
-class TokenListResponse(BaseModel):
-    network: str
-    tokens: List[TokenInfo]
 
 class GenerateAddressRequest(BaseModel):
-    network: str
-    token: str
-    wallet_type: Optional[str] = "onchain"
+    network: str = Field(..., description="Network code, e.g. 'ton'")
+    token: str = Field(..., description="Token symbol, default native coin")
+    wallet_type: str = Field(..., description="'manual' or 'telegram'")
 
 class GenerateAddressResponse(BaseModel):
-    external_wallet_id: str
-    address: str
-    qr_code_url: Optional[str] = None
-
-class DepositHistoryItem(BaseModel):
-    id: str
-    network: str
-    token: str
-    address: str
-    amount: Decimal
-    status: str
-    tx_hash: Optional[str]
-    created_at: datetime
-
-class DepositHistoryResponse(BaseModel):
-    history: List[DepositHistoryItem]
+    external_wallet_id: str = Field(..., description="ID of the ExternalWallet record")
+    address: str = Field(..., description="Deposit address for user")
+    qr_code_url: Optional[str] = Field(None, description="QR code image URL for easy scanning")
+    min_amount: Decimal = Field(..., description="Minimum deposit amount required to cover deployment/gas fees")

@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import Dict
+from typing import Dict, List
 from pydantic import BaseModel, Field, field_validator, ConfigDict, RootModel
 
 from app.config.coin_registry import CoinMeta
@@ -14,17 +14,6 @@ class UserWalletsGrouped(RootModel[Dict[str, UserTokenWallet]]):
     root model: { SYMBOL: { coin, balances } }
     """
     pass
-
-class WithdrawalRequest(BaseModel):
-    token: str = Field(..., description="Token symbol, e.g. USDT")
-    network: str = Field(..., description="Network code, e.g. ERC20")
-    amount: Decimal = Field(..., description="Amount to withdraw")
-    address: str = Field(..., description="Destination address")
-
-class AdjustRequest(BaseModel):
-    symbol: str = Field(..., description="Token symbol, e.g. USDT")
-    network: str = Field(..., description="Network code, e.g. ERC20")
-    delta: str   = Field(..., description="Change amount as Decimal string (can be negative)")
 
 class WalletResponse(BaseModel):
     balances: Dict[str, str]  # network → updated amount as string
@@ -127,3 +116,32 @@ class ExchangeExecuteResponse(BaseModel):
     from_amount:     Decimal                   = Field(..., description="Amount debited of `from_token`")
     to_amount:       Decimal                   = Field(..., description="Amount credited of `to_token`")
     
+    
+class InternalWalletSchema(BaseModel):
+    coin: str = Field(..., description="Symbol of the coin, e.g. 'TON'")
+    network: str = Field(..., description="Network code, e.g. 'ton'")
+    balance: Decimal = Field(..., description="Current internal balance of this coin and network")
+
+class ExternalWalletSchema(BaseModel):
+    network: str = Field(..., description="Network code, e.g. 'ton'")
+    deposit_addresses: List[str] = Field(..., description="List of user's deposit addresses")
+    withdrawal_addresses: List[str] = Field(..., description="List of user's whitelisted withdrawal addresses")
+    
+class TokenInfo(BaseModel):
+    symbol: str
+    contract: str | None
+    decimals: int
+
+class TokenListResponse(BaseModel):
+    network: str
+    tokens: List[TokenInfo]
+    
+
+# withdrawal addresses
+
+class WithdrawalAddressRequest(BaseModel):
+    address: str
+    
+
+class WithdrawalAddressResponse(BaseModel):
+    address: str

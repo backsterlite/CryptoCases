@@ -10,9 +10,9 @@ from app.schemas.history import (
 )
 from app.services.history_service import HistoryService
 from app.api.deps import require_role
+from . import API_V1
 
-
-router = APIRouter(prefix="/history", tags=["history"])
+router = APIRouter(prefix=f"{API_V1}/history", tags=["history"])
 
 
 @router.get(
@@ -28,7 +28,7 @@ async def get_spin_history(
     """
     Returns the last `limit` spin records for the current user, sorted by time in descending order.
     """
-    user_id = current_user.id
+    user_id = current_user.user_id
     items = await HistoryService.get_spins(user_id=user_id, limit=limit)
     return SpinHistoryResponse(spins=items)
 
@@ -64,6 +64,6 @@ async def get_withdrawal_history(
     """
     Returns the last `limit` withdrawal records for the current user, sorted by time in descending order.
     """
-    user_id = current_user.id
+    user_id = current_user.user_id
     items = await HistoryService.get_withdrawals(user_id=user_id, limit=limit)
     return WithdrawalHistoryResponse(withdrawals=items)

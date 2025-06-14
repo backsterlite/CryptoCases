@@ -1,9 +1,8 @@
 from decimal import Decimal, ROUND_DOWN
 from datetime import datetime, timezone
-from typing import List, Tuple, Optional, AsyncIterator
-from contextlib import asynccontextmanager
+from typing import List, Tuple, Optional
+from motor.motor_asyncio import AsyncIOMotorClientSession
 
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorClientSession
 from beanie import PydanticObjectId
 
 from app.db.models.internal_balance import InternalBalance
@@ -15,39 +14,11 @@ from app.models.coin import CoinAmount
 from app.exceptions.balance import BalanceTooLow
 from app.utils import coin_keys
 
-COINS_FOR_PAY = ["tether", "usdc"]
 class InternalBalanceService:
     """
     Service for all internal‐balance operations.
     Can adjust balances either standalone or inside a transaction session.
     """
-    
-    _client: Optional[AsyncIOMotorClient] = None
-
-    @classmethod
-    def get_client(cls) -> AsyncIOMotorClient:
-        """
-        Return a singleton Motor client to use for both
-        ad‐hoc updates and transactions.
-        """
-        if cls._client is None:
-            cls._client = DataBase._client
-        return cls._client
-
-    @classmethod
-    @asynccontextmanager
-    async def start_transaction(cls) -> AsyncIterator[AsyncIOMotorClientSession]:
-        """
-        Async context manager that yields a MongoDB session in a transaction.
-        Usage:
-            async with InternalBalanceService.start_transaction() as session:
-                await InternalBalanceService.adjust_balance(..., session=session)
-                await InternalBalanceService.adjust_balance(..., session=session)
-        """
-        client = cls.get_client()
-        async with await client.start_session() as session:
-            async with session.start_transaction():
-                yield session
     
     @staticmethod
     async def get_balance(user_id: int, network: str | None, coin: str) -> Decimal:
@@ -112,8 +83,8 @@ class InternalBalanceService:
                 session=session
             )
     
-    # @staticmethod
-    # async def deduct_usd_amount(user_id: str, amount_usd: Decimal) -> None:
+    @staticmethod
+    async def deduct_usd_amount(user_id: str, amount_usd: Decimal) -> None:
         """
         Deducts the specified USD amount from the user's internal balances across all coins.
         Withdraws from balances starting with the highest USD equivalent until amount_usd is covered.
@@ -215,11 +186,12 @@ class InternalBalanceService:
 
     @staticmethod
     async def try_charge_user_for_case(user_id: int, case_id: str) -> bool:
+        from app.config.settings import settings
         case = await CaseService.get_case_by_id(case_id)
         case_price = case["price_usd"]
         user_wallets = await InternalBalanceService.list_wallets(user_id)
         for wallet in user_wallets:
-            if wallet.coin in COINS_FOR_PAY \
+            if wallet.coin in settings.GLOBAL_USD_WALLET_ALIAS \
             and wallet.balance >= case_price:
                 
                 await InternalBalanceService.adjust_balance(

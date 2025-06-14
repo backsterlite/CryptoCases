@@ -18,8 +18,8 @@ class SpinHistoryItem(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
-        schema_extra = {
+        from_attributes = True
+        json_schema_extra = {
             "example": {
                 "id": "60f7c2d5ab12cd3f5e678901",
                 "case_id": "gold_case",
@@ -47,8 +47,8 @@ class DepositHistoryItem(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
-        schema_extra = {
+        from_attributes = True
+        json_schema_extra = {
             "example": {
                 "id": "60f7c2d5ab12cd3f5e678902",
                 "coin": "USDT",
@@ -77,8 +77,8 @@ class WithdrawalHistoryItem(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
-        schema_extra = {
+        from_attributes = True
+        json_schema_extra = {
             "example": {
                 "id": "60f7c2d5ab12cd3f5e678903",
                 "to_address": "0xdef456...",

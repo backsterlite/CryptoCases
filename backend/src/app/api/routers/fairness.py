@@ -9,8 +9,9 @@ from app.services.odds_service import export_odds
 from app.db.models.player import ServerSeed, SpinLog
 from app.schemas.case import CommitOut, RevealOut
 from app.api.deps import require_role
+from . import API_V1
 
-router = APIRouter(prefix="/fairness", tags=["Fairness"])
+router = APIRouter(prefix=f"{API_V1}/fairness", tags=["Fairness"])
 
 @router.get("/odds/{case_id}/{version}")
 async def get_odds(case_id: str, version: str):

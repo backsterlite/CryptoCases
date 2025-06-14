@@ -18,7 +18,13 @@ class ExternalWalletService:
         ):
         self._hd_wallet_service = hd_wallet
 
-    async def create_external_wallet(self, user_id: str, coin: str, network: str, source: str) -> ExternalWallet:
+    async def create_wallet(
+        self,
+        user_id: int,
+        coin: str,
+        network: str,
+        wallet_type: str
+        ) -> ExternalWallet:
         """
         Create new external wallet for user
         """
@@ -34,17 +40,19 @@ class ExternalWalletService:
 
             # 2) Деривація адреси
             idx = meta.current_index
-            path_template = settings.HD_DERIVATION_PATH_TEMPLATE
-            address, full_path = self._hd_wallet_service.derive_address(meta.xpub, path_template, idx, network)
-
+            address, full_path = self._hd_wallet_service.derive_address(
+                xpub=meta.xpub,
+                network=network,
+                index=idx)
+            if  not isinstance(address, str):
+                address = address.address.to_str(is_bounceable=False)
             # 3) Зберігаємо ExternalWallet з новим адресом
             wallet = ExternalWallet(
                 user_id=user_id,
                 coin=coin,
                 network=network,
                 address=address,
-                source=source,
-                vault_key_id=None,
+                wallet_type=wallet_type, # type: ignore
                 derivation_index=idx,
                 derivation_path=full_path
             )
@@ -67,7 +75,7 @@ class ExternalWalletService:
                 detail=f"Failed to create wallet: {str(e)}"
             )
 
-    async def list_external_wallets(self, user_id: str) -> List[ExternalWallet]:
+    async def list_wallets(self, user_id: str) -> List[ExternalWallet]:
         """
         Get list of user's external wallets
         """
@@ -79,7 +87,7 @@ class ExternalWalletService:
                 detail=f"Failed to list wallets: {str(e)}"
             )
 
-    async def remove_external_wallet(self, wallet_id: PydanticObjectId, user_id: str) -> None:
+    async def remove_wallet(self, wallet_id: PydanticObjectId, user_id: str) -> None:
         """
         Remove external wallet
         """
@@ -97,3 +105,33 @@ class ExternalWalletService:
                 status_code=500,
                 detail=f"Failed to remove wallet: {str(e)}"
             )
+            
+    async def get_wallet(
+        self,
+        user_id: int,
+        wallet_type: str,
+        coin: str,
+        network: str
+    ) -> ExternalWallet | None:
+        wallet = await ExternalWallet.find_one(
+            ExternalWallet.user_id==user_id,
+            ExternalWallet.wallet_type==wallet_type,
+            ExternalWallet.coin==coin,
+            ExternalWallet.network==network
+        )
+        return wallet
+            
+    async def wallet_exists(
+        self,
+        user_id: int,
+        wallet_type: str,
+        coin: str,
+        network: str
+    ) -> bool:
+        wallet = await ExternalWallet.find_one(
+            ExternalWallet.user_id==user_id,
+            ExternalWallet.wallet_type==wallet_type,
+            ExternalWallet.coin==coin,
+            ExternalWallet.network==network
+        )
+        return wallet is None

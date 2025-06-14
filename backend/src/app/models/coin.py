@@ -123,6 +123,7 @@ from typing import Dict, List, Optional, Tuple
 
 from app.config.coin_registry import CoinRegistry, CoinMeta
 from app.config.asset_registry import AssetRegistry
+from app.utils import coin_keys
 
 TARGET_SCALE = Decimal("0.000001")
 
@@ -154,15 +155,15 @@ class Coin:
     def from_meta(cls, meta: CoinMeta) -> "Coin":
         precisions: Dict[str, int] = {}
         networks: List[str] = []
-        if meta.is_native:
-            if meta.native_network:
-                networks.append(meta.native_network)
-                precisions[meta.native_network] = 18
+        asset_key = coin_keys.to_asset_key(meta.symbol)
+        if meta.is_native: 
+            networks.append("NATIVE")
+            precisions["NATIVE"] = AssetRegistry.get_decimals(asset_key, "NATIVE")
         else:
             # pull from AssetRegistry
-            for chain in AssetRegistry._assets.get(meta.symbol.upper(), {}):
+            for chain in AssetRegistry._assets.get(asset_key, {}):
                 networks.append(chain)
-                precisions[chain] = AssetRegistry.get_decimals(meta.symbol, chain)
+                precisions[chain] = AssetRegistry.get_decimals(asset_key, chain)
         return cls(
             id=meta.coingecko_id,
             symbol=meta.symbol.upper(),
@@ -238,6 +239,9 @@ class CoinAmount:
             ctx.prec = prec
             amount = value_in_usd / rate
         coin_precision = coin.get_precision(network or coin.native_network or None)
+        
         quant = Decimal("1." + ("0" * coin_precision))
-        return amount.quantize(quant, rounding=ROUND_DOWN)
+        result = amount.quantize(quant, rounding=ROUND_DOWN)
+        print(f"COIN: {coin.name} precisions: {coin_precision} result_value: {str(result)}")
+        return result
         

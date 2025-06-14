@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+API_V1 = "/api/v1"
 
 def register_routers(app: FastAPI) -> None:
     """
@@ -13,6 +14,7 @@ def register_routers(app: FastAPI) -> None:
     from app.api.routers.rates import router as rate_router
     from app.api.routers.wallet import router as wallet_router
     from app.api.routers.history import router as history_router
+    from app.api.routers.admin import history
     
     app.include_router(user_router)
     app.include_router(auth_router)
@@ -22,3 +24,10 @@ def register_routers(app: FastAPI) -> None:
     app.include_router(rate_router)
     app.include_router(wallet_router)
     app.include_router(history_router)
+    
+    #----------------------
+    # Admin routers
+    
+    app.include_router(history.router)
+    
+    #--------------------

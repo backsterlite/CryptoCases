@@ -1,4 +1,6 @@
 from functools import lru_cache
+from typing import Annotated
+
 from fastapi import Depends, HTTPException
 from app.core.auth_jwt import (
     oauth2_scheme,
@@ -7,7 +9,8 @@ from app.core.auth_jwt import (
 from app.db.models.user import User
 from app.services.user_service import UserService
 from app.config.network_registry import NetworkRegistry
-from app.config.settings import settings
+from app.config.settings import Settings
+from app.services.blockchain.factory import BlockchainClientFactory
 
 
 
@@ -28,20 +31,50 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
 
 def require_role(required_role: str):
     """
-    Dependency factory: check role field for User.
-    If mismatch — raise 403.
+    Dependency factory: ensures that current user has at least the `required_role` level.
+    Role hierarchy is defined in ROLE_PRIORITIES, where higher value => більше прав.
+    If user's role priority < required_role priority, raise 403.
     """
-    async def role_checker(user: User = Depends(get_current_user)) -> User:
-        if user.role != required_role:
+    async def role_checker(
+        user: User = Depends(get_current_user),
+        settings: Settings = Depends(get_settings)
+        ) -> User:
+        user_priority = settings.ROLE_PRIORITIES.get(user.role)
+        required_priority = settings.ROLE_PRIORITIES.get(required_role)
+
+        if user_priority is None:
+            # Невідома роль у базі – трактуємо як найнижчий рівень доступу
             raise HTTPException(
                 status_code=403,
-                detail=f"Operation requires `{required_role}` role, you have `{user.role}`"
+                detail=f"Unrecognized role `{user.role}`"
+            )
+
+        if required_priority is None:
+            # Якщо некоректно вказана required_role в коді, можна сигналізувати помилку на боці розробника
+            raise HTTPException(
+                status_code=500,
+                detail=f"Server misconfiguration: unknown required_role `{required_role}`"
+            )
+
+        if user_priority < required_priority:
+            raise HTTPException(
+                status_code=403,
+                detail=(
+                    f"Operation requires role `{required_role}` or higher; "
+                    f"you have `{user.role}`"
+                )
             )
         return user
+
     return role_checker
 
 @lru_cache
-def get_network_registry() -> NetworkRegistry:
+def get_settings():
+    settings = Settings()
+    return settings
+
+@lru_cache
+def get_network_registry(settings: Settings = Depends(get_settings)) -> NetworkRegistry:
     return NetworkRegistry(path=settings.network_registry_path)
 
 @lru_cache
@@ -50,6 +83,16 @@ def get_external_wallet_service() -> "ExternalWalletService":   # type: ignore  
     return ExternalWalletService()
 
 @lru_cache
-def get_hd_wallet_service() -> "HDWalletService":  # type: ignore # noqa: F821
+def get_deposit_service():
+    from app.services.deposit_service import DepositService
+    return DepositService()
+
+@lru_cache
+def get_hd_wallet_service(settings: Settings = Depends(get_settings)) -> "HDWalletService":  # type: ignore # noqa: F821
     from app.utils.hd_wallet import HDWalletService
-    return HDWalletService(xprv=settings.HD_XPRV)
+    return HDWalletService(xprv=settings.HD_XPRV, mnemonic="")
+
+@lru_cache
+def get_blockchain_factory() -> BlockchainClientFactory:
+    registry = get_network_registry()
+    return BlockchainClientFactory(registry)

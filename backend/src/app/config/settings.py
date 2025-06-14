@@ -1,71 +1,71 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field
 from pathlib import Path
 from typing import List, Dict, Any
-from pydantic import Field
 import os
 
+# Визначаємо корінь проекту
 if "/app" in str(Path.cwd()):
     BASE_DIR = Path(__file__).resolve().parents[3]
 else:
     BASE_DIR = Path(__file__).resolve().parents[4]
 
 class Settings(BaseSettings):
+    # MongoDB
     mongo_uri: str = "mongodb://mongo:27017/?replicaSet=rs0"
     mongo_db_name: str = "cryptocases"
-    bot_token: str = ""
-    jwt_secret: str = "supersecret"
+
+    # Telegram Bot та JWT
+    bot_token: str = ""          # TELEGRAM BOT TOKEN (ENV: BACKEND_BOT_TOKEN)
+    jwt_secret: str = ""         # JWT SECRET (ENV: BACKEND_JWT_SECRET)
+
+    # Debug / тестовий режим
     debug: bool = False
-    COINGECKO_API: str = ""
-    COINGECKO_BASE_URL: str = ""
+    
+    
+    COINGECKO_API: str
+    COINGECKO_BASE_URL: str
+    
+    BASE_TOKENS: List[str] = ["tether", "usd-coin"]
+    GLOBAL_USD_WALLET_ALIAS: List[str] = ["tether", "usdt", "usdc", "usd-coin"]
+    ROLE_PRIORITIES: Dict[str,int] = {
+        "user": 1,
+        "worker": 2,
+        "admin": 3
+    }
+    local_odds_dir: Path = BASE_DIR / "data" / "odds"
+    
+    # Шляхи до реєстрів
     coin_registry_path: Path = BASE_DIR / "data" / "coin_registry.json"
     network_registry_path: Path = BASE_DIR / "data" / "chain_registry.json"
     asset_registry_path: Path = BASE_DIR / "data" / "asset_registry.json"
-    project_root_path: Path = BASE_DIR
-    BASE_TOKENS: List[str] = ["tether", "usdc"]
-    GLOBAL_USD_WALLET_ALIAS: List[str] = ["tether", "usdt", "usdc", "usd-coin"]
-    local_odds_dir: Path = BASE_DIR / "data" / "odds"
-    
-    #REDIS
-    REDIS_URL: str = Field(
-        default="redis://redis:6379/1",
-        description="URL for Redis (refresh tokens storage)"
-    )
-    REDIS_PASS: str = Field(
-        default="123456789",
-        description="Password for Redis"
-    )
-    
-     # HD wallet XPUB-ключі для кожної монети+мережі
-    XPUB_USDT_ERC20: str = Field(default="", description="XPUB для USDT ERC20")
-    XPUB_USDT_TRC20: str = Field(default="", description="XPUB для USDT TRC20")
-    XPUB_USDC_ERC20: str = Field(default="", description="XPUB для USDC ERC20")
-    XPUB_TON_TONCENTER: str = Field(default="", description="XPUB для TON")
-    
-    HD_XPRV: str = ""
 
-    # BIP32-шаблон шляху для похідних адрес (останній сегмент — index)
+    # Redis (refresh tokens, Celery)
+    REDIS_URL: str = "redis://localhost:6379/1"
+    REDIS_PASS: str = ""
+
+    # HD-деривація: XPUB / SECRET KEY для кожної мережі
+    TON_HD_XPUB: str = Field("", description="Master XPUB для HD-адрес у мережі TON")
+    TRON_HD_XPUB: str = Field("", description="Master XPUB для HD-адрес у мережі TRON (TRC20)")
+    POLYGON_HD_XPUB: str = Field("", description="Master XPUB для HD-адрес у мережі Polygon/Ethereum")
+    SOLANA_HD_SECRET_KEY: str = Field("", description="Full Secret Key (Base58) для HD-адрес у мережі Solana")
+
+    # Шаблони BIP32-дериваційних шляхів (останній сегмент — {index})
     HD_DERIVATION_PATH_TEMPLATE: str = Field(
-        "m/44'/{coin_index}'/0'/0/{index}", 
-        description="BIP32 шлях: заміняються {coin_index} та {index}"
+        "m/44'/{coin_index}'/0'/0/{index}"
     )
 
-    # Solana settings
-    SOLANA_MAINNET_RPC_URL: str = ""
-    SOLANA_TESTNET_RPC_URL: str = ""
-    SOLANA_DEVNET_RPC_URL: str = ""
-    SOLANA_NETWORK: str = "devnet" 
-    SOLANA_SECRET_KEY:str=""
+    # TON Center API (якщо використовується для моніторингу TON)
+    TONCENTER_API_KEY: str = Field("", description="API Key для toncenter (DEPLOY/моніторинг)")
 
-    # EVM Settings
-    ETH_RPC_URL:        str = os.getenv("ETH_RPC_URL", "https://mainnet.infura.io/v3/your-project-id")
-    ETH_CHAIN_ID:       int = int(os.getenv("ETH_CHAIN_ID", "1"))
-    ETH_GAS_LIMIT:      int = int(os.getenv("ETH_GAS_LIMIT", "21000"))
-    ETH_GAS_PRICE_GWEI: int = int(os.getenv("ETH_GAS_PRICE_GWEI", "50"))
-    EVM_PRIVATE_KEY:str = ""
+    # (Опціонально) Custodial Keys (якщо використовуєте централізований гаманець)
+    CUSTODIAL_TON_SECRET: str = Field("", description="Приватний ключ централізованого TON-гаманця (якщо є)")
+    CUSTODIAL_TRON_PRIVATE_KEY: str = Field("", description="Приватний ключ централізованого TRON-гаманця")
+    CUSTODIAL_POLYGON_PRIVATE_KEY: str = Field("", description="Приватний ключ централізованого Polygon (EVM) гаманця")
+    CUSTODIAL_SOLANA_SECRET_KEY: str = Field("", description="Secret Key централізованого Solana-гаманця")
 
-    TRON_PRIVATE_KEY:str= ""
-    # ERC20 ABI
-    ERC20_ABI : List[Dict[str, Any]] = [
+    # ABI для ERC20 (залишаємо для EVM-транзакцій)
+    ERC20_ABI: List[Dict[str, Any]] = [
         {
             "constant": True,
             "inputs": [],
@@ -91,16 +91,12 @@ class Settings(BaseSettings):
             "type": "function"
         }
     ]
+    
+    MNEMONIC: str = Field(..., description="secret mnemonic")
 
-    # Celery settings
-    CELERY_BROKER_URL: str = Field(
-        default="redis://localhost:6379/0",
-        description="URL для Celery broker (Redis)"
-    )
-    CELERY_RESULT_BACKEND: str = Field(
-        default="redis://localhost:6379/0",
-        description="URL для Celery result backend (Redis)"
-    )
+    # Celery
+    CELERY_BROKER_URL: str = "redis://localhost:6379/0"
+    CELERY_RESULT_BACKEND: str = "redis://localhost:6379/0"
 
     model_config = SettingsConfigDict(
         env_file=Path(BASE_DIR, ".env"),
@@ -110,6 +106,3 @@ class Settings(BaseSettings):
         case_sensitive=True,
         extra="ignore"
     )
-    
-
-settings = Settings()

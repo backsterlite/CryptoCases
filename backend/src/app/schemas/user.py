@@ -39,14 +39,19 @@ def parse_telegram_init(init_data: Dict[str, Any]) -> UserCreateTelegram:
 class UserResponsePublic(BaseModel):
     user_id: int
     username: str | None
+    user_firstname: str | None
+    user_lastname: str | None
+    user_username: str | None
+    user_photo_url: str | None
 
     model_config = ConfigDict( from_attributes=True)
     
 class UserResponsePrivate(BaseModel):
     id: Optional[str] = Field(alias="_id")
-    telegram_id: int
-    balance_usd: float
-    wallets: List[CoinAmount]
-    history: List[str]
+    user_id: int
+    user_firstname: str
+    user_lastname: str
+    user_username: str
+    user_photo_url: str
 
     model_config = ConfigDict( from_attributes=True)

@@ -12,8 +12,10 @@ from app.services.exchange_service import ExchangeService
 from app.api.deps import require_role
 from app.db.models.user import User
 from app.utils.user import group_wallets_by_coin
+from . import API_V1
 
-router = APIRouter(prefix="/wallet", tags=["Wallets"])
+
+router = APIRouter(prefix=f"{API_V1}/wallet", tags=["Wallets"])
 
 
 @router.get('/all', response_model=UserWalletsGrouped)

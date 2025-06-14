@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 
 from app.services.rate_cache import rate_cache
+from . import API_V1
 
-
-router = APIRouter(prefix="/rates", tags=["Rates"])
+router = APIRouter(prefix=f"{API_V1}/rates", tags=["Rates"])
 
 @router.get(path="/", response_model=dict[str,str],
     )

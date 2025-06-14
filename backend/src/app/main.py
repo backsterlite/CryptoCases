@@ -39,7 +39,7 @@ app.add_exception_handler(429, _rate_limit_exceeded_handler)
 
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=["http://localhost:5173"],      # або точний URL фронтенду, наприклад "http://localhost:5173"
+  allow_origins=["http://localhost:5173", " https://31cd-93-175-80-8.ngrok-free.app"],      # або точний URL фронтенду, наприклад "http://localhost:5173"
   allow_credentials=True,
   allow_methods=["*"],
   allow_headers=["*"],

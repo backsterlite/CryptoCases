@@ -103,6 +103,9 @@ class CoinMeta:
 
 class CoinRegistry:
     _coins: Dict[str, CoinMeta] = {}
+    _by_symbol: dict[str, CoinMeta] = {}
+    _by_alias:  dict[str, CoinMeta] = {}
+    _by_gecko:  dict[str, CoinMeta] = {}
 
     # ------------------------------------------------------------------
     # Loader
@@ -122,24 +125,37 @@ class CoinRegistry:
             )
             for cid, entry in raw.items()
         }
+        
+        cls._by_symbol.clear()
+        cls._by_alias.clear()
+        cls._by_gecko.clear()
+        
+        for meta in cls._coins.values():
+            key_symbol = meta.symbol.upper()
+            cls._by_symbol[key_symbol] = meta
+
+            for alia in meta.aliases:
+                cls._by_alias[alia] = meta
+
+            if meta.coingecko_id:
+                cls._by_gecko[meta.coingecko_id] = meta
 
     # ------------------------------------------------------------------
     # Access
     # ------------------------------------------------------------------
     @classmethod
     def get(cls, coin_id: str) -> Optional[CoinMeta]:
-        key = coin_id.upper()
-        if key in cls._coins:
-            return cls._coins[key]
-        # try aliases
-        for meta in cls._coins.values():
-            if key in meta.aliases:
-                return meta
-        # try coingecko_id
-        for key, value in cls._coins.items():
-            if key == value.coingecko_id:
-                return value
-        return None
+        key_upper = coin_id.upper()
+        coin_lower = coin_id.lower()
+        return (
+            cls._by_symbol.get(key_upper)
+            or cls._by_alias.get(key_upper)
+            or cls._by_gecko.get(coin_lower)
+        )
+    
+    @classmethod
+    def get_asset_key(cls, coin_id: str):
+        return next((id_ for id_, meta in cls._coins.items() if meta == cls.get(coin_id)))
 
     @classmethod
     def list_ids(cls) -> List[str]:

@@ -25,7 +25,10 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
     return JSONResponse(status_code=exc.status_code, content=content)
     
 async def balance_to_low_exception_handler(request: Request, exc: BalanceTooLow):
+    content = {"detail": exc.message, "debug":"on" if settings.debug else "off"}
+    if settings.debug:
+        content["trace"] = traceback.format_stack()
     return JSONResponse(
         status_code=exc.status_code,
-        content={"detail": exc.message, "trace": traceback.format_stack()}
+        content=content
     )
