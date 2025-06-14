@@ -1,7 +1,7 @@
 export function initTelegramStub() {
   window.Telegram = {
     WebApp: {
-      initData: 'query_id=746dc4189c0bd518507e24f450fe052813d06688&user={"id": 123456789, "first_name": "Ivan", "last_name": "Yarmoliuk", "username": "backster", "language_code": "en"}&auth_date=1747858930&hash=f8855a0f69c572db7a59cfc3e0652c0e491b0794e8d6ee2c14dd1052f09c5006',
+      initData: 'query_id=a2aa0745dc905a45504b216e875e3aeddb67c5d5&user={"id": 123456789, "first_name": "Ivan", "last_name": "Yarmoliuk", "username": "backster", "language_code": "en"}&auth_date=1749220143&hash=74655423b2732d89f33d1a06e89cd309709dd4fde9965db3fb24dada5ba01209',
       initDataUnsafe: {
         user: { 
           id: 123456789, 

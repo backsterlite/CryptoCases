@@ -1,0 +1,126 @@
+{
+  "case_id": "case_5",
+  "version": "2025-06-06T07:20:19.948805+00:00",
+  "tiers": [
+    {
+      "name": "common",
+      "chance": "0.7",
+      "rewards": [
+        {
+          "coin_id": "shiba-inu",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.167"
+        },
+        {
+          "coin_id": "pepe",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.166"
+        },
+        {
+          "coin_id": "dogecoin",
+          "network": "native",
+          "amount": "1",
+          "sub_chance": "0.167"
+        },
+        {
+          "coin_id": "usd-coin",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.166"
+        },
+        {
+          "coin_id": "the-open-network",
+          "network": "TON",
+          "amount": "1",
+          "sub_chance": "0.167"
+        },
+        {
+          "coin_id": "zilliqa",
+          "network": "BEP20",
+          "amount": "1",
+          "sub_chance": "0.167"
+        }
+      ]
+    },
+    {
+      "name": "rare",
+      "chance": "0.2",
+      "rewards": [
+        {
+          "coin_id": "matic-network",
+          "network": "native",
+          "amount": "1",
+          "sub_chance": "0.25"
+        },
+        {
+          "coin_id": "algorand",
+          "network": "native",
+          "amount": "1",
+          "sub_chance": "0.25"
+        },
+        {
+          "coin_id": "1inch",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.25"
+        },
+        {
+          "coin_id": "harmony",
+          "network": "ONE",
+          "amount": "1",
+          "sub_chance": "0.25"
+        }
+      ]
+    },
+    {
+      "name": "epic",
+      "chance": "0.07",
+      "rewards": [
+        {
+          "coin_id": "arbitrum",
+          "network": "ARB",
+          "amount": "1",
+          "sub_chance": "0.33"
+        },
+        {
+          "coin_id": "near",
+          "network": "ERC20",
+          "amount": "1",
+          "sub_chance": "0.33"
+        },
+        {
+          "coin_id": "internet-computer",
+          "network": "ICP",
+          "amount": "1",
+          "sub_chance": "0.34"
+        }
+      ]
+    },
+    {
+      "name": "legendary",
+      "chance": "0.03",
+      "rewards": [
+        {
+          "coin_id": "the-graph",
+          "network": "ERC20",
+          "amount": "350",
+          "sub_chance": "0.42"
+        },
+        {
+          "coin_id": "injective-protocol",
+          "network": "ERC20",
+          "amount": "3.53",
+          "sub_chance": "0.16"
+        },
+        {
+          "coin_id": "mask-network",
+          "network": "POLYGON",
+          "amount": "23",
+          "sub_chance": "0.42"
+        }
+      ]
+    }
+  ]
+}

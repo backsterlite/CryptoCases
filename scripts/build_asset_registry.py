@@ -42,8 +42,12 @@ import json
 import logging
 import re
 import sys
+import yaml
+
 from pathlib import Path
 from typing import Any, Dict
+
+from utils import check_is_native_token
 
 # ---------------------------------------------------------------------------
 # paths / logging
@@ -52,6 +56,7 @@ from typing import Any, Dict
 BASE_DIR = Path(__file__).resolve().parent.parent
 RAW_DATA = BASE_DIR / "data" / "raw_coin_data.json"
 NETWORK_MAP = BASE_DIR / "data" / "network_map.json"
+ASSET_MANUAL = BASE_DIR / "data" / "asset_manual.yml"
 ASSET_REGISTRY = BASE_DIR / "data" / "asset_registry.json"
 
 logging.basicConfig(
@@ -69,6 +74,13 @@ def _slug(s: str) -> str:
 
 def _load_json(path: Path):
     return json.loads(path.read_text()) if path.exists() else {}
+
+def _load_yaml(path: Path):
+     data = yaml.safe_load(path.read_text("utf-8")) or {}
+     if not isinstance(data, dict):
+         print((" WARNING non‑EVM registry must be a mapping at top level"))
+         return None
+     return data
 
 
 def _save_json(obj: Any, path: Path):
@@ -91,6 +103,11 @@ def build(force: bool = False):
     if not net_map:
         log.error("%s not found – run build_network_map.py first", NETWORK_MAP)
         sys.exit(1)
+    
+    asset_manual = _load_yaml(ASSET_MANUAL)
+    if not asset_manual:
+        log.error("%s not found", NETWORK_MAP)
+        sys.exit(1)
 
     registry: Dict[str, Dict[str, Dict[str, Any]]] = {} if force else _load_json(ASSET_REGISTRY)
 
@@ -98,35 +115,41 @@ def build(force: bool = False):
     added = 0
 
     for coin_id, payload in raw_data.items():
-        platforms = payload.get("detail_platforms") or payload.get("platforms") or {}
-        if not platforms:
-            continue  # native coin w/o contract
         coin_entry = registry.setdefault(coin_id, {})
-        for raw_platform, detail in platforms.items():
-            key = _slug(raw_platform)
-            if key not in net_map:
-                log.warning("platform '%s' missing in network_map.json (skip)", raw_platform)
-                skipped_unknown += 1
+        platforms = payload.get("detail_platforms") or payload.get("platforms") or {}
+        
+        if check_is_native_token(payload):
+            token_payload = asset_manual.get(coin_id.lower())
+            if token_payload:
+                registry[coin_id] = token_payload
+            else:
                 continue
-            chain_code = net_map[key]["code"]
-            if chain_code == "UNKNOWN":
-                skipped_unknown += 1
-                continue
-            contract = (
-                detail.get("contract_address")
-                if isinstance(detail, dict)
-                else detail  # old 'platforms' field is addr str or empty
-            )
-            if not contract:
-                continue  # nothing to register
-            decimals = (
-                detail.get("decimal_place") if isinstance(detail, dict) else None
-            )
-            decimals = int(decimals) if decimals else 18
-            if chain_code in coin_entry and not force:
-                continue  # do not overwrite manual entry
-            coin_entry[chain_code] = {"contract": contract.lower(), "decimals": decimals}
-            added += 1
+        else:
+            for raw_platform, detail in platforms.items():
+                key = _slug(raw_platform)
+                if key not in net_map:
+                    log.warning("coin '%s' platform '%s' missing in network_map.json (skip)", coin_id, raw_platform)
+                    skipped_unknown += 1
+                    continue
+                chain_code = net_map[key]["code"]
+                if chain_code == "UNKNOWN":
+                    skipped_unknown += 1
+                    continue
+                contract = (
+                    detail.get("contract_address")
+                    if isinstance(detail, dict)
+                    else detail  # old 'platforms' field is addr str or empty
+                )
+                if not contract:
+                    continue  # nothing to register
+                decimals = (
+                    detail.get("decimal_place") if isinstance(detail, dict) else None
+                )
+                decimals = int(decimals) if decimals else 18
+                if chain_code in coin_entry and not force:
+                    continue  # do not overwrite manual entry
+                coin_entry[chain_code] = {"contract": contract.lower(), "decimals": decimals}
+                added += 1
 
     _save_json(dict(sorted(registry.items())), ASSET_REGISTRY)
     log.info("asset_registry written: %s (added %d, skipped %d)", ASSET_REGISTRY, added, skipped_unknown)

@@ -178,5 +178,9 @@
   "ZKSYNC": {
     "code": "UNKNOWN",
     "type": "UNKNOWN"
+  },
+  "INJECTIVE": {
+     "code": "INJ",
+     "type": "EVM"
   }
 }

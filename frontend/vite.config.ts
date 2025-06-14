@@ -9,16 +9,22 @@ export default defineConfig({
     tailwindcss()
   ],
   server: {
+    proxy: {
+      // Усе, що починається з /api → localhost:8000
+      "/api": {
+        target: "http://backend:8000",
+        changeOrigin: true,   // підміняє Origin → http://localhost:8000
+        secure: false,        // https → http допустимо
+        ws: false,            // true, якщо колись будуть WebSocket’и
+        // optional: прибираємо префікс, якщо бек НЕ має /api
+        // rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
     host: true,     // щоб слухати на 0.0.0.0
     port: 5173,     // твій порт фронта
     allowedHosts: [
-      "d405-93-175-80-8.ngrok-free.app",
-      "85c5-93-175-80-8.ngrok-free.app",
       "localhost:8000",
-      "d422-93-175-80-8.ngrok-free.app"
+      "31cd-93-175-80-8.ngrok-free.app",
     ]
-  },
-  define: {
-    'import.meta.env.PROD': JSON.stringify(process.env.NODE_ENV === 'production')
   },
 })

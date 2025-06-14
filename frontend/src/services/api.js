@@ -4,7 +4,7 @@ import client from "../app/api/client"
 const api = {
   auth: {
     telegram: (initData) => client.post('/auth/telegram', { init_data: initData }),
-    refresh: () => client.post('/auth/refresh'),
+    refresh: (payload) => client.post('/auth/refresh', payload),
   },
   users: {
     me: () => client.get('/users/me'),

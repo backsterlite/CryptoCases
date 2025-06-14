@@ -20,7 +20,7 @@ function Protected({ children }) {
   const { accessToken } = useSelector(state => state.auth);
   if(!accessToken) {
     console.log("NO ACCESS TOKEN")
-  }
+  } 
   return accessToken ? children : <Navigate to="/" replace />;
 }
 

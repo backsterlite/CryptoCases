@@ -235,6 +235,7 @@
       "LINK"
     ],
     "enabled": true,
+    "explorer": "https://polygonscan.com/tx/{tx_hash}",
     "min_confirmations": 12,
     "native_coin": "MATIC",
     "rpc": [
@@ -261,6 +262,7 @@
       "LINK"
     ],
     "enabled": true,
+    "explorer": "https://explorer.solana.com/tx/{tx_hash}",
     "min_confirmations": 1,
     "native_coin": "SOL",
     "rpc": [
@@ -287,6 +289,7 @@
       "NOT"
     ],
     "enabled": true,
+    "explorer": "https://tonscan.org/tx/{tx_hash}",
     "min_confirmations": 1,
     "native_coin": "ton",
     "rpc": [
@@ -307,6 +310,7 @@
       "WETH"
     ],
     "enabled": true,
+    "explorer": "https://tronscan.org/#/transaction/{tx_hash}",
     "min_confirmations": 1,
     "native_coin": "trx",
     "rpc": [

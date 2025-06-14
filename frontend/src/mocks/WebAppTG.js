@@ -1,16 +1,21 @@
 // Файл: webAppInit.js
-let WebApp;
+import WebApp from '@twa-dev/sdk';
+
+let ComputedWebApp;
 
 const initializeWebApp = async () => {
-  if (import.meta.env.PROD) {
-    const module = await import('@twa-dev/sdk');
-    WebApp = module.WebApp;
-  } else {
+  
+   if (WebApp.initData) {
+    ComputedWebApp = WebApp
+   }else {
     const { initTelegramStub } = await import('./telegramWebApp.stub');
     initTelegramStub();
-    WebApp = window.Telegram.WebApp;
-  }
-  return WebApp;
+    ComputedWebApp = window.Telegram.WebApp;
+   }
+  
+    
+  
+  return ComputedWebApp;
 };
 
 // Експортуємо проміс, який резолвиться до WebApp

@@ -4,7 +4,6 @@ import CaseCard from '../cases/components/CaseCard';
 
 export default function MainPage() {
 
- 
 
   return (
     <div className="bg-gradient-to-b from-gray-100 via-white to-gray-100 min-h-screen flex flex-col items-center p-4">

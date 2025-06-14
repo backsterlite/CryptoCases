@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../services/api';
 import { showSessionExpiredModal } from '../../common/slices/uiSlice'; // action to show modal
 import TelegramWebAppPromise from '../../mocks/WebAppTG';
-
+// import WebApp from '@twa-dev/sdk'
 const initialState = {
   accessToken: null,
   refreshToken: null,
@@ -37,8 +37,12 @@ export const loginWithTelegram = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const WebApp = await TelegramWebAppPromise;
+      console.log(WebApp)
       const initData = WebApp.initData;
+     
+      // const initData = WebApp.initData
       const res = await api.auth.telegram(initData);
+      console.log(res.data)
       return res.data;
     } catch (err) {
       return rejectWithValue(err.message);

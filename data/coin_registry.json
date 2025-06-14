@@ -13,7 +13,7 @@
       "ALGO"
     ],
     "coingecko_id": "algorand",
-    "is_native": false,
+    "is_native": true,
     "name": "Algorand",
     "native_network": null,
     "symbol": "algo",
@@ -44,7 +44,7 @@
       "AVAX"
     ],
     "coingecko_id": "avalanche-2",
-    "is_native": false,
+    "is_native": true,
     "name": "Avalanche",
     "native_network": null,
     "symbol": "avax",
@@ -55,7 +55,7 @@
       "ADA"
     ],
     "coingecko_id": "cardano",
-    "is_native": false,
+    "is_native": true,
     "name": "Cardano",
     "native_network": null,
     "symbol": "ada",
@@ -88,7 +88,7 @@
       "DOGE"
     ],
     "coingecko_id": "dogecoin",
-    "is_native": false,
+    "is_native": true,
     "name": "Dogecoin",
     "native_network": null,
     "symbol": "doge",
@@ -99,7 +99,7 @@
       "ETH"
     ],
     "coingecko_id": "ethereum",
-    "is_native": false,
+    "is_native": true,
     "name": "Ethereum",
     "native_network": null,
     "symbol": "eth",
@@ -121,7 +121,7 @@
       "ONE"
     ],
     "coingecko_id": "harmony",
-    "is_native": false,
+    "is_native": true,
     "name": "Harmony",
     "native_network": null,
     "symbol": "one",
@@ -165,7 +165,7 @@
       "LTC"
     ],
     "coingecko_id": "litecoin",
-    "is_native": false,
+    "is_native": true,
     "name": "Litecoin",
     "native_network": null,
     "symbol": "ltc",
@@ -227,7 +227,7 @@
       "DOT"
     ],
     "coingecko_id": "polkadot",
-    "is_native": false,
+    "is_native": true,
     "name": "Polkadot",
     "native_network": null,
     "symbol": "dot",
@@ -271,7 +271,7 @@
       "XLM"
     ],
     "coingecko_id": "stellar",
-    "is_native": false,
+    "is_native": true,
     "name": "Stellar",
     "native_network": null,
     "symbol": "xlm",
@@ -324,7 +324,7 @@
       "TRX"
     ],
     "coingecko_id": "tron",
-    "is_native": false,
+    "is_native": true,
     "name": "TRON",
     "native_network": null,
     "symbol": "trx",
@@ -344,7 +344,7 @@
       "VET"
     ],
     "coingecko_id": "vechain",
-    "is_native": false,
+    "is_native": true,
     "name": "VeChain",
     "native_network": "VET",
     "symbol": "vet",
@@ -353,7 +353,7 @@
   "XRP": {
     "aliases": [],
     "coingecko_id": "ripple",
-    "is_native": false,
+    "is_native": true,
     "name": "XRP",
     "native_network": null,
     "symbol": "xrp",

@@ -16,7 +16,6 @@ function App() {
 
 // On mount or token change: login or fetch user
   useEffect(() => {
-    console.log("auth", accessToken, refreshToken)
     if (!accessToken && refreshToken) {
       // спробувати оновити accessToken
       dispatch(refreshAccessToken());
@@ -31,7 +30,6 @@ function App() {
   // After successful auth, fetch balance
   useEffect(() => {
     if (accessToken && user) {
-      // console.log("fetchBalance", accessToken, status)
       dispatch(fetchBalance());
     }
   }, [dispatch, accessToken, status]);

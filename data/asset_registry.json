@@ -29,7 +29,13 @@
       "decimals": 18
     }
   },
-  "ALGORAND": {},
+  "ALGORAND": {
+    "coingecko": "algorand",
+    "decimals": 6,
+    "extra": {},
+    "symbol": "ALGO",
+    "type": "Algorand"
+  },
   "APT": {
     "APTOS": {
       "contract": "0x1::aptos_coin::aptoscoin",
@@ -50,8 +56,21 @@
       "decimals": 18
     }
   },
-  "AVALANCHE": {},
-  "CARDANO": {},
+  "AVALANCHE": {
+    "chain_id": 43114,
+    "coingecko": "avalanche-2",
+    "decimals": 18,
+    "extra": null,
+    "symbol": "AVAX",
+    "type": "EVM"
+  },
+  "CARDANO": {
+    "coingecko": "cardano",
+    "decimals": 6,
+    "extra": {},
+    "symbol": "ADA",
+    "type": "UTXO"
+  },
   "CHAINLINK": {
     "ARB": {
       "contract": "0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
@@ -152,15 +171,35 @@
       "decimals": 6
     }
   },
-  "DOGECOIN": {},
-  "ETHEREUM": {},
+  "DOGECOIN": {
+    "coingecko": "dogecoin",
+    "decimals": 8,
+    "extra": {},
+    "symbol": "DOGE",
+    "type": "UTXO"
+  },
+  "ETHEREUM": {
+    "coingecko": "ethereum",
+    "decimals": 18,
+    "extra": {
+      "chain_id": 1
+    },
+    "symbol": "ETH",
+    "type": "EVM"
+  },
   "GATETOKEN": {
     "ERC20": {
       "contract": "0xe66747a101bff2dba3697199dcce5b743b454759",
       "decimals": 18
     }
   },
-  "HARMONY": {},
+  "HARMONY": {
+    "coingecko": "harmony",
+    "decimals": 18,
+    "extra": {},
+    "symbol": "ONE",
+    "type": "Harmony"
+  },
   "HYPERLIQUID": {},
   "INJECTIVE": {
     "BEP20": {
@@ -190,7 +229,13 @@
       "decimals": 8
     }
   },
-  "LITECOIN": {},
+  "LITECOIN": {
+    "coingecko": "litecoin",
+    "decimals": 8,
+    "extra": {},
+    "symbol": "LTC",
+    "type": "UTXO"
+  },
   "MASK NETWORK": {
     "BEP20": {
       "contract": "0x2ed9a5c8c13b93955103b9a7c167b67ef4d568a3",
@@ -265,7 +310,13 @@
       "decimals": 18
     }
   },
-  "POLKADOT": {},
+  "POLKADOT": {
+    "coingecko": "polkadot",
+    "decimals": 10,
+    "extra": {},
+    "symbol": "DOT",
+    "type": "Polkadot"
+  },
   "POLYGON": {
     "BEP20": {
       "contract": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
@@ -308,7 +359,13 @@
       "decimals": 18
     }
   },
-  "STELLAR": {},
+  "STELLAR": {
+    "coingecko": "stellar",
+    "decimals": 7,
+    "extra": {},
+    "symbol": "XLM",
+    "type": "Stellar"
+  },
   "SUI": {
     "SUI": {
       "contract": "0x0000000000000000000000000000000000000000000000000000000000000002::sui::sui",
@@ -393,7 +450,13 @@
       "decimals": 18
     }
   },
-  "TRON": {},
+  "TRON": {
+    "coingecko": "tron",
+    "decimals": 6,
+    "extra": {},
+    "symbol": "TRX",
+    "type": "Tron"
+  },
   "USDC": {
     "ALGO": {
       "contract": "31566704",
@@ -456,8 +519,20 @@
       "decimals": 18
     }
   },
-  "VECHAIN": {},
-  "XRP": {},
+  "VECHAIN": {
+    "coingecko": "vechain",
+    "decimals": 18,
+    "extra": {},
+    "symbol": "VET",
+    "type": "Vechain"
+  },
+  "XRP": {
+    "coingecko": "ripple",
+    "decimals": 6,
+    "extra": {},
+    "symbol": "XRP",
+    "type": "UTXO"
+  },
   "ZILLIQA": {
     "BEP20": {
       "contract": "0xb86abcb37c3a4b64f74f59301aff131a1becc787",

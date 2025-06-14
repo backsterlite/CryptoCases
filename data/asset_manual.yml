@@ -1,0 +1,80 @@
+vechain:
+  symbol: VET
+  decimals: 18
+  coingecko: vechain
+  type: Vechain
+  extra: {}
+xrp:
+  symbol: XRP
+  decimals: 6
+  coingecko: ripple
+  type: UTXO
+  extra: {}
+tron:
+  symbol: TRX
+  decimals: 6
+  coingecko: tron
+  type: Tron
+  extra: {}
+stellar:
+  symbol: XLM
+  decimals: 7
+  coingecko: stellar
+  type: Stellar
+  extra: {}
+polkadot:
+  symbol: DOT
+  decimals: 10
+  coingecko: polkadot
+  type: Polkadot
+  extra: {}
+litecoin:
+  symbol: LTC
+  decimals: 8
+  coingecko: litecoin
+  type: UTXO
+  extra: {}
+harmony:
+  symbol: ONE
+  decimals: 18
+  coingecko: harmony
+  type: Harmony
+  extra: {}
+hyperliquid:
+  symbol: HYPE
+  decimals: 18
+  coingecko: hyperliquid
+  type: HyperLiquid
+  extra: {}
+avalanche:
+  symbol: AVAX
+  decimals: 18
+  coingecko: avalanche-2
+  type: EVM
+  extra: null
+  chain_id: 43114
+cardano:
+  symbol: ADA
+  decimals: 6
+  coingecko: cardano
+  type: UTXO
+  extra: {}
+algorand:
+  symbol: ALGO
+  decimals: 6
+  coingecko: algorand
+  type: Algorand
+  extra: {}
+dogecoin:
+  symbol: DOGE
+  decimals: 8
+  coingecko: dogecoin
+  type: UTXO
+  extra: {}
+ethereum:
+  symbol: ETH
+  decimals: 18
+  coingecko: ethereum
+  type: EVM
+  extra:
+    chain_id: 1

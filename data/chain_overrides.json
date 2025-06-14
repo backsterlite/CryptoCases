@@ -1,37 +1,50 @@
 {
   "TON": {
     "enabled": true,
+    "type": "TON",
+    "chain_id": null,
     "min_confirmations": 1,
     "native_coin": "ton",
     "rpc": [
       "https://toncenter.com/api/v2/jsonRPC"
-    ]
+    ],
+    "explorer": "https://tonscan.org/tx/{tx_hash}"
   },
 
   "TRC20": {
     "enabled": true,
+    "type": "TRON",
+    "chain_id": null,
     "min_confirmations": 1,
     "native_coin": "trx",
     "rpc": [
       "https://api.trongrid.io"
-    ]
+    ],
+    "explorer": "https://tronscan.org/#/transaction/{tx_hash}"
   },
 
   "SPL": {
     "enabled": true,
+    "type": "SOLANA",
+    
+    "chain_id": null,
     "min_confirmations": 1,
     "native_coin": "SOL",
     "rpc": [
       "https://api.mainnet-beta.solana.com"
-    ]
+    ],
+    "explorer": "https://explorer.solana.com/tx/{tx_hash}"
   },
 
   "POLYGON": {
     "enabled": true,
+    "type": "EVM",
+    "chain_id": 137,
     "min_confirmations": 12,
     "native_coin": "MATIC",
     "rpc": [
       "https://polygon-rpc.com"
-    ]
+    ],
+    "explorer": "https://polygonscan.com/tx/{tx_hash}"
   }
 }

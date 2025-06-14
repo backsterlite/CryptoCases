@@ -146,6 +146,8 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from utils import check_is_native_token
+
 # ---------------------------------------------------------------------------
 # paths / logging
 # ---------------------------------------------------------------------------
@@ -204,8 +206,11 @@ def build(raw_path: Path, net_map_path: Path):
         thumb = data.get("image", {}).get("thumb")
         gecko = data.get("id")
 
-        platforms = data.get("platforms", {})
-        raw_native = data.get("asset_platform_id") or first_non_empty(platforms) or None
+        is_native = check_is_native_token(data)
+        
+        raw_native = (data.get("asset_platform_id") 
+                    or first_non_empty(data.get("platforms", {})) 
+                    or None)
         if raw_native:
             key = _slug(raw_native)
             native_network = net_map.get(key, {}).get("code", key)
@@ -218,7 +223,7 @@ def build(raw_path: Path, net_map_path: Path):
             "thumb": thumb,
             "coingecko_id": gecko,
             "aliases": [sym.upper()] if sym and sym.upper() != coin_id.upper() else [],
-            "is_native": not bool(platforms),
+            "is_native": is_native,
             "native_network": native_network,
         }
 

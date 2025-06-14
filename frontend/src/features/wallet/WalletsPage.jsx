@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWallets } from './walletSlice';
 import './css/WalletsPage.css';
@@ -12,8 +12,12 @@ const WalletsPage = () => {
   const error = useSelector(state => state.wallet.walletsError);
 
   const [isSwapOpen, setIsSwapOpen] = useState(false);
+const handleClose = useCallback(() => {
+  setIsSwapOpen(false)
+}, [])
 
   useEffect(() => {
+    console.log("fetch wallet Wallet page")
     dispatch(fetchWallets());
   }, [dispatch]);
 
@@ -25,8 +29,14 @@ const WalletsPage = () => {
     return <div className="error-wallets">Помилка: {error}</div>;
   }
 
-  const entries = wallets ? Object.entries(wallets) : [];
-
+  let entries = wallets ? Object.entries(wallets) : [];
+  entries.sort((a, b) => {
+    const balanceObj_A = a[1].balance;
+    const balanceObj_B = b[1].balance;
+    const amount_A = parseFloat(Object.values(balanceObj_A)[0] || 0)
+    const amount_B = parseFloat(Object.values(balanceObj_B)[0] || 0)
+    return amount_B- amount_A
+  })
   // Функція для форматування мережі
   const formatNetwork = (network) => {
     if (network === 'None' || network === null) {
@@ -106,7 +116,7 @@ const WalletsPage = () => {
         </table>
       )}
 
-      <SwapModal isOpen={isSwapOpen} onClose={() => setIsSwapOpen(false)} />
+      <SwapModal isOpen={isSwapOpen} onClose={handleClose} />
     </div>
   );
 };
