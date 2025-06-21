@@ -4,26 +4,16 @@ import api from '../../services/api';
 import { showSessionExpiredModal } from '../../common/slices/uiSlice'; // action to show modal
 import TelegramWebAppPromise from '../../mocks/WebAppTG';
 // import WebApp from '@twa-dev/sdk'
-const initialState = {
-  accessToken: null,
-  refreshToken: null,
-  user: null,
-  status: 'idle', // 'loading' | 'succeeded' | 'failed'
-  error: null,
-};
 
 export const refreshAccessToken = createAsyncThunk(
   'auth/refresh',
   async (_, { getState, rejectWithValue, dispatch }) => {
     try {
       const { refreshToken } = getState().auth;
-      // Якщо refreshToken зберігається в Redux
       if (!refreshToken) {
         return rejectWithValue('No refresh token');
       }
-      // Запит на бекенд:
       const res = await api.auth.refresh({ refresh_token: refreshToken });
-      // Очікуємо, що бек поверне { access_token: '...', refresh_token: '...' }
       return res.data;
     } catch (err) {
       // якщо бек видав 401 або іншу помилку, кидаємо reject
@@ -37,12 +27,10 @@ export const loginWithTelegram = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const WebApp = await TelegramWebAppPromise;
-      console.log(WebApp)
       const initData = WebApp.initData;
      
       // const initData = WebApp.initData
       const res = await api.auth.telegram(initData);
-      console.log(res.data)
       return res.data;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -67,6 +55,14 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
+
+const initialState = {
+  accessToken: null,
+  refreshToken: null,
+  user: null,
+  status: 'idle', // 'loading' | 'succeeded' | 'failed'
+  error: null,
+};
 
 const authSlice = createSlice({
   name: 'auth',
@@ -105,12 +101,11 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refresh_token;
       })
       .addCase(refreshAccessToken.rejected, (state, action) => {
-        // якщо не вдалось оновити — логаут
         state.accessToken = null;
         state.refreshToken = null;
         state.user = null;
         state.status = 'idle';
-        state.error = 'SessionExpired';
+        state.error = action.payload;
       })
       // FETCH USER
       .addCase(fetchCurrentUser.pending, state => {

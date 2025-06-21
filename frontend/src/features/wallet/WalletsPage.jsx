@@ -1,23 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchWallets } from './walletSlice';
 import './css/WalletsPage.css';
 import SwapModal from './components/SwapModal';
 
 const WalletsPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const wallets = useSelector(state => state.wallet.wallets);
   const isLoading = useSelector(state => state.wallet.walletsLoading);
   const error = useSelector(state => state.wallet.walletsError);
 
   const [isSwapOpen, setIsSwapOpen] = useState(false);
-const handleClose = useCallback(() => {
-  setIsSwapOpen(false)
-}, [])
+  const handleClose = useCallback(() => {
+    setIsSwapOpen(false)
+  }, []);
 
   useEffect(() => {
-    console.log("fetch wallet Wallet page")
     dispatch(fetchWallets());
   }, [dispatch]);
 
@@ -35,9 +36,9 @@ const handleClose = useCallback(() => {
     const balanceObj_B = b[1].balance;
     const amount_A = parseFloat(Object.values(balanceObj_A)[0] || 0)
     const amount_B = parseFloat(Object.values(balanceObj_B)[0] || 0)
-    return amount_B- amount_A
-  })
-  // Функція для форматування мережі
+    return amount_B - amount_A
+  });
+
   const formatNetwork = (network) => {
     if (network === 'None' || network === null) {
       return 'Default';
@@ -45,7 +46,6 @@ const handleClose = useCallback(() => {
     return network;
   };
 
-  // Функція для форматування балансу
   const formatBalance = (balance) => {
     const num = parseFloat(balance);
     if (num === 0) return '0';
@@ -53,6 +53,14 @@ const handleClose = useCallback(() => {
     if (num < 1) return num.toFixed(6);
     if (num < 1000) return num.toFixed(4);
     return num.toLocaleString('en-US', { maximumFractionDigits: 2 });
+  };
+
+  const handleDeposit = (coin, network) => {
+    navigate(`/wallet/deposit/${network}/${coin.symbol.toLowerCase()}`);
+  };
+
+  const handleWithdraw = (coin, network) => {
+    navigate(`/wallet/withdraw/${network}/${coin.symbol.toLowerCase()}`);
   };
 
   return (
@@ -73,6 +81,7 @@ const handleClose = useCallback(() => {
               <th>Монета</th>
               <th>Мережа</th>
               <th>Баланс</th>
+              <th>Дії</th>
             </tr>
           </thead>
           <tbody>
@@ -107,6 +116,23 @@ const handleClose = useCallback(() => {
                     <td>{networkLabel}</td>
                     <td style={{ fontWeight: parseFloat(amount) > 0 ? '500' : 'normal' }}>
                       {formattedAmount}
+                    </td>
+                    <td>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleDeposit(coin, network)}
+                          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        >
+                          Депозит
+                        </button>
+                        <button
+                          onClick={() => handleWithdraw(coin, network)}
+                          className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                          disabled={parseFloat(amount) <= 0}
+                        >
+                          Вивід
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );

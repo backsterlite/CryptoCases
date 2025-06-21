@@ -9,9 +9,9 @@ from app.core import auth_jwt
 from app.schemas.auth import TelegramAuthRequest, TokenResponse, RefreshRequest
 from app.schemas.user import parse_telegram_init
 from app.services.user_service import UserService
-from app.config.settings import Settings
+from app.core.config.settings import Settings
 from app.core.api_limiter import limiter
-from app.api.deps import get_settings
+from app.core.config.settings import get_settings
 from . import API_V1
 
 router = APIRouter(prefix=f"{API_V1}/auth", tags=["Auth"])

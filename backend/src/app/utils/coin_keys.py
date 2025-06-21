@@ -1,5 +1,5 @@
 # src/app/utils/coin_keys.py
-from app.config.coin_registry import CoinRegistry
+from app.core.config.coin_registry import CoinRegistry
 
 def to_id(value: str) -> str:
     """Завжди повертає coingecko_id у lower-case (ключ для БД, rate-cache)."""

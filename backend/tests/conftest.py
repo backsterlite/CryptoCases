@@ -10,7 +10,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie
 
 from src.app.main import app
-from src.app.config.settings_test import settings as test_settings
+from src.app.core.config.settings_test import settings as test_settings
 from src.app.db.models import (
     user,
     player,
@@ -33,8 +33,8 @@ def event_loop():
 
 @pytest.fixture(scope="session")
 async def db():
-    client = AsyncIOMotorClient(test_settings.mongo_url)
-    db = client.get_database(test_settings.mongo_db_name, codec_options=codec_options)
+    client = AsyncIOMotorClient(test_settings.test_mongo_url)
+    db = client.get_database(test_settings.test_mongo_db_name, codec_options=codec_options)
     await init_beanie(
         database=db,
         document_models=[

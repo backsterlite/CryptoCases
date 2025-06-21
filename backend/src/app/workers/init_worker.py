@@ -1,6 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie
-from app.config.settings import settings
+from app.core.config.settings import Settings
 from app.db.models import (
     user,
     player,

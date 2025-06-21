@@ -1,19 +1,21 @@
+from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
 from pathlib import Path
 from typing import List, Dict, Any
-import os
+
 
 # Визначаємо корінь проекту
 if "/app" in str(Path.cwd()):
-    BASE_DIR = Path(__file__).resolve().parents[3]
+    BASE_DIR = Path(__file__).resolve().parents[4]
 else:
     BASE_DIR = Path(__file__).resolve().parents[4]
 
 class Settings(BaseSettings):
     # MongoDB
-    mongo_uri: str = "mongodb://mongo:27017/?replicaSet=rs0"
-    mongo_db_name: str = "cryptocases"
+    mongo_uri: str = Field(...)
+    mongo_db_name: str = Field(...)
 
     # Telegram Bot та JWT
     bot_token: str = ""          # TELEGRAM BOT TOKEN (ENV: BACKEND_BOT_TOKEN)
@@ -23,8 +25,8 @@ class Settings(BaseSettings):
     debug: bool = False
     
     
-    COINGECKO_API: str
-    COINGECKO_BASE_URL: str
+    COINGECKO_API: str = Field(...)
+    COINGECKO_BASE_URL: str = Field(...)
     
     BASE_TOKENS: List[str] = ["tether", "usd-coin"]
     GLOBAL_USD_WALLET_ALIAS: List[str] = ["tether", "usdt", "usdc", "usd-coin"]
@@ -39,6 +41,7 @@ class Settings(BaseSettings):
     coin_registry_path: Path = BASE_DIR / "data" / "coin_registry.json"
     network_registry_path: Path = BASE_DIR / "data" / "chain_registry.json"
     asset_registry_path: Path = BASE_DIR / "data" / "asset_registry.json"
+    project_root_path: Path = BASE_DIR
 
     # Redis (refresh tokens, Celery)
     REDIS_URL: str = "redis://localhost:6379/1"
@@ -100,9 +103,13 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(
         env_file=Path(BASE_DIR, ".env"),
-        env_prefix="BACKEND_",
         env_file_encoding="utf-8",
         env_nested_delimiter="__",
         case_sensitive=True,
         extra="ignore"
     )
+
+@lru_cache
+def get_settings():
+    settings = Settings()
+    return settings

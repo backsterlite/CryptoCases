@@ -8,7 +8,7 @@ from app.db.init_db import init_db
 from app.db.models.external_wallet import ExternalWallet
 from app.db.models.deposit_log import DepositLog
 from app.services.blockchain.factory import BlockchainClientFactory
-from app.config.network_registry import NetworkRegistry
+from app.core.config.network_registry import NetworkRegistry
 from app.services.rate_cache import rate_cache
 from app.services.internal_balance_service import InternalBalanceService
 

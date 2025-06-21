@@ -1,7 +1,7 @@
 from typing import Dict, Optional
 from app.schemas.wallet import UserTokenWallet, UserWalletsGrouped
 from app.services.internal_balance_service import InternalBalanceService
-from app.config.coin_registry import CoinRegistry, CoinMeta
+from app.core.config.coin_registry import CoinRegistry, CoinMeta
 from app.utils.coin_keys import to_symbol
 
 

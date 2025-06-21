@@ -7,9 +7,11 @@ from beanie import PydanticObjectId
 
 from app.db.models.internal_balance import InternalBalance
 from app.db.init_db import DataBase
+from app.core.config.settings import get_settings
+from app.core.config.settings import Settings
 from app.services.rate_cache import rate_cache
 from app.services.case_service import CaseService
-from app.config.coin_registry import CoinRegistry
+from app.core.config.coin_registry import CoinRegistry
 from app.models.coin import CoinAmount
 from app.exceptions.balance import BalanceTooLow
 from app.utils import coin_keys
@@ -19,7 +21,7 @@ class InternalBalanceService:
     Service for all internal‐balance operations.
     Can adjust balances either standalone or inside a transaction session.
     """
-    
+    _settings: Settings = get_settings()
     @staticmethod
     async def get_balance(user_id: int, network: str | None, coin: str) -> Decimal:
         coin = coin_keys.to_id(coin)
@@ -186,12 +188,11 @@ class InternalBalanceService:
 
     @staticmethod
     async def try_charge_user_for_case(user_id: int, case_id: str) -> bool:
-        from app.config.settings import settings
         case = await CaseService.get_case_by_id(case_id)
         case_price = case["price_usd"]
         user_wallets = await InternalBalanceService.list_wallets(user_id)
         for wallet in user_wallets:
-            if wallet.coin in settings.GLOBAL_USD_WALLET_ALIAS \
+            if wallet.coin in InternalBalanceService._settings.GLOBAL_USD_WALLET_ALIAS \
             and wallet.balance >= case_price:
                 
                 await InternalBalanceService.adjust_balance(

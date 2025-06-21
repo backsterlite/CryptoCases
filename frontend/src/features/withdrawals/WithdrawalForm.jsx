@@ -2,16 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styles from './WithdrawalForm.module.css';
 import { useWithdrawal } from './useWithdrawal';
 
-export interface WithdrawalFormProps {
-  network: string;
-  token: string;
-}
-
-export const WithdrawalForm: React.FC<WithdrawalFormProps> = ({ network, token }) => {
+export const WithdrawalForm = ({ network, token }) => {
   const { addresses, balance, loading, error, load, addAddress, initiate, loadBalance } = useWithdrawal();
-  const [selected, setSelected] = useState<string>('');
-  const [newAddress, setNewAddress] = useState<string>('');
-  const [amount, setAmount] = useState<number>(0);
+  const [selected, setSelected] = useState('');
+  const [newAddress, setNewAddress] = useState('');
+  const [amount, setAmount] = useState(0);
   const [adding, setAdding] = useState(false);
 
   useEffect(() => {
@@ -19,7 +14,7 @@ export const WithdrawalForm: React.FC<WithdrawalFormProps> = ({ network, token }
     loadBalance(network, token);
   }, [network, token]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (amount > (balance || 0)) {
       alert('Amount exceeds balance');
@@ -56,4 +51,4 @@ export const WithdrawalForm: React.FC<WithdrawalFormProps> = ({ network, token }
   );
 };
 
-export default WithdrawalForm;
+export default WithdrawalForm; 

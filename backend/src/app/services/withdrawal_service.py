@@ -7,8 +7,8 @@ from app.services.rate_cache import rate_cache
 from app.db.models.withdrawal_log import WithdrawalLog
 from app.services.blockchain.factory import BlockchainClientFactory
 from app.api.deps import get_network_registry
-from app.config.network_registry import NetworkRegistry, UnknownNetworkError, UnsupportedTokenError
-from app.config.settings import settings
+from app.core.config.network_registry import NetworkRegistry, UnknownNetworkError, UnsupportedTokenError
+from app.core.config.settings import Settings
 
 
 class WithdrawalService:

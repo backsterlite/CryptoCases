@@ -4,7 +4,9 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.exceptions.base import AppException
 from app.exceptions.balance import BalanceTooLow
-from app.config.settings import settings
+from app.core.config.settings import get_settings
+
+settings = get_settings()
 
 async def app_exception_handler(request: Request, exc: AppException):
     content = {"detail": exc.message, "debug":"on" if settings.debug else "off"}

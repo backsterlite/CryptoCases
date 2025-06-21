@@ -7,8 +7,8 @@ if "/app" in str(Path.cwd()):
 else:
     BASE_DIR = Path(__file__).resolve().parents[4]
 class TestSettings(BaseSettings):
-    mongo_url: str = "mongodb://mongo:27017/?replicaSet=rs0"
-    mongo_db_name: str = "test_cryptocases"
+    test_mongo_url: str = "mongodb://mongo:27017/?replicaSet=rs0"
+    test_mongo_db_name: str = "test_cryptocases"
     dev_bot_token: str = Field(default="", description="Bot token for dev")
 
     model_config = SettingsConfigDict(

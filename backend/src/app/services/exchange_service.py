@@ -4,8 +4,9 @@ from decimal import Decimal
 
 from fastapi import HTTPException, status
 
-from app.config.coin_registry import CoinRegistry
-from app.config.asset_registry import AssetRegistry
+from app.core.config.coin_registry import CoinRegistry
+from app.core.config.asset_registry import AssetRegistry
+from app.core.config.settings import get_settings
 from app.db.transaction import TransactionManager
 from app.services.rate_cache import rate_cache
 from app.services.internal_balance_service import InternalBalanceService
@@ -14,6 +15,7 @@ from app.schemas.wallet import ExchangeQuoteRequest, ExchangeExecuteRequest
 from app.utils import coin_keys
 
 class ExchangeService:
+    _settings = get_settings()
     
     @classmethod
     def validate(cls, data: ExchangeQuoteRequest | ExchangeExecuteRequest):
@@ -49,11 +51,10 @@ class ExchangeService:
         - If network is provided, AssetRegistry must have a contract for (token, network).
         Raises HTTPException on invalid combination.
         """
-        from app.config.settings import settings
         print("TOKEN SYMBOL:", token_symbol, "network", network)
         # If no network, token must be USDT or USDC (internal balances are network-agnostic)
         if network is None:
-            if coin_keys.to_id(token_symbol) not in settings.GLOBAL_USD_WALLET_ALIAS:
+            if coin_keys.to_id(token_symbol) not in cls._settings.GLOBAL_USD_WALLET_ALIAS:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail=(

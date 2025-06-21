@@ -18,7 +18,10 @@ from app.services.risk_guard import ensure_reserve_and_limits
 from app.services.rate_cache import rate_cache
 from app.services.fairness_service import FairnessService
 from app.schemas.case import CaseOpenResponse, PrizeItem, CaseOpenRequest
-from app.config.settings import settings
+from app.core.config.settings import Settings
+from app.core.config.settings import get_settings
+
+settings: Settings = get_settings()
 
 ZERO = Decimal("0")
 STEP = Decimal("0.02")

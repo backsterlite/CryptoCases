@@ -97,7 +97,6 @@ const SwapModal = ({ isOpen, onClose }) => {
   // Успішний swap
   useEffect(() => {
     if (swapSuccess) {
-      console.log("fetch wallet Modal page")
       dispatch(fetchWallets())
       dispatch(resetSwapStatus())
       setTimeout(() => {

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Query
 from app.core.auth_jwt import create_access_token, create_refresh_token
-from app.config.settings_test import settings
+from app.core.config.settings_test import settings
 from app.services.user_service import UserService
 from app.schemas.user import UserResponsePrivate, UserCreateTelegram
 from app.schemas.auth import TokenResponse

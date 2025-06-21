@@ -9,16 +9,17 @@ from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordBearer
 
 
-from app.config.settings import Settings
+from app.core.config.settings import Settings
 from app.services.user_service import UserService
 from app.db.models.user import User
 from app.core.redis_client import get_redis
-from app.api.deps import get_settings
+from app.core.config.settings import get_settings
 
 SECRET_KEY = get_settings().jwt_secret
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 15  # 12 годин
+ACCESS_TOKEN_EXPIRE_MINUTES = 2 #15  # 12 годин
 REFRESH_TOKEN_EXPIRE_DAYS = 30
+REFRESH_TOKEN_EXPIRE_MINUTES = 10
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")  # формальність, не використовується напряму
 
@@ -40,7 +41,7 @@ async def create_refresh_token(user_id: str) -> str:
     to_encode = {
         "sub": user_id,
         "jti": jti,
-        "exp": now + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS),
+        "exp": now + timedelta(minutes=REFRESH_TOKEN_EXPIRE_MINUTES),#timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS),
         "iat": now,
     }
     token = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)

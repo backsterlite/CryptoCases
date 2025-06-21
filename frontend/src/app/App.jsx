@@ -6,28 +6,30 @@ import Spinner from '../common/components/Spinner';
 import AppRoutes from '../routes/AppRoutes';
 import { useAppDispatch, useAppSelector } from './hooks';
 
-const App: React.FC = () => {
+const App = () => {
   const dispatch = useAppDispatch();
-  const { accessToken, refreshToken, user, status } = useAppSelector((state) => state.auth);
+  const { accessToken, refreshToken, user, status, error } = useAppSelector((state) => state.auth);
   const { sessionExpiredModalVisible } = useAppSelector((state) => state.ui);
-
   useEffect(() => {
-    if (!accessToken && refreshToken) {
-      dispatch(refreshAccessToken());
-    } else if (!accessToken && !refreshToken) {
-      dispatch(loginWithTelegram());
-    } else if (accessToken && !user) {
-      dispatch(fetchCurrentUser());
-      dispatch(fetchBalance());
-    }
-  }, [dispatch, accessToken, refreshToken, user]);
+    const handleAuth = async () => {
+      if (!accessToken && refreshToken) {
+        await dispatch(refreshAccessToken());
+      } else if (!accessToken && !refreshToken) {
+        await dispatch(loginWithTelegram());
+      } else if (accessToken && !user) {
+        await dispatch(fetchCurrentUser());
+        await dispatch(fetchBalance());
+      }
+    };
+
+    handleAuth();
+  }, [dispatch, accessToken, refreshToken, user, error]);
 
   useEffect(() => {
     if (accessToken && user) {
       dispatch(fetchBalance());
     }
   }, [dispatch, accessToken, status, user]);
-
   return (
     <>
       {sessionExpiredModalVisible && <SessionExpiredModal />}

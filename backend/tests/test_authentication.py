@@ -7,15 +7,15 @@ import hashlib
 import json
 from time import time
 
-from app.config.settings_test import settings as test_settings
-from app.core.auth_jwt import (
+from src.app.core.config.settings_test import settings as test_settings
+from src.app.core.auth_jwt import (
     create_access_token,
     create_refresh_token,
     verify_access_token,
     verify_and_rotate_refresh_token,
 )
-from app.services.user_service import UserService
-from app.api.deps import get_current_user
+from src.app.services.user_service import UserService
+from src.app.api.deps import get_current_user
 
 
 def gen_init_data(telegram_id: int) -> str:
@@ -71,7 +71,7 @@ class TestAuthJWT:
     async def test_create_and_rotate_refresh_token(self, db):
         # створимо новий refresh, зразу зробимо ротацію
         user_id = "42"
-        refresh = create_refresh_token(user_id)
+        refresh = await create_refresh_token(user_id)
         new_access, new_refresh = await verify_and_rotate_refresh_token(refresh)
 
         assert new_refresh != refresh
@@ -85,12 +85,16 @@ class TestAuthJWT:
 
 @pytest.mark.asyncio
 class TestAuthEndpoints:
-    async def test_telegram_flow_and_refresh(self, client):
+    async def test_telegram_flow_and_refresh(self, client, auth_token):
+        headers = {"Authorization": f"Bearer {auth_token}"}
         # 1) Telegram-login → отримуємо пару токенів
         tid = 555_666
         init_data = gen_init_data(tid)
 
-        resp = await client.post("/auth/telegram", json={"init_data": init_data})
+        resp = await client.post(
+            "/auth/telegram", 
+            json={"init_data": init_data},
+            headers=headers)
         print("RESP:::", resp)
         assert resp.status_code == 200
         body = resp.json()
@@ -105,17 +109,29 @@ class TestAuthEndpoints:
         assert claims["scope"] == "user"
 
         # 3) Refresh → ротація
-        r2 = await client.post("/auth/refresh", json={"refresh_token": refresh})
+        r2 = await client.post(
+            "/auth/refresh", 
+            json={"refresh_token": refresh},
+            headers=headers
+            )
         assert r2.status_code == 200
         b2 = r2.json()
         assert b2["refresh_token"] != refresh
 
         # 4) старий refresh тепер invalid
-        r3 = await client.post("/auth/refresh", json={"refresh_token": refresh})
+        r3 = await client.post(
+            "/auth/refresh",
+            json={"refresh_token": refresh},
+            headers=headers
+            )
         assert r3.status_code == 401
 
-    async def test_telegram_invalid_init_data(self, client):
-        resp = await client.post("/auth/telegram", json={"init_data": "foo=bar&hash=baz"})
+    async def test_telegram_invalid_init_data(self, client, auth_token):
+        headers = {"Authorization": f"Bearer {auth_token}"}
+        resp = await client.post(
+            "/auth/telegram", 
+            json={"init_data": "foo=bar&hash=baz"},
+            headers=headers)
         assert resp.status_code in (400, 401)
 
     async def test_get_current_user_endpoint(self, client, auth_token):

@@ -16,12 +16,11 @@ import CaseOpensHistoryPage from '../features/history/CaseOpensHistoryPage';
 import WithdrawHistoryPage from '../features/history/WithdrawHistoryPage';
 import SettingsPage from '../features/settings/SettingsPage';
 
-const Protected: React.FC<{ children: React.ReactElement }> = ({ children }) => {
+const Protected = ({ children }) => {
   const { accessToken } = useAppSelector((state) => state.auth);
   return accessToken ? children : <Navigate to="/" replace />;
 };
-
-const AppRoutes: React.FC = () => (
+const AppRoutes = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Protected><MainLayout /></Protected>}>

@@ -1,4 +1,4 @@
-import qrcode
+# import qrcode
 import base64
 from io import BytesIO
 from decimal import Decimal
@@ -8,7 +8,7 @@ from typing import Optional, Dict
 from fastapi import Depends, HTTPException, status
 
 from app.api.deps import get_network_registry, get_external_wallet_service
-from app.config.network_registry import NetworkRegistry, UnknownNetworkError, UnsupportedTokenError
+from app.core.config.network_registry import NetworkRegistry, UnknownNetworkError, UnsupportedTokenError
 from app.db.models.external_wallet import ExternalWallet
 from app.db.models.deposit_log import DepositLog
 from app.schemas.deposit import GenerateAddressResponse

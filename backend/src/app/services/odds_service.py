@@ -5,8 +5,11 @@ import hashlib
 from datetime import datetime
 from pathlib import Path
 from app.db.models.case_config import CaseConfig
-from app.config.settings import settings
+from app.core.config.settings import Settings
+from app.core.config.settings import get_settings
 import aioboto3
+
+settings: Settings = get_settings()
 
 async def export_odds(case_id: str, to_bucket: bool = True) -> Path:
     """

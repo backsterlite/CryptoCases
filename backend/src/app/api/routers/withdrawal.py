@@ -9,8 +9,8 @@ from fastapi import (
     status
     )
 
-from app.config.network_registry import NetworkRegistry, TokenCfg
-from app.config.constants import WITHDRAWAL
+from app.core.config.network_registry import NetworkRegistry, TokenCfg
+from app.core.config.constants import WITHDRAWAL
 from app.schemas.wallet import TokenInfo, TokenListResponse
 from app.schemas.wallet import WithdrawalAddressRequest, WithdrawalAddressResponse
 from app.api.deps import require_role, get_network_registry

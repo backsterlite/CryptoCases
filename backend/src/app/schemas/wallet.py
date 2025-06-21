@@ -2,7 +2,7 @@ from decimal import Decimal
 from typing import Dict, List
 from pydantic import BaseModel, Field, field_validator, ConfigDict, RootModel
 
-from app.config.coin_registry import CoinMeta
+from app.core.config.coin_registry import CoinMeta
 
 class UserTokenWallet(BaseModel):
     coin: CoinMeta

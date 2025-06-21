@@ -11,7 +11,7 @@ from app.models.history_status import StatusHistoryEntry
 
 
 class DepositLog(Document):
-    user_id: Optional[str]           # тепер можна довантажувати (якщо ExternalWallet не завжди повідомляє)
+    user_id: Optional[int]           # тепер можна довантажувати (якщо ExternalWallet не завжди повідомляє)
     external_wallet_id: str          # посилання на зовнішній гаманець
     tx_hash: str                     # хеш транзакції on-chain
     coin: str                        # символ токена, наприклад "USDT"

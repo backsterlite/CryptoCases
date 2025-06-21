@@ -7,9 +7,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.api.routers import register_routers
+from app.core.config.settings import get_settings
 from app.exceptions import register_exception_handlers
 from app.core.bootstrap import bootstrap
-from app.config.settings import settings
 from app.core import api_limiter
 
 
@@ -25,6 +25,8 @@ async def lifespan(app: FastAPI):
     yield 
     await bootstrap.stop()
 
+settings = get_settings()
+
 app = FastAPI(title="CryptoCases API", lifespan=lifespan, debug=settings.debug)
 
 # ==== SlowAPI rate‐limiting setup ====
@@ -39,7 +41,7 @@ app.add_exception_handler(429, _rate_limit_exceeded_handler)
 
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=["http://localhost:5173", " https://31cd-93-175-80-8.ngrok-free.app"],      # або точний URL фронтенду, наприклад "http://localhost:5173"
+  allow_origins=["http://localhost:5173", "https://4191-93-175-80-8.ngrok-free.app"],      # або точний URL фронтенду, наприклад "http://localhost:5173"
   allow_credentials=True,
   allow_methods=["*"],
   allow_headers=["*"],

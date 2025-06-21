@@ -7,7 +7,7 @@ from tonutils.wallet.contract.v4 import WalletV4R2
 from tonutils.jetton import JettonWalletStablecoin, JettonMasterStablecoin
 
 from app.services.blockchain.base import IBlockchainClient
-from app.config.network_registry import NetworkRegistry
+from app.core.config.network_registry import NetworkRegistry
 
 
 class TonClientWrapper(IBlockchainClient):
@@ -47,7 +47,6 @@ class TonClientWrapper(IBlockchainClient):
         """
         Перекласти TIP-3 jetton (USDT, USDC).
         """
-        JettonWalletStablecoin.
         tx = await from_wallet.transfer_jetton(
             jetton_contract=jetton_contract,
             to_address=to_address,

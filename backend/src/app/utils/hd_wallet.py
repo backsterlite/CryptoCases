@@ -8,7 +8,7 @@ from tonutils.client import ToncenterV3Client
 from tonutils.wallet.contract.v5 import WalletV5R1
 from fastapi import Depends
 
-from app.config.settings import settings
+from app.core.config.settings import Settings
 from app.db.models.hd_wallet_meta import HDWalletMeta
 from app.services.blockchain.ton_client import TonClientWrapper
 from app.api.deps import get_blockchain_factory

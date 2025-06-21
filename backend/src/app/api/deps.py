@@ -8,9 +8,9 @@ from app.core.auth_jwt import (
     )
 from app.db.models.user import User
 from app.services.user_service import UserService
-from app.config.network_registry import NetworkRegistry
-from app.config.settings import Settings
-from app.services.blockchain.factory import BlockchainClientFactory
+from app.core.config.network_registry import NetworkRegistry
+from app.core.config.settings import Settings
+from app.core.config.settings import get_settings
 
 
 
@@ -68,10 +68,7 @@ def require_role(required_role: str):
 
     return role_checker
 
-@lru_cache
-def get_settings():
-    settings = Settings()
-    return settings
+
 
 @lru_cache
 def get_network_registry(settings: Settings = Depends(get_settings)) -> NetworkRegistry:
@@ -93,6 +90,7 @@ def get_hd_wallet_service(settings: Settings = Depends(get_settings)) -> "HDWall
     return HDWalletService(xprv=settings.HD_XPRV, mnemonic="")
 
 @lru_cache
-def get_blockchain_factory() -> BlockchainClientFactory:
+def get_blockchain_factory() -> "BlockchainClientFactory":  # type: ignore # noqa: F821
+    from app.services.blockchain.factory import BlockchainClientFactory
     registry = get_network_registry()
     return BlockchainClientFactory(registry)

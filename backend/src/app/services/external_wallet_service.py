@@ -8,15 +8,17 @@ from app.api.deps import get_hd_wallet_service
 from app.db.models.external_wallet import ExternalWallet
 from app.db.models.hd_wallet_meta import HDWalletMeta
 from app.utils.hd_wallet import HDWalletService
-from app.config.settings import settings
-
+from app.core.config.settings import Settings
+from app.core.config.settings import get_settings
 
 class ExternalWalletService:
     def __init__(
         self,
-        hd_wallet: HDWalletService=Depends(get_hd_wallet_service)
+        hd_wallet: HDWalletService=Depends(get_hd_wallet_service),
+        settings: Settings = Depends(get_settings)
         ):
         self._hd_wallet_service = hd_wallet
+        self._settings = settings
 
     async def create_wallet(
         self,
@@ -34,7 +36,7 @@ class ExternalWalletService:
             if not meta:
                 # беремо XPUB із налаштувань динамічно
                 env_key = f"XPUB_{coin}_{network}"
-                xpub = getattr(settings, env_key)
+                xpub = getattr(self._settings, env_key)
                 meta = HDWalletMeta(coin=coin, network=network, xpub=xpub, current_index=0)
                 await meta.insert()
 

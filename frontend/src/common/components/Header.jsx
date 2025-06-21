@@ -8,7 +8,6 @@ import UserAvatar from './UserAvatar'
 
 export default function Header() {
   const { amount, loading, error } = useSelector(state => state.balance);
-  console.log("amount", amount)
   if (loading) return <div>Loading…</div>;
   if (error)   return <div>Error: {error}</div>;
   return (

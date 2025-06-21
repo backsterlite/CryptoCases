@@ -8,14 +8,13 @@ from fastapi import Depends
 
 from app.utils.signer import EvmSigner
 from app.services.blockchain.base import IBlockchainClient
-from app.config.network_registry import NetworkRegistry
-from app.config.settings import settings
+from app.core.config.settings import Settings
 from app.api.deps import get_network_registry
 from app.utils.hd_wallet import HDWalletService
 
 class EVMClient(IBlockchainClient):
     
-    def __init__(self, network_code: str, registry: NetworkRegistry=Depends(get_network_registry)):
+    def __init__(self, network_code: str, registry = Depends(get_network_registry)):
         self.network_code = network_code
         self.registry = registry
         self.network_cfg = registry.get_network(network_code)
@@ -23,7 +22,7 @@ class EVMClient(IBlockchainClient):
         # Initialize Web3 with RPC from registry
         rpc_url = self.network_cfg.rpc[0] if isinstance(self.network_cfg.rpc, list) else self.network_cfg.rpc
         self.web3 = Web3(Web3.HTTPProvider(rpc_url))
-        self.signer = EvmSigner()
+        self.signer = EvmSigner("")
         self.from_address = settings.PROJECT_WALLET_ADDRESS
 
     def prepare_transaction(

@@ -9,8 +9,8 @@ from spl.token.client import Token as SplToken
 from spl.token.constants import TOKEN_PROGRAM_ID
 
 from app.services.blockchain.base import IBlockchainClient
-from app.config.network_registry import NetworkRegistry
-from app.config.settings import settings
+from app.core.config.network_registry import NetworkRegistry
+from app.core.config.settings import Settings
 from app.utils.hd_wallet import HDWalletService
 
 class SOLClient(IBlockchainClient):

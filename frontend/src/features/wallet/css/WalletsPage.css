@@ -4,19 +4,20 @@
   padding: 24px;
   max-width: 1200px;
   margin: 0 auto;
+  color: #213547;
 }
 
 .wallets-page h2 {
   margin-bottom: 24px;
   font-size: 24px;
   font-weight: 600;
-  color: #333;
+  color: #213547;
 }
 
 .wallets-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -37,7 +38,7 @@
 .wallets-table td {
   padding: 16px;
   border-bottom: 1px solid #f0f0f0;
-  color: #333;
+  color: #213547;
 }
 
 .wallets-table tr:last-child td {
@@ -95,4 +96,41 @@
   padding: 48px;
   color: #f44336;
   font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wallets-page {
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  .wallets-page h2 {
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  .wallets-table {
+    background: #242424;
+  }
+
+  .wallets-table thead {
+    background: #1a1a1a;
+  }
+
+  .wallets-table th {
+    color: rgba(255, 255, 255, 0.6);
+    border-bottom-color: #333;
+  }
+
+  .wallets-table td {
+    color: rgba(255, 255, 255, 0.87);
+    border-bottom-color: #333;
+  }
+
+  .wallets-table tr:hover {
+    background: #2a2a2a;
+  }
+
+  .no-wallets,
+  .loading-wallets {
+    color: rgba(255, 255, 255, 0.6);
+  }
 }

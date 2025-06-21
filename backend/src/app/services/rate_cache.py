@@ -8,8 +8,9 @@ from aiohttp import ClientSession, ClientError, ClientTimeout
 from decimal import Decimal
 from pathlib import Path
 
-from app.config.coin_registry import CoinRegistry
-from app.config.settings import settings, BASE_DIR
+from app.core.config.coin_registry import CoinRegistry
+from app.core.config.settings import Settings, BASE_DIR
+from app.core.config.settings import get_settings
 
 
 
@@ -30,6 +31,7 @@ class RateCache:
         # пункт 1 & 3: створюємо одну сесію з таймаутом
         self._timeout = ClientTimeout(total=timeout_seconds)
         self._session: Optional[ClientSession] = None
+        self._settings = get_settings()
 
     async def close(self):
         """Закриваємо сесію при завершенні роботи."""
@@ -56,7 +58,7 @@ class RateCache:
             }
             try:
                 resp = await self._session.get( # type: ignore
-                    f"{settings.COINGECKO_BASE_URL}/simple/price",
+                    f"{self._settings.COINGECKO_BASE_URL}/simple/price",
                     params=params
                 )
                 resp.raise_for_status()      # пункт 3: перевірка статусу

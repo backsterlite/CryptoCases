@@ -8,8 +8,8 @@ from tronpy.keys import PrivateKey
 
 from app.utils.signer import TronSigner
 from app.services.blockchain.base import IBlockchainClient
-from app.config.network_registry import NetworkRegistry
-from app.config.settings import settings
+from app.core.config.network_registry import NetworkRegistry
+from app.core.config.settings import Settings
 
 class TronClient(IBlockchainClient):
     

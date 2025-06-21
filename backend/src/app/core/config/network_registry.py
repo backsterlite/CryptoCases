@@ -88,7 +88,7 @@ class NetworkCfg:
         # Нова логіка: raw.get("deposit_tokens") повертає список рядків (символів).
         # Для кожного символу беремо контракт і decimals з AssetRegistry, а також
         # вираховуємо canonical тільки для TETHER/USDT і USD-COIN/USDC.
-        from app.config.asset_registry import AssetRegistry
+        from app.core.config.asset_registry import AssetRegistry
 
         self._deposit_tokens: Dict[str, TokenCfg] = {}
         for sym in raw.get("deposit_tokens", []):

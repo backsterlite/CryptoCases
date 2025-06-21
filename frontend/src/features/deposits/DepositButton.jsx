@@ -3,16 +3,12 @@ import { TonConnectButton, useTonConnectUI, useTonWallet } from '@tonconnect/ui-
 import styles from './DepositButton.module.css';
 import { useDeposit } from './useDeposit';
 
-export interface DepositButtonProps {
-  network: string;
-}
-
-export const DepositButton: React.FC<DepositButtonProps> = ({ network }) => {
+export const DepositButton = ({ network }) => {
   const wallet = useTonWallet();
   const [tonConnectUi] = useTonConnectUI();
   const { loading, error, address, getAddress, initiate } = useDeposit();
-  const [amount, setAmount] = useState<number>(0);
-  const [txHash, setTxHash] = useState<string>('');
+  const [amount, setAmount] = useState(0);
+  const [txHash, setTxHash] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const handleRequestAddress = async () => {
@@ -27,7 +23,7 @@ export const DepositButton: React.FC<DepositButtonProps> = ({ network }) => {
       validUntil: Math.floor(Date.now() / 1000) + 60,
       messages: [
         {
-          address: address!,
+          address: address,
           amount: (amount * 1e9).toString(),
         },
       ],
@@ -64,4 +60,4 @@ export const DepositButton: React.FC<DepositButtonProps> = ({ network }) => {
   );
 };
 
-export default DepositButton;
+export default DepositButton; 

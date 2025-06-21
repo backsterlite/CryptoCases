@@ -6,13 +6,13 @@ from pymongo import ReturnDocument
 from motor.motor_asyncio import AsyncIOMotorClientSession
 
 from app.db.models.user import User
-from app.config.settings import settings
+
 from app.models.coin import CoinAmount, Coin
 from app.db.models.internal_balance import InternalBalance
 
 
 class WalletService:
-
+    
 
     @staticmethod
     async def get_balance(user: User, token: str, network: str) -> Decimal:
@@ -44,6 +44,10 @@ class WalletService:
         Returns initial wallet structure with zero balances
         for base tokens (e.g., USDT, USDC) across all supported networks.
         """
+        from app.core.config.settings import Settings
+        from app.core.config.settings import get_settings
+        
+        settings: Settings = get_settings()
                 
         for symbol in settings.BASE_TOKENS:
             await InternalBalance.insert_one(

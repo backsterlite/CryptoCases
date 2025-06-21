@@ -2,12 +2,12 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from app.api.deps import(
+from app.core.config.settings import(
     get_network_registry,
     require_role,
     get_deposit_service
     ) 
-from app.config.network_registry import NetworkRegistry, UnknownNetworkError, UnsupportedTokenError, TokenCfg
+from app.core.config.network_registry import NetworkRegistry, UnknownNetworkError, UnsupportedTokenError, TokenCfg
 from app.services.deposit_service import DepositService
 from app.schemas.deposit import(
     GenerateAddressRequest,

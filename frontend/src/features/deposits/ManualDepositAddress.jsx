@@ -2,13 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './DepositButton.module.css';
 import { useDeposit } from './useDeposit';
 
-export interface ManualDepositAddressProps {
-  network: string;
-}
-
-export const ManualDepositAddress: React.FC<ManualDepositAddressProps> = ({ network }) => {
+export const ManualDepositAddress = ({ network }) => {
   const { fetchManualAddress, loading, error } = useDeposit();
-  const [address, setAddress] = useState<string>('');
+  const [address, setAddress] = useState('');
 
   useEffect(() => {
     fetchManualAddress(network).then((addr) => {
@@ -28,4 +24,4 @@ export const ManualDepositAddress: React.FC<ManualDepositAddressProps> = ({ netw
   );
 };
 
-export default ManualDepositAddress;
+export default ManualDepositAddress; 

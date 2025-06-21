@@ -11,7 +11,7 @@ import {
 } from './caseDetailSlice';
 import { fetchBalance } from '../balance/balanceSlice';
 
-export const useCaseDetail = (caseId: string) => {
+export const useCaseDetail = (caseId) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((s) => s.caseDetail);
   const {

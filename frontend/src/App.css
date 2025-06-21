@@ -35,8 +35,23 @@
 
 .card {
   padding: 2em;
+  background: #fff;
+  color: #213547;
+  border-radius: 12px;
+  border: 1px solid #eee;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #232323;
+    color: rgba(255,255,255,0.87);
+    border-color: #333;
+  }
+  .read-the-docs {
+    color: #aaa;
+  }
 }

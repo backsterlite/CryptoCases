@@ -6,9 +6,9 @@ from decimal import Decimal
 
 from httpx import AsyncClient
 
-from app.db.models.player import SpinLog # type: ignore
-from app.db.models.deposit_log import DepositLog # type: ignore
-from app.db.models.withdrawal_log import WithdrawalLog # type: ignore
+from src.app.db.models.player import SpinLog # type: ignore
+from src.app.db.models.deposit_log import DepositLog # type: ignore
+from src.app.db.models.withdrawal_log import WithdrawalLog # type: ignore
 
 
 @pytest.mark.asyncio

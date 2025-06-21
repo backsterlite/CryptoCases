@@ -1,17 +1,8 @@
 import React from 'react';
 
-export interface CaseInfo {
-  case_id: string;
-  name?: string;
-  price_usd: string | number;
-}
 
-export interface CaseCardProps {
-  caseInfo: CaseInfo;
-  onClick: () => void;
-}
 
-export const CaseCard: React.FC<CaseCardProps> = ({ caseInfo, onClick }) => {
+const CaseCard = ({ caseInfo, onClick }) => {
   return (
     <button
       type="button"

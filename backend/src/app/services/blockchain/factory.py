@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from app.config.network_registry import NetworkRegistry
+from app.core.config.network_registry import NetworkRegistry
 from app.services.blockchain.evm_client import EVMClient
 from app.services.blockchain.tron_client import TronClient
 # from app.services.blockchain.ton_client import TonClientWrapper #TODO implement TON logic

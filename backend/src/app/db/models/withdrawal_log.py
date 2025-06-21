@@ -11,7 +11,7 @@ from app.models.history_status import StatusHistoryEntry
 
 
 class WithdrawalLog(Document):
-    user_id: str                     # ID користувача, який ініціює вивід
+    user_id: int                     # ID користувача, який ініціює вивід
     external_wallet_id: str          # звідки (з якого гаманця) робимо вивід
     network: str                     # блокчейн-мережа (наприклад, "ethereum", "tron" тощо)
     to_address: str                  # адреса, куди відправимо кошти

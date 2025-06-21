@@ -4,7 +4,7 @@
 # from decimal import Decimal, ROUND_DOWN, localcontext
 
 # from app.models.coin_registry import NormalizedCoin
-# from app.config.coin_registry import CoinRegistry
+# from app.core.config.coin_registry import CoinRegistry
 
 # TARGET_SCALE = Decimal("0.000001")
 
@@ -121,8 +121,8 @@ from dataclasses import dataclass
 from decimal import Decimal, ROUND_DOWN, localcontext
 from typing import Dict, List, Optional, Tuple
 
-from app.config.coin_registry import CoinRegistry, CoinMeta
-from app.config.asset_registry import AssetRegistry
+from app.core.config.coin_registry import CoinRegistry, CoinMeta
+from app.core.config.asset_registry import AssetRegistry
 from app.utils import coin_keys
 
 TARGET_SCALE = Decimal("0.000001")

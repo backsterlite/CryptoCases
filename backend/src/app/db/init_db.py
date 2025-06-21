@@ -6,8 +6,7 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase, AsyncIOMotorClientSession
 from .mongo_codec import codec_options
 
-from app.config.settings import Settings
-from app.api.deps import get_settings
+from app.core.config.settings import Settings, get_settings
 
 
 from app.db.models import (
@@ -24,13 +23,13 @@ from app.db.models import (
 class DataBase:
     _client: AsyncIOMotorClient
     _db: AsyncIOMotorDatabase
-
+    _settings: Settings
     @classmethod
-    async def init_db(cls,
-                      settings: Settings = Depends(get_settings)
-                      ):
-        cls._client = AsyncIOMotorClient(settings.mongo_uri)
-        cls._db = cls._client.get_database(settings.mongo_db_name, codec_options=codec_options)
+    async def init_db(cls):
+        cls._settings = get_settings()
+        cls._client = AsyncIOMotorClient(cls._settings.mongo_uri)
+        cls._db = cls._client.get_database(cls._settings.mongo_db_name, codec_options=codec_options)
+        
         await init_beanie(database=cls._db, document_models=[
             user.User,
             player.CapPool,
