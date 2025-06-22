@@ -17,7 +17,7 @@ class StatusHistoryEntry(BaseModel):
     country: Optional[str] = None         # ISO-код країни або опис локації
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "status": "pending_internal",
                 "changed_at": "2025-06-03T12:34:56.000Z",

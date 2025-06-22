@@ -1,7 +1,7 @@
 from functools import lru_cache
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import Field
+from pydantic import Field, field_validator
 from pathlib import Path
 from typing import List, Dict, Any
 
@@ -19,7 +19,13 @@ class Settings(BaseSettings):
 
     # Telegram Bot та JWT
     bot_token: str = ""          # TELEGRAM BOT TOKEN (ENV: BACKEND_BOT_TOKEN)
-    jwt_secret: str = ""         # JWT SECRET (ENV: BACKEND_JWT_SECRET)
+    jwt_secret: str = Field(..., min_length=32)         # JWT SECRET (ENV: BACKEND_JWT_SECRET)
+    
+    @field_validator('jwt_secret')
+    def validate_jwt_secret(cls, v):
+        if len(v) < 32:
+            raise ValueError('JWT secret must be at least 32 characters')
+        return v
 
     # Debug / тестовий режим
     debug: bool = False

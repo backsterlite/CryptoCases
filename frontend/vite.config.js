@@ -24,7 +24,7 @@ export default defineConfig({
     port: 5173,     // твій порт фронта
     allowedHosts: [
       "localhost:8000",
-      "4191-93-175-80-8.ngrok-free.app",
+      "3cf7-93-175-80-8.ngrok-free.app",
     ]
   },
 })

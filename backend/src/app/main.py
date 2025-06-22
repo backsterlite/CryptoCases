@@ -10,6 +10,7 @@ from app.api.routers import register_routers
 from app.core.config.settings import get_settings
 from app.exceptions import register_exception_handlers
 from app.core.bootstrap import bootstrap
+from app.core.middlewares.security_middleware import SecurityMiddleware, SecureCORSMiddleware
 from app.core import api_limiter
 
 
@@ -40,11 +41,15 @@ app.add_exception_handler(429, _rate_limit_exceeded_handler)
 # ================================
 
 app.add_middleware(
-  CORSMiddleware,
-  allow_origins=["http://localhost:5173", "https://4191-93-175-80-8.ngrok-free.app"],      # або точний URL фронтенду, наприклад "http://localhost:5173"
-  allow_credentials=True,
-  allow_methods=["*"],
-  allow_headers=["*"],
+    SecurityMiddleware,
+    max_requests_per_minute=60,
+    max_requests_per_hour=1000,
+    trusted_proxies={"127.0.0.1", "10.0.0.0/8"}
+)
+
+app.add_middleware(
+    SecureCORSMiddleware,
+    allowed_origins=["https://your-frontend.com", "http://localhost:5173"]
 )
 
 register_exception_handlers(app)
